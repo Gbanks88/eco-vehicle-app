@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CG4F - Creating Greatness 4 Foundation{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Base Styles -->
+    <style>
+        :root {
+            /* Import theme variables from branding.json */
+            --primary-color: #4299e1;
+            --secondary-color: #667eea;
+            --accent-color: #48bb78;
+            --background-color: #f0f4f8;
+            --text-color: #2d3748;
+            --text-secondary: #718096;
+            
+            /* Gradients */
+            --primary-gradient: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+            --secondary-gradient: linear-gradient(135deg, #48bb78 0%, #38b2ac 100%);
+            
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: var(--spacing-lg);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .button-primary {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        
+        .button-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Chart styles */
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            height: 300px;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">Creating Greatness 4 Foundation</div>
+            <div class="subtitle">Advanced Analytics Platform</div>
+            <div class="mission-statement">"Empowering Dreams, Building Futures"</div>
+            <nav class="core-principles">
+                <div class="principle-grid">
+                    <div class="principle">
+                        <i class="mdi mdi-star"></i>
+                        <span>Excellence in Innovation</span>
+                        <p>"Inspiring Excellence, One Step at a Time"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-lightbulb"></i>
+                        <span>Transformative Impact</span>
+                        <p>"Transforming Potential into Achievement"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-compass"></i>
+                        <span>Dedicated Support</span>
+                        <p>"Your Journey, Our Mission"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-rocket"></i>
+                        <span>Potential Unleashed</span>
+                        <p>"Unleashing Potential, Creating Success"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-handshake"></i>
+                        <span>Collaborative Growth</span>
+                        <p>"Together We Achieve Greatness"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-target"></i>
+                        <span>Dream Realization</span>
+                        <p>"Where Dreams Become Reality"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-heart"></i>
+                        <span>Community Impact</span>
+                        <p>"Creating Lasting Change"</p>
+                    </div>
+                    <div class="principle">
+                        <i class="mdi mdi-shield"></i>
+                        <span>Sustainable Future</span>
+                        <p>"Building Tomorrow Today"</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="container">
+        <div style="text-align: center; padding: var(--spacing-lg) 0; color: var(--text-secondary);">
+            © {% now 'Y' %} Creating Greatness 4 Foundation. All rights reserved.
+        </div>
+    </footer>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

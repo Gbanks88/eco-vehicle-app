@@ -1,0 +1,138 @@
+@startuml EcoVehicle Component Interaction
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam componentStyle uml2
+
+' Components
+[Sensor Hub] as SH
+[Metrics Collector] as MC
+[Stream Processor] as SP
+[Performance Analyzer] as PA
+[Environmental Analyzer] as EA
+[Alert Manager] as AM
+[Dashboard] as DB
+[Time Series DB] as TS
+[Report Generator] as RG
+[External API] as API
+
+' Interfaces
+interface "ISensor" as IS
+interface "IMetrics" as IM
+interface "IProcessor" as IP
+interface "IAnalyzer" as IA
+interface "IAlert" as IAL
+interface "IStorage" as IST
+interface "IVisual" as IV
+interface "IReport" as IR
+interface "IExternal" as IE
+
+' Data Types
+class "MetricsData" as MD {
+    +timestamp: DateTime
+    +metrics: Map<string, double>
+    +metadata: Map<string, string>
+}
+
+class "AnalysisResult" as AR {
+    +type: ResultType
+    +value: double
+    +confidence: double
+    +recommendations: List<string>
+}
+
+class "Alert" as AL {
+    +id: string
+    +severity: Level
+    +message: string
+    +timestamp: DateTime
+}
+
+' Connections
+SH -up-> IS : implements
+IS -right-> MC : uses
+
+MC -up-> IM : implements
+IM -right-> SP : uses
+
+SP -up-> IP : implements
+IP -right-> PA : uses
+IP -right-> EA : uses
+
+PA -up-> IA : implements
+EA -up-> IA : implements
+IA -right-> AM : uses
+
+AM -up-> IAL : implements
+IAL -right-> DB : uses
+
+DB -up-> IV : implements
+IV -right-> RG : uses
+
+TS -up-> IST : implements
+IST -right-> PA : uses
+IST -right-> EA : uses
+
+RG -up-> IR : implements
+IR -right-> API : uses
+
+API -up-> IE : implements
+
+' Data Flow
+MC ..> MD : produces
+SP ..> MD : processes
+PA ..> AR : produces
+EA ..> AR : produces
+AM ..> AL : manages
+TS ..> MD : stores
+TS ..> AR : stores
+RG ..> AR : consumes
+API ..> AR : exposes
+
+note right of SH
+  Collects raw data from
+  hardware sensors
+end note
+
+note right of MC
+  Aggregates and normalizes
+  sensor data
+end note
+
+note right of SP
+  Real-time stream processing
+  and validation
+end note
+
+note right of PA
+  Analyzes performance metrics
+  and detects anomalies
+end note
+
+note right of EA
+  Calculates environmental
+  impact and efficiency
+end note
+
+note right of AM
+  Manages alerts and
+  notifications
+end note
+
+note right of TS
+  Stores time series data
+  and analysis results
+end note
+
+note right of RG
+  Generates reports and
+  exports data
+end note
+
+note right of API
+  Provides external system
+  integration
+end note
+
+@enduml

@@ -1,0 +1,100 @@
+---
+# Systems Engineering Requirement Templates
+
+systems_optimization:
+  performance:
+    - "The optimization algorithm shall converge within {iterations} iterations for {problem_size} variables"
+    - "Solution quality shall be within {tolerance}% of global optimum"
+    - "The system shall handle up to {constraints} simultaneous constraints"
+  computational:
+    - "Optimization runtime shall not exceed {time} seconds on {hardware} platform"
+    - "Memory usage shall not exceed {memory} GB during optimization"
+    - "The algorithm shall parallelize across {cores} processor cores"
+  robustness:
+    - "The solution shall remain feasible under {uncertainty}% parameter variation"
+    - "The algorithm shall recover from {failure_type} within {time} seconds"
+    - "Optimization shall maintain {stability} numerical stability"
+
+model_based_systems:
+  architecture:
+    - "The system model shall represent {components} components and their interactions"
+    - "Model hierarchy shall support up to {levels} levels of decomposition"
+    - "Interface definitions shall include {parameters} parameters per connection"
+  traceability:
+    - "Requirements shall be traced to {artifacts} design artifacts"
+    - "Model changes shall be tracked with {detail} level of detail"
+    - "Version control shall maintain {history} months of history"
+  simulation:
+    - "Simulation shall execute with {timestep} second timesteps"
+    - "Model shall support {scenarios} concurrent simulation scenarios"
+    - "Results shall be accurate within {tolerance}% of physical system"
+
+utility_theory:
+  decision_making:
+    - "The decision model shall consider {criteria} decision criteria"
+    - "Preference modeling shall support {levels} levels of preference"
+    - "Risk assessment shall quantify {risks} types of uncertainty"
+  analysis:
+    - "Trade-off analysis shall evaluate {alternatives} alternatives"
+    - "Utility functions shall be calibrated using {samples} reference points"
+    - "Sensitivity analysis shall cover {parameters} input parameters"
+  implementation:
+    - "Decision support shall provide results within {time} seconds"
+    - "The system shall handle {stakeholders} stakeholder preferences"
+    - "Confidence metrics shall be provided for all decisions"
+
+lifecycle_assessment:
+  environmental:
+    - "Assessment shall cover {phases} lifecycle phases"
+    - "Carbon footprint shall be measured with {accuracy}% accuracy"
+    - "Resource utilization shall be tracked for {resources} materials"
+  analysis:
+    - "Impact assessment shall consider {factors} environmental factors"
+    - "Data collection shall cover {duration} years of operation"
+    - "Uncertainty shall be quantified for {parameters} parameters"
+  reporting:
+    - "Reports shall comply with {standard} reporting standards"
+    - "Results shall be traceable to {sources} data sources"
+    - "Assessment shall be updated every {period} months"
+
+multidisciplinary_optimization:
+  coupling:
+    - "The framework shall handle {disciplines} coupled disciplines"
+    - "Coupling strength shall be quantified with {metrics} metrics"
+    - "Data exchange shall occur within {time} milliseconds"
+  convergence:
+    - "System-level optimization shall converge within {iterations} iterations"
+    - "Subsystem solutions shall be within {tolerance}% of optimal"
+    - "Consistency constraints shall be satisfied to {accuracy} precision"
+  scalability:
+    - "The system shall scale to {variables} design variables"
+    - "Parallel execution shall utilize {resources} computing resources"
+    - "Memory usage shall not exceed {memory} GB per discipline"
+
+probabilistic_design:
+  reliability:
+    - "Design shall achieve {reliability}% reliability over {lifetime} years"
+    - "Failure modes shall be analyzed for {scenarios} scenarios"
+    - "Safety margins shall account for {uncertainty}% uncertainty"
+  analysis:
+    - "Monte Carlo simulation shall use {samples} samples"
+    - "Confidence intervals shall be {confidence}% accurate"
+    - "Sensitivity analysis shall cover {parameters} parameters"
+  implementation:
+    - "Analysis shall complete within {time} hours on {platform}"
+    - "Results shall be validated against {tests} physical tests"
+    - "Risk assessment shall consider {factors} failure factors"
+
+verification_validation:
+  testing:
+    - "Test coverage shall exceed {coverage}% for {criteria} criteria"
+    - "Test suite shall execute within {time} hours"
+    - "Regression testing shall cover {features} features"
+  validation:
+    - "Model validation shall use {datasets} reference datasets"
+    - "Accuracy shall be within {tolerance}% of physical measurements"
+    - "Validation shall cover {conditions} operating conditions"
+  documentation:
+    - "Test reports shall include {metrics} performance metrics"
+    - "Validation results shall be traced to {requirements} requirements"
+    - "Documentation shall be updated within {period} days of changes"

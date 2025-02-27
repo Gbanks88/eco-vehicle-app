@@ -1,0 +1,71 @@
+@startuml Environmental Monitoring
+
+skinparam class {
+    BackgroundColor PaleGreen
+    BorderColor DarkGreen
+    ArrowColor DarkGreen
+    AttributeFontColor DarkGreen
+}
+
+title Environmental Monitoring System
+
+class EmissionsMonitor {
+    + co2_level: float
+    + nox_level: float
+    + particulate_matter: float
+    + monitor_emissions()
+    + get_metrics()
+    + check_compliance()
+}
+
+class AirQualitySensor {
+    + air_quality_index: float
+    + temperature: float
+    + humidity: float
+    + read_sensors()
+    + calibrate()
+}
+
+class EfficiencyAnalyzer {
+    + energy_consumption: float
+    + regeneration_rate: float
+    + calculate_efficiency()
+    + optimize_parameters()
+}
+
+class MetricsCollector {
+    + timestamp: datetime
+    + metrics: Dict
+    + collect_data()
+    + analyze_trends()
+    + generate_report()
+}
+
+class AlertManager {
+    + threshold_levels: Dict
+    + current_alerts: List
+    + check_thresholds()
+    + send_alert()
+}
+
+EmissionsMonitor --> MetricsCollector: sends data
+AirQualitySensor --> MetricsCollector: sends data
+EfficiencyAnalyzer --> MetricsCollector: sends data
+MetricsCollector --> AlertManager: triggers alerts
+
+note right of EmissionsMonitor
+  Monitors and analyzes vehicle
+  emissions in real-time
+end note
+
+note right of EfficiencyAnalyzer
+  Calculates and optimizes
+  energy efficiency
+end note
+
+note bottom of AlertManager
+  Manages environmental
+  alerts and notifications
+end note
+
+@enduml

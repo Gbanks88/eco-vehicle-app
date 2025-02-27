@@ -1,0 +1,62 @@
+@startuml Fault Handling Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightYellow
+    ParticipantBorderColor Orange
+    ArrowColor DarkGray
+    LifeLineBackgroundColor LightGray
+    LifeLineBorderColor Gray
+}
+
+title Eco Vehicle Fault Handling Sequence
+
+participant "Power\nController" as PC
+participant "State\nManager" as SM
+participant "Fault\nHandler" as FH
+participant "Alert\nSystem" as AS
+participant "Data\nLogger" as DL
+participant "Web\nDashboard" as WD
+
+activate PC
+PC -> SM: Detect anomaly
+activate SM
+
+SM -> FH: Report fault condition
+activate FH
+
+FH -> DL: Log fault details
+activate DL
+DL --> FH: Logging confirmed
+deactivate DL
+
+FH -> AS: Generate alert
+activate AS
+AS -> WD: Display alert
+activate WD
+WD --> AS: Alert displayed
+deactivate WD
+AS --> FH: Alert sent
+deactivate AS
+
+FH -> SM: Evaluate fault severity
+alt #LightGreen Critical Fault
+    SM -> PC: Initiate safe shutdown
+    PC -> SM: Shutdown initiated
+    SM -> FH: Update fault status
+    FH -> AS: Send critical alert
+    AS -> WD: Display critical alert
+else #LightYellow Minor Fault
+    SM -> PC: Switch to reduced power
+    PC -> SM: Power mode changed
+    SM -> FH: Monitor fault
+    FH -> AS: Send warning
+    AS -> WD: Display warning
+end
+
+FH --> SM: Fault handled
+deactivate FH
+SM --> PC: Update system state
+deactivate SM
+deactivate PC
+
+@enduml

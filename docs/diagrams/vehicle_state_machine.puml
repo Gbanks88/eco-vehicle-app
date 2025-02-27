@@ -1,0 +1,91 @@
+@startuml Vehicle State Machine
+
+skinparam state {
+    BackgroundColor LightBlue
+    BorderColor Blue
+    ArrowColor Blue
+    FontName Arial
+    AttributeFontColor Blue
+}
+
+title Eco Vehicle State Machine Diagram
+
+[*] --> OFF : System Start
+
+state OFF {
+    [*] --> LOCKED : Initial State
+    LOCKED --> UNLOCKED : Valid Key/Authentication
+    UNLOCKED --> LOCKED : Lock Command
+}
+
+OFF --> STARTUP : Ignition ON
+STARTUP --> READY : System Check OK
+STARTUP --> ERROR : System Check Failed
+
+state READY {
+    [*] --> PARK
+    
+    PARK --> DRIVE : Gear Select D
+    PARK --> REVERSE : Gear Select R
+    
+    DRIVE --> PARK : Gear Select P
+    DRIVE --> ECO_MODE : Eco Button
+    DRIVE --> SPORT_MODE : Sport Button
+    
+    ECO_MODE --> DRIVE : Normal Mode
+    SPORT_MODE --> DRIVE : Normal Mode
+    
+    REVERSE --> PARK : Gear Select P
+}
+
+state ERROR {
+    [*] --> DIAGNOSTIC
+    DIAGNOSTIC --> SERVICE_REQUIRED : Major Issue
+    DIAGNOSTIC --> READY : Issue Resolved
+}
+
+state "CHARGING" as CHARGING {
+    [*] --> CHARGING_INIT
+    CHARGING_INIT --> CHARGING_ACTIVE : Connection OK
+    CHARGING_ACTIVE --> CHARGING_COMPLETE : Battery Full
+    CHARGING_ACTIVE --> CHARGING_ERROR : Fault Detected
+    CHARGING_COMPLETE --> [*]
+}
+
+READY --> CHARGING : Plugin Connected
+CHARGING --> READY : Charging Complete/Disconnected
+
+state EMERGENCY {
+    [*] --> EMERGENCY_STOP
+    EMERGENCY_STOP --> SAFE_MODE
+    SAFE_MODE --> [*]
+}
+
+READY --> EMERGENCY : Critical Error/Collision
+ERROR --> EMERGENCY : Critical System Failure
+
+' Transitions back to OFF
+READY --> OFF : Ignition OFF
+ERROR --> OFF : System Reset
+EMERGENCY --> OFF : Reset After Service
+
+' Additional state attributes
+state READY {
+    Battery : Level%
+    Speed : km/h
+    Temperature : °C
+}
+
+state CHARGING {
+    ChargingRate : kW
+    TimeRemaining : min
+    Temperature : °C
+}
+
+state ERROR {
+    ErrorCode : String
+    Severity : Level
+    Component : String
+}
+
+@enduml

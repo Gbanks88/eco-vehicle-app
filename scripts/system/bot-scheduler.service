@@ -1,0 +1,16 @@
+[Unit]
+Description=AI Bot Scheduler Service
+After=network.target
+
+[Service]
+Type=simple
+User=eco_vehicle
+Group=eco_vehicle
+WorkingDirectory=/Volumes/Learn_Space/eco_vehicle_project
+Environment=PYTHONPATH=/Volumes/Learn_Space/eco_vehicle_project
+ExecStart=/Volumes/Learn_Space/eco_vehicle_project/venv/bin/python /Volumes/Learn_Space/eco_vehicle_project/scripts/python/scheduler/bot_scheduler.py
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

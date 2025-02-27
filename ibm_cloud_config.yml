@@ -1,0 +1,47 @@
+# IBM Cloud Configuration
+
+# Account Information
+account:
+  email: ""                  # Your IBM Cloud email
+  region: "us-south"         # Default region, can be changed
+  resource_group: "default"  # Resource group name
+
+# Compute Resources
+virtual_server:
+  name: "eco-vehicle-gpu"
+  type: "gpu-v100"          # NVIDIA V100 GPU instance
+  ram: "32GB"
+  storage: "100GB"
+  os: "ubuntu-20.04"
+
+# Database Configuration
+database:
+  type: "mongodb"           # MongoDB for use with Studio 3T
+  name: "eco_vehicle_db"
+  plan: "standard"          # Standard plan with replica sets
+  ssl_enabled: true
+
+# Watson Services
+watson:
+  visual_recognition:
+    name: "eco-vehicle-vision"
+    plan: "lite"            # Free tier
+  machine_learning:
+    name: "eco-vehicle-ml"
+    plan: "lite"            # Free tier
+
+# Storage Services
+cloud_storage:
+  name: "eco-vehicle-storage"
+  type: "cos"              # Cloud Object Storage
+  plan: "standard"         # Standard plan
+
+# Security
+ssl_cert:
+  enabled: true
+  domain: ""               # Your custom domain if any
+
+# Development Tools
+devops:
+  enable_ci_cd: true       # Enable CI/CD pipelines
+  github_integration: true  # Enable GitHub integration

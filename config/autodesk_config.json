@@ -1,0 +1,6 @@
+{
+    "client_id": "YOUR_CLIENT_ID",
+    "client_secret": "YOUR_CLIENT_SECRET",
+    "callback_url": "http://localhost:3000/callback",
+    "scope": "data:read data:write data:create bucket:read bucket:create"
+}

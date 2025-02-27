@@ -1,0 +1,144 @@
+@startuml EcoVehicle Deployment Architecture
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+' Node definitions
+node "Application Server" {
+    component "Core Application" {
+        [System Monitor]
+        [Metrics Collector]
+        [Analysis Engine]
+        [Alert Manager]
+    }
+    
+    component "AI/ML Services" {
+        [Model Server]
+        [Online Learner]
+        [Inference Engine]
+        [Feature Processor]
+    }
+}
+
+node "Database Servers" {
+    database "InfluxDB Cluster" {
+        [Time Series Data]
+        [Retention Policies]
+    }
+    
+    database "MongoDB Cluster" {
+        [Config Store]
+        [ML Model Store]
+        [Analysis Store]
+    }
+    
+    database "Redis Cluster" {
+        [Real-time Cache]
+        [Session Store]
+    }
+}
+
+node "Web Servers" {
+    component "API Gateway" {
+        [REST API]
+        [WebSocket Server]
+        [gRPC Service]
+    }
+    
+    component "Web Application" {
+        [Dashboard UI]
+        [Chart Renderer]
+        [Alert UI]
+    }
+}
+
+node "ML Training Cluster" {
+    component "Training Services" {
+        [Model Trainer]
+        [Hyperparameter Tuner]
+        [Validation Service]
+    }
+    
+    component "Data Processing" {
+        [ETL Pipeline]
+        [Feature Engineering]
+        [Data Validation]
+    }
+}
+
+node "Monitoring & Logging" {
+    component "System Monitoring" {
+        [Prometheus]
+        [Grafana]
+        [Alert Manager]
+    }
+    
+    component "Logging" {
+        [ELK Stack]
+        [Log Aggregator]
+        [Log Analysis]
+    }
+}
+
+cloud "External Services" {
+    [Weather API]
+    [Traffic Service]
+    [Environmental Data]
+}
+
+' Connections
+[Core Application] --> [API Gateway]
+[Core Application] --> [InfluxDB Cluster]
+[Core Application] --> [MongoDB Cluster]
+[Core Application] --> [Redis Cluster]
+
+[AI/ML Services] --> [ML Training Cluster]
+[AI/ML Services] --> [MongoDB Cluster]
+[AI/ML Services] --> [Redis Cluster]
+
+[Web Application] --> [API Gateway]
+[API Gateway] --> [Core Application]
+[API Gateway] --> [AI/ML Services]
+
+[Training Services] --> [Data Processing]
+[Training Services] --> [MongoDB Cluster]
+
+[System Monitoring] --> [Core Application]
+[System Monitoring] --> [Web Servers]
+[System Monitoring] --> [Database Servers]
+[System Monitoring] --> [ML Training Cluster]
+
+[Logging] --> [Core Application]
+[Logging] --> [AI/ML Services]
+[Logging] --> [Web Servers]
+
+[External Services] --> [API Gateway]
+
+' Notes
+note right of [Core Application]
+  Main application logic
+  and coordination
+end note
+
+note right of [AI/ML Services]
+  ML model serving and
+  online learning
+end note
+
+note right of [Database Servers]
+  Distributed database
+  clusters for scalability
+end note
+
+note right of [ML Training Cluster]
+  Dedicated resources for
+  model training
+end note
+
+note right of [Monitoring & Logging]
+  System monitoring and
+  log analysis
+end note
+
+@enduml

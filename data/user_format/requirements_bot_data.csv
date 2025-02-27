@@ -1,0 +1,5 @@
+analysis_timestamp,processed_domains,processed_templates,domain_coverage_coverage_score,domain_coverage_total_domains,domain_coverage_covered_domains,template_metrics_total_templates,template_metrics_completeness_score,template_metrics_quality_score,bot_name,timestamp
+2025-02-24T15:22:09.093218,11,11,1.0,11,11,11,0.9,0.85,requirements_bot,2025-02-24T15:22:09.093249
+2025-02-24T15:30:24.561021,11,11,1.0,11,11,11,0.9,0.85,requirements_bot,2025-02-24T15:30:24.561050
+2025-02-25T03:00:22.142847,11,11,1.0,11,11,11,0.9,0.85,requirements_bot,2025-02-25T03:00:22.145768
+2025-02-26T03:00:47.452877,11,11,1.0,11,11,11,0.9,0.85,requirements_bot,2025-02-26T03:00:47.455629

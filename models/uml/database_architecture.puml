@@ -1,0 +1,110 @@
+@startuml EcoVehicle Database Architecture
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam componentStyle uml2
+
+' Database Systems
+database "InfluxDB" {
+    folder "Time Series Data" {
+        [Metrics Measurements]
+        [System Events]
+        [Performance Data]
+        [Environmental Data]
+    }
+    
+    folder "Retention Policies" {
+        [Real-time Data: 24h]
+        [Hourly Data: 30d]
+        [Daily Data: 1y]
+        [Monthly Data: 5y]
+    }
+}
+
+database "MongoDB" {
+    folder "Collections" {
+        [System Config]
+        [ML Models]
+        [Analysis Results]
+        [Alert History]
+    }
+    
+    folder "Indexes" {
+        [Timestamp Index]
+        [Metric Type Index]
+        [Alert Level Index]
+        [Model Version Index]
+    }
+}
+
+database "Redis Cache" {
+    folder "Cache Layers" {
+        [Real-time Metrics]
+        [Active Alerts]
+        [Model Predictions]
+        [UI State]
+    }
+}
+
+' Studio 3T Integration
+component "Studio 3T" {
+    [Query Builder]
+    [Aggregation Editor]
+    [Schema Explorer]
+    [Index Optimizer]
+}
+
+' Data Flow Components
+component "Data Pipeline" {
+    [Data Collector]
+    [Stream Processor]
+    [Data Transformer]
+    [Cache Manager]
+}
+
+component "Query Layer" {
+    [Query Router]
+    [Query Optimizer]
+    [Result Aggregator]
+    [Cache Controller]
+}
+
+' Connections
+[Data Collector] --> InfluxDB
+[Stream Processor] --> MongoDB
+[Data Transformer] --> [Redis Cache]
+
+[Query Builder] --> MongoDB
+[Aggregation Editor] --> MongoDB
+[Schema Explorer] --> MongoDB
+[Index Optimizer] --> MongoDB
+
+[Query Router] --> [Query Optimizer]
+[Query Optimizer] --> InfluxDB
+[Query Optimizer] --> MongoDB
+[Query Optimizer] --> [Redis Cache]
+[Result Aggregator] --> [Cache Controller]
+
+' Notes
+note right of InfluxDB
+  High-performance time series storage
+  with automatic data retention
+end note
+
+note right of MongoDB
+  Document store for configuration,
+  ML models, and analysis results
+end note
+
+note right of [Redis Cache]
+  In-memory cache for
+  real-time access
+end note
+
+note right of "Studio 3T"
+  MongoDB GUI for development
+  and administration
+end note
+
+@enduml

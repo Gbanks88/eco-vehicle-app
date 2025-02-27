@@ -1,0 +1,28 @@
+{
+  "domain": "cg4f.online",
+  "provider": "namecheap",
+  "records": [
+    {
+      "type": "A",
+      "name": "@",
+      "content": "57.128.180.184",
+      "ttl": 1800
+    },
+    {
+      "type": "A",
+      "name": "api",
+      "content": "57.128.180.184",
+      "ttl": 3600
+    },
+    {
+      "type": "CNAME",
+      "name": "cdn",
+      "content": "cg4l.site",
+      "ttl": 1800
+    }
+  ],
+  "nameservers": [
+    "dns1.registrar-servers.com",
+    "dns2.registrar-servers.com"
+  ]
+}

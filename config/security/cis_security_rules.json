@@ -1,0 +1,145 @@
+{
+  "waf": {
+    "mode": "on",
+    "sensitivity": "high",
+    "rules": {
+      "owasp": {
+        "sql_injection": true,
+        "xss": true,
+        "rce": true,
+        "lfi_rfi": true,
+        "protocol_attacks": true
+      },
+      "custom": [
+        {
+          "description": "Block suspicious IPs",
+          "expression": "ip.src in $suspicious_ips",
+          "action": "block"
+        },
+        {
+          "description": "Rate limit API endpoints",
+          "expression": "starts_with(http.request.uri, '/api/')",
+          "action": "rate_limit",
+          "rate": 100,
+          "period": 60
+        }
+      ]
+    }
+  },
+  "ssl_tls": {
+    "mode": "full_strict",
+    "min_tls_version": "1.2",
+    "hsts": {
+      "enabled": true,
+      "max_age": 31536000,
+      "include_subdomains": true,
+      "preload": true
+    },
+    "certificates": {
+      "custom_certs": false,
+      "always_use_https": true,
+      "opportunistic_encryption": true,
+      "automatic_https_rewrites": true
+    }
+  },
+  "caching": {
+    "browser_cache_ttl": 14400,
+    "edge_cache_ttl": {
+      "static_resources": 86400,
+      "dynamic_content": 1800
+    },
+    "cache_level": "aggressive",
+    "always_online": true
+  },
+  "firewall": {
+    "security_level": "high",
+    "challenge_ttl": 3600,
+    "allowed_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "blocked_countries": [],
+    "ip_rules": [
+      {
+        "target": "ip",
+        "value": "57.128.180.184",
+        "mode": "whitelist"
+      }
+    ]
+  },
+  "page_rules": [
+    {
+      "targets": [
+        {
+          "target": "url",
+          "constraint": {
+            "operator": "matches",
+            "value": "cg4f.online/*"
+          }
+        }
+      ],
+      "actions": {
+        "ssl": "full_strict",
+        "browser_cache_ttl": 14400,
+        "security_level": "high",
+        "cache_level": "aggressive"
+      }
+    },
+    {
+      "targets": [
+        {
+          "target": "url",
+          "constraint": {
+            "operator": "matches",
+            "value": "api.cg4f.online/*"
+          }
+        }
+      ],
+      "actions": {
+        "ssl": "full_strict",
+        "browser_cache_ttl": 0,
+        "security_level": "high",
+        "cache_level": "bypass"
+      }
+    }
+  ],
+  "monitoring": {
+    "health_checks": [
+      {
+        "name": "Main Website",
+        "target": "cg4f.online",
+        "interval": 60,
+        "retries": 2,
+        "timeout": 5,
+        "type": "https",
+        "path": "/",
+        "expected_codes": [200],
+        "alert_threshold": {
+          "up": 1,
+          "down": 3
+        }
+      },
+      {
+        "name": "API Endpoint",
+        "target": "api.cg4f.online",
+        "interval": 30,
+        "retries": 2,
+        "timeout": 5,
+        "type": "https",
+        "path": "/health",
+        "expected_codes": [200],
+        "alert_threshold": {
+          "up": 1,
+          "down": 2
+        }
+      }
+    ],
+    "alerts": {
+      "email": ["admin@cg4f.online"],
+      "webhook": "https://cg4f.online/webhooks/monitoring",
+      "triggers": {
+        "ssl_expiration": true,
+        "ddos_attack": true,
+        "waf_events": true,
+        "health_check_failures": true
+      }
+    }
+  }
+}

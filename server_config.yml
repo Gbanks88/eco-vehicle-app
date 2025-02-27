@@ -1,0 +1,35 @@
+# MEGA Server Configuration
+
+# Server Connection Details
+server:
+  hostname: ""  # e.g., mega-server.company.com or IP address like 192.168.1.100
+  port: 22      # Default SSH port
+  username: ""  # Your SSH username
+
+# Hardware Information
+hardware:
+  gpu:
+    vendor: ""          # e.g., NVIDIA, AMD
+    model: ""          # e.g., Tesla V100, A100
+    count: 0           # Number of GPUs installed
+
+# Operating System Details
+os:
+  distribution: ""     # e.g., Ubuntu, CentOS
+  version: ""         # e.g., 20.04, 8.0
+  architecture: ""    # e.g., x86_64, arm64
+
+# Build Environment
+environment:
+  cuda_version: ""    # e.g., 11.8, 12.0
+  gcc_version: ""     # e.g., 9.4.0
+  cmake_version: ""   # e.g., 3.22.0
+  qt_version: ""      # e.g., 5.15.2
+
+# Storage Configuration
+storage:
+  build_directory: "" # e.g., /opt/builds/eco_vehicle
+  data_directory: "" # e.g., /data/eco_vehicle
+
+# Additional Notes
+notes: ""            # Any additional information or special requirements

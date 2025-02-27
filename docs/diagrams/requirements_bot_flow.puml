@@ -1,0 +1,79 @@
+@startuml Requirements Bot Activity Flow
+
+skinparam ActivityBackgroundColor LightBlue
+skinparam ActivityBorderColor Blue
+skinparam ArrowColor Blue
+
+|Input Processing|
+start
+:Receive Requirement Text;
+:Load Configuration;
+fork
+    :Preprocess Text;
+    :Extract Metrics;
+fork again
+    :Load Quality Patterns;
+    :Initialize NLP Components;
+end fork
+:Generate Requirement ID;
+
+|Requirement Generation|
+if (Valid Input?) then (yes)
+    :Create Requirement Object;
+    fork
+        :Generate Title;
+        :Set Category & Priority;
+    fork again
+        :Extract Metrics;
+        :Identify Dependencies;
+    fork again
+        :Identify Stakeholders;
+        :Generate Acceptance Criteria;
+    end fork
+    :Calculate Feasibility Score;
+else (no)
+    :Log Error;
+    stop
+endif
+
+|Validation|
+:Validate Requirement;
+fork
+    :Check Ambiguity;
+fork again
+    :Check Measurability;
+fork again
+    :Check Completeness;
+fork again
+    :Check Consistency;
+end fork
+:Collect Validation Issues;
+
+|Analysis & Suggestions|
+if (Issues Found?) then (yes)
+    :Generate Improvement Suggestions;
+    fork
+        :Suggest Metric Improvements;
+    fork again
+        :Suggest Clarity Improvements;
+    fork again
+        :Suggest Completeness Improvements;
+    end fork
+endif
+
+|Output Generation|
+:Format Results;
+fork
+    :Generate Documentation;
+fork again
+    :Export to Specified Format;
+fork again
+    :Create Validation Report;
+end fork
+
+|Final Processing|
+:Combine All Outputs;
+:Store Results;
+stop
+
+@enduml

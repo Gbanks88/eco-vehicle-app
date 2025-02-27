@@ -1,0 +1,83 @@
+@startuml EcoVehicle Monitoring Sequence
+
+' Style configurations
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+
+actor User
+participant "Dashboard" as UI
+participant "SystemMonitor" as Monitor
+participant "MetricsCollector" as Collector
+participant "PerformanceAnalyzer" as Analyzer
+participant "AlertManager" as Alerts
+database "MetricsDB" as DB
+
+== System Initialization ==
+User -> UI: Launch application
+activate UI
+UI -> Monitor: initialize()
+activate Monitor
+Monitor -> Collector: startCollection()
+activate Collector
+Monitor -> Analyzer: initialize()
+activate Analyzer
+Monitor -> Alerts: initialize()
+activate Alerts
+
+== Real-time Monitoring ==
+loop Every 1 second
+    Collector -> Collector: collectMetrics()
+    Collector -> Monitor: updateMetrics(data)
+    Monitor -> Analyzer: analyzeMetrics(data)
+    Monitor -> DB: storeMetrics(data)
+    
+    alt Threshold Exceeded
+        Monitor -> Alerts: checkThresholds(data)
+        Alerts -> UI: displayAlert(alert)
+    end
+    
+    Monitor -> UI: updateDisplay(data)
+end
+
+== Analysis Operations ==
+User -> UI: requestAnalysis()
+UI -> Analyzer: performAnalysis()
+activate Analyzer
+Analyzer -> DB: fetchHistoricalData()
+DB --> Analyzer: historicalData
+Analyzer -> Analyzer: analyzeTrends()
+Analyzer -> Analyzer: detectAnomalies()
+Analyzer -> Analyzer: predictMaintenance()
+Analyzer --> UI: analysisResults
+deactivate Analyzer
+
+== Alert Handling ==
+Alerts -> UI: alertTriggered(alert)
+UI -> User: showNotification()
+User -> UI: acknowledgeAlert()
+UI -> Alerts: markAlertHandled()
+
+== Data Export ==
+User -> UI: exportData()
+UI -> DB: fetchData(criteria)
+DB --> UI: exportData
+UI -> UI: formatData()
+UI --> User: downloadFile
+
+== System Shutdown ==
+User -> UI: exitApplication()
+UI -> Monitor: shutdown()
+Monitor -> Collector: stopCollection()
+deactivate Collector
+Monitor -> Analyzer: cleanup()
+deactivate Analyzer
+Monitor -> Alerts: cleanup()
+deactivate Alerts
+Monitor -> DB: disconnect()
+deactivate Monitor
+UI --> User: applicationClosed
+deactivate UI
+
+@enduml

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Vehicle Monitoring Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f1c40f;
+            --background-color: #ecf0f1;
+            --card-background: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .dashboard-header {
+            background-color: var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            color: white;
+        }
+        .dashboard-title {
+            margin: 0;
+            color: #333;
+            font-size: 24px;
+        }
+        .dashboard-subtitle {
+            color: #666;
+            margin: 10px 0 0;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .dashboard-card {
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 3px solid var(--secondary-color);
+            transition: transform 0.2s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+        }
+        .metric-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .metric-trend {
+            font-size: 14px;
+            color: var(--success-color);
+        }
+        
+        .metric-trend.down {
+            color: var(--accent-color);
+        }
+        .metric-label {
+            color: #666;
+            font-size: 14px;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .alert-warning {
+            background-color: var(--warning-color);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .alert-warning:before {
+            content: '⚠️';
+        }
+        .alert-danger {
+            background-color: var(--accent-color);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .alert-danger:before {
+            content: '🚨';
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Eco Vehicle Monitoring Dashboard</h1>
+            <p class="dashboard-subtitle">Real-time system monitoring and environmental impact analysis</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="metric-label">CPU Usage</div>
+                <div id="cpu-usage" class="metric-value">0%</div>
+            </div>
+            <div class="dashboard-card">
+                <div class="metric-label">Memory Usage</div>
+                <div id="memory-usage" class="metric-value">0%</div>
+            </div>
+            <div class="dashboard-card">
+                <div class="metric-label">Battery Level</div>
+                <div id="battery-level" class="metric-value">0%</div>
+            </div>
+            <div class="dashboard-card">
+                <div class="metric-label">Environmental Score</div>
+                <div id="env-score" class="metric-value">0</div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div id="system-overview"></div>
+        </div>
+
+        <div class="dashboard-card">
+            <div id="performance-trends"></div>
+        </div>
+
+        <div class="dashboard-card">
+            <div id="environmental-dashboard"></div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Recent Alerts</h3>
+            <div id="alerts"></div>
+        </div>
+    </div>
+
+    <script>
+        let ws = new WebSocket(`ws://${window.location.host}/ws`);
+        
+        ws.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.type === 'metrics_update') {
+                updateMetrics(data.data);
+            }
+        };
+
+        ws.onclose = function() {
+            console.log('WebSocket connection closed');
+            setTimeout(function() {
+                ws = new WebSocket(`ws://${window.location.host}/ws`);
+            }, 1000);
+        };
+
+        function updateMetrics(metrics) {
+            // Update simple metrics
+            $('#cpu-usage').text(`${metrics.cpu_usage.toFixed(1)}%`);
+            $('#memory-usage').text(`${metrics.memory_usage.toFixed(1)}%`);
+            $('#battery-level').text(`${metrics.battery_level.toFixed(1)}%`);
+            if (metrics.environmental_score) {
+                $('#env-score').text((metrics.environmental_score * 100).toFixed(1));
+            }
+
+            // Update plots
+            updatePlots();
+        }
+
+        function updatePlots() {
+            // System Overview
+            $.get('/system_overview', function(data) {
+                Plotly.newPlot('system-overview', data.data, data.layout);
+            });
+
+            // Performance Trends
+            $.get('/performance_trends', function(data) {
+                Plotly.newPlot('performance-trends', data.data, data.layout);
+            });
+
+            // Environmental Dashboard
+            $.get('/environmental_dashboard', function(data) {
+                Plotly.newPlot('environmental-dashboard', data.data, data.layout);
+            });
+        }
+
+        // Initial plot update
+        updatePlots();
+
+        // Update plots every 5 seconds
+        setInterval(updatePlots, 5000);
+    </script>
+</body>
+</html>

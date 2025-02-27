@@ -1,0 +1,76 @@
+@startuml Requirements Bot Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ParticipantBorderColor Blue
+    ArrowColor Blue
+}
+
+actor User
+participant "Input Processor" as Input
+participant "NLP Engine" as NLP
+participant "Generator" as Gen
+participant "Validator" as Val
+participant "Suggester" as Sug
+participant "Exporter" as Exp
+database "Config Store" as Config
+database "Requirements Store" as Store
+
+== Initialization ==
+User -> Input: Submit requirement text
+activate Input
+Input -> Config: Load configuration
+Config --> Input: Configuration data
+Input -> NLP: Initialize NLP components
+activate NLP
+
+== Text Processing ==
+Input -> NLP: Process text
+NLP -> NLP: Entity recognition
+NLP -> NLP: Dependency parsing
+NLP -> NLP: Semantic analysis
+NLP --> Input: Processed text
+deactivate NLP
+
+== Requirement Generation ==
+Input -> Gen: Generate requirement
+activate Gen
+Gen -> Gen: Create requirement object
+Gen -> Gen: Extract metrics
+Gen -> Gen: Generate acceptance criteria
+Gen -> Gen: Calculate feasibility
+Gen --> Input: Requirement object
+deactivate Gen
+
+== Validation ==
+Input -> Val: Validate requirement
+activate Val
+Val -> Val: Check ambiguity
+Val -> Val: Check measurability
+Val -> Val: Check completeness
+Val -> Store: Check against existing requirements
+Store --> Val: Historical data
+Val --> Input: Validation results
+deactivate Val
+
+== Suggestion Generation ==
+Input -> Sug: Generate suggestions
+activate Sug
+Sug -> Sug: Analyze issues
+Sug -> Sug: Generate improvements
+Sug --> Input: Improvement suggestions
+deactivate Sug
+
+== Export ==
+Input -> Exp: Export results
+activate Exp
+Exp -> Exp: Format output
+Exp -> Store: Store requirement
+Exp -> Exp: Generate documentation
+Exp --> Input: Final output
+deactivate Exp
+
+Input --> User: Complete results
+deactivate Input
+
+@enduml

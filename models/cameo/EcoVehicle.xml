@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+    <uml:Model xmi:type="uml:Model" name="EcoVehicle" visibility="public">
+        <!-- Component Diagram -->
+        <packagedElement xmi:type="uml:Component" name="MonitoringSystem">
+            <packagedElement xmi:type="uml:Component" name="Dashboard">
+                <interfaceRealization xmi:type="uml:InterfaceRealization" name="IMetrics"/>
+                <interfaceRealization xmi:type="uml:InterfaceRealization" name="IAnalysis"/>
+                <interfaceRealization xmi:type="uml:InterfaceRealization" name="IEnvironmental"/>
+            </packagedElement>
+            
+            <packagedElement xmi:type="uml:Component" name="MetricsCollector">
+                <provided xmi:type="uml:Interface" name="IMetrics">
+                    <ownedOperation xmi:type="uml:Operation" name="collectMetrics"/>
+                    <ownedOperation xmi:type="uml:Operation" name="processMetrics"/>
+                </provided>
+            </packagedElement>
+            
+            <packagedElement xmi:type="uml:Component" name="PerformanceAnalyzer">
+                <provided xmi:type="uml:Interface" name="IAnalysis">
+                    <ownedOperation xmi:type="uml:Operation" name="analyzePerformance"/>
+                    <ownedOperation xmi:type="uml:Operation" name="detectAnomalies"/>
+                </provided>
+            </packagedElement>
+            
+            <packagedElement xmi:type="uml:Component" name="EnvironmentalMonitor">
+                <provided xmi:type="uml:Interface" name="IEnvironmental">
+                    <ownedOperation xmi:type="uml:Operation" name="monitorImpact"/>
+                    <ownedOperation xmi:type="uml:Operation" name="calculateScore"/>
+                </provided>
+            </packagedElement>
+        </packagedElement>
+        
+        <!-- State Machine -->
+        <packagedElement xmi:type="uml:StateMachine" name="VehicleMonitoringStates">
+            <region xmi:type="uml:Region" name="MainRegion">
+                <subvertex xmi:type="uml:State" name="Initializing"/>
+                <subvertex xmi:type="uml:State" name="Monitoring"/>
+                <subvertex xmi:type="uml:State" name="Alert"/>
+                <subvertex xmi:type="uml:State" name="Maintenance"/>
+                
+                <transition xmi:type="uml:Transition" source="Initializing" target="Monitoring"/>
+                <transition xmi:type="uml:Transition" source="Monitoring" target="Alert"/>
+                <transition xmi:type="uml:Transition" source="Alert" target="Maintenance"/>
+                <transition xmi:type="uml:Transition" source="Maintenance" target="Monitoring"/>
+            </region>
+        </packagedElement>
+        
+        <!-- Requirements -->
+        <packagedElement xmi:type="uml:Package" name="Requirements">
+            <packagedElement xmi:type="uml:Class" name="Performance">
+                <ownedAttribute xmi:type="uml:Property" name="cpuThreshold" value="80"/>
+                <ownedAttribute xmi:type="uml:Property" name="memoryThreshold" value="90"/>
+                <ownedAttribute xmi:type="uml:Property" name="networkLatencyThreshold" value="100"/>
+            </packagedElement>
+            
+            <packagedElement xmi:type="uml:Class" name="Environmental">
+                <ownedAttribute xmi:type="uml:Property" name="minScore" value="70"/>
+                <ownedAttribute xmi:type="uml:Property" name="optimalScore" value="90"/>
+            </packagedElement>
+        </packagedElement>
+    </uml:Model>
+</xmi:XMI>

@@ -1,0 +1,125 @@
+@startuml EcoVehicle Interface Specifications
+
+interface "IMetricsCollector" as IMC {
+    + collectMetrics(): MetricsData
+    + startCollection()
+    + stopCollection()
+    + configureInterval(ms: int)
+    + addSensor(sensor: ISensor)
+    + removeSensor(sensorId: string)
+}
+
+interface "ISensor" as IS {
+    + getId(): string
+    + getType(): SensorType
+    + getValue(): double
+    + getUnit(): string
+    + getAccuracy(): double
+    + calibrate()
+}
+
+interface "IStreamProcessor" as ISP {
+    + processMetrics(data: MetricsData)
+    + setBufferSize(size: int)
+    + getProcessingRate(): double
+    + getLatency(): double
+}
+
+interface "IAnalyzer" as IA {
+    + analyze(data: ProcessedData): AnalysisResult
+    + getConfidence(): double
+    + getAccuracy(): double
+    + train(historicalData: Dataset)
+}
+
+interface "IStorage" as IST {
+    + store(data: StorageData)
+    + retrieve(query: Query): Dataset
+    + backup(location: string)
+    + optimize()
+    + getStats(): StorageStats
+}
+
+interface "IVisualizer" as IV {
+    + updateDisplay(data: DisplayData)
+    + configureLayout(config: LayoutConfig)
+    + exportView(format: string)
+    + handleInteraction(event: UserEvent)
+}
+
+interface "IAlertManager" as IAM {
+    + addAlert(alert: Alert)
+    + removeAlert(alertId: string)
+    + getActiveAlerts(): List<Alert>
+    + setThreshold(metric: string, value: double)
+}
+
+interface "IReportGenerator" as IRG {
+    + generateReport(type: ReportType): Report
+    + scheduleReport(schedule: Schedule)
+    + exportReport(format: string)
+    + getTemplates(): List<Template>
+}
+
+interface "IExternalSystem" as IES {
+    + connect(config: ConnectionConfig)
+    + disconnect()
+    + sendData(data: ExternalData)
+    + receiveData(): ExternalData
+    + getStatus(): ConnectionStatus
+}
+
+' Data Structures
+class "MetricsData" as MD {
+    + timestamp: DateTime
+    + sensorId: string
+    + value: double
+    + unit: string
+    + metadata: Map<string, string>
+}
+
+class "ProcessedData" as PD {
+    + originalData: MetricsData
+    + processedValue: double
+    + confidence: double
+    + flags: List<Flag>
+}
+
+class "AnalysisResult" as AR {
+    + resultType: ResultType
+    + value: double
+    + confidence: double
+    + recommendations: List<string>
+}
+
+class "Alert" as AL {
+    + id: string
+    + type: AlertType
+    + severity: Severity
+    + message: string
+    + timestamp: DateTime
+}
+
+class "Report" as RP {
+    + id: string
+    + type: ReportType
+    + content: ReportContent
+    + metadata: ReportMetadata
+}
+
+' Relationships
+IMC --> IS : uses
+IMC --> MD : produces
+ISP --> MD : consumes
+ISP --> PD : produces
+IA --> PD : consumes
+IA --> AR : produces
+IST --> PD : stores
+IST --> AR : stores
+IV --> AR : displays
+IAM --> AL : manages
+IRG --> RP : generates
+IES --> MD : exchanges
+IES --> AR : exchanges
+
+@enduml

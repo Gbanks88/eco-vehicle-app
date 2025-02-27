@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RCC>
+    <qresource prefix="/icons">
+        <!-- Model Repository Icons -->
+        <file>icons/new_model.png</file>
+        <file>icons/open_model.png</file>
+        <file>icons/save_model.png</file>
+        <file>icons/delete_model.png</file>
+        <file>icons/edit_model.png</file>
+        <file>icons/checkout.png</file>
+        <file>icons/checkin.png</file>
+        <file>icons/version.png</file>
+        <file>icons/compare.png</file>
+        <file>icons/merge.png</file>
+        <file>icons/history.png</file>
+        
+        <!-- Flow Modeling Icons -->
+        <file>icons/activity.png</file>
+        <file>icons/data_flow.png</file>
+        <file>icons/control_flow.png</file>
+        <file>icons/decision.png</file>
+        <file>icons/fork.png</file>
+        <file>icons/join.png</file>
+        <file>icons/initial.png</file>
+        <file>icons/final.png</file>
+        
+        <!-- Common Icons -->
+        <file>icons/search.png</file>
+        <file>icons/filter.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/help.png</file>
+        <file>icons/warning.png</file>
+        <file>icons/error.png</file>
+        <file>icons/success.png</file>
+    </qresource>
+    
+    <qresource prefix="/styles">
+        <file>styles/dark.qss</file>
+        <file>styles/light.qss</file>
+        <file>styles/common.qss</file>
+    </qresource>
+    
+    <qresource prefix="/translations">
+        <file>i18n/app_en.qm</file>
+        <file>i18n/app_es.qm</file>
+        <file>i18n/app_fr.qm</file>
+        <file>i18n/app_de.qm</file>
+        <file>i18n/app_ja.qm</file>
+        <file>i18n/app_zh.qm</file>
+    </qresource>
+    
+    <qresource prefix="/templates">
+        <file>templates/model_report.html</file>
+        <file>templates/version_diff.html</file>
+        <file>templates/flow_diagram.html</file>
+    </qresource>
+    
+    <qresource prefix="/config">
+        <file>config/default_settings.json</file>
+        <file>config/shortcuts.json</file>
+        <file>config/validation_rules.json</file>
+    </qresource>
+</RCC>

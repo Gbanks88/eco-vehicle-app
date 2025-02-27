@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG4F System Monitoring</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    
+    <!-- Base Styles -->
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/monitoring.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">Creating Greatness 4 Foundation</div>
+            <div class="subtitle">Advanced Analytics Platform</div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="monitoring-dashboard">
+            <h1>System Monitoring</h1>
+            
+            <!-- System Status Overview -->
+            <div class="metrics-grid">
+                <!-- Database Health -->
+                <div class="metric-card" v-for="(db, name) in metrics.databases" :key="name">
+                    <div class="metric-header">
+                        <i class="mdi mdi-database"></i>
+                        <span class="metric-label">{{ name }} Status</span>
+                    </div>
+                    <div class="metric-value">
+                        <span class="status-indicator" :class="getStatusClass(db.status)"></span>
+                        {{ db.status }}
+                    </div>
+                    <div class="metric-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Connections:</span>
+                            <span class="detail-value">{{ db.connections }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Latency:</span>
+                            <span class="detail-value">{{ db.latency }}ms</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="metric-card performance">
+                    <div class="metric-header">
+                        <i class="mdi mdi-speedometer"></i>
+                        <span class="metric-label">System Performance</span>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="performance-item">
+                            <span class="item-label">CPU Load</span>
+                            <div class="progress-bar">
+                                <div class="progress" :style="{width: metrics.performance.cpu.usage + '%'}"></div>
+                            </div>
+                            <span class="item-value">{{ metrics.performance.cpu.usage }}%</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="item-label">Memory Usage</span>
+                            <div class="progress-bar">
+                                <div class="progress" :style="{width: metrics.performance.memory.percent + '%'}"></div>
+                            </div>
+                            <span class="item-value">{{ metrics.performance.memory.percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Status -->
+                <div class="metric-card network">
+                    <div class="metric-header">
+                        <i class="mdi mdi-network"></i>
+                        <span class="metric-label">Network Status</span>
+                    </div>
+                    <div class="network-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Throughput</span>
+                            <span class="stat-value">{{ formatBytes(metrics.network.throughput) }}/s</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Active Connections</span>
+                            <span class="stat-value">{{ metrics.network.connections.established }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Status -->
+                <div class="metric-card storage">
+                    <div class="metric-header">
+                        <i class="mdi mdi-harddisk"></i>
+                        <span class="metric-label">Storage Status</span>
+                    </div>
+                    <div class="storage-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Used Space</span>
+                            <div class="progress-bar">
+                                <div class="progress" :style="{width: metrics.storage.usage.percent + '%'}"></div>
+                            </div>
+                            <span class="stat-value">{{ formatBytes(metrics.storage.usage.used) }} / {{ formatBytes(metrics.storage.usage.total) }}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">I/O Operations</span>
+                            <span class="stat-value">{{ metrics.storage.io_stats.operations }}/s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alerts Section -->
+            <div class="section">
+                <h2>Active Alerts</h2>
+                <div class="alerts-container">
+                    <div v-for="alert in alerts" :key="alert.id" 
+                         :class="['alert', `alert-${alert.type}`]">
+                        <i :class="['mdi', alert.icon]"></i>
+                        <div>
+                            <strong>{{ alert.title }}</strong>
+                            <p>{{ alert.message }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Resources -->
+            <div class="section">
+                <h2>System Resources</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">CPU Usage</div>
+                        <div class="chart-container" style="height: 200px;">
+                            <div id="cpuChart"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Memory Usage</div>
+                        <div class="chart-container" style="height: 200px;">
+                            <div id="memoryChart"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Disk Usage</div>
+                        <div class="chart-container" style="height: 200px;">
+                            <div id="diskChart"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Network Traffic</div>
+                        <div class="chart-container" style="height: 200px;">
+                            <div id="networkChart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="container">
+        <div style="text-align: center; padding: var(--spacing-lg) 0; color: var(--text-secondary);">
+            © 2025 Creating Greatness 4 Foundation. All rights reserved.
+        </div>
+    </footer>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+    <script src="js/monitoring.js"></script>
+</body>
+</html>

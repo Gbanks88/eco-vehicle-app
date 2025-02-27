@@ -1,0 +1,190 @@
+{
+  "motherboards": [
+    {
+      "model": "B550M Pro4",
+      "manufacturer": "ASRock",
+      "socket": "AM4",
+      "chipset": "B550",
+      "memory": {
+        "slots": 4,
+        "max_speed": 4733,
+        "max_capacity": 128,
+        "voltage": 1.35,
+        "ecc_support": true
+      },
+      "features": [
+        "USB 3.0 Native Support",
+        "Advanced Power Management",
+        "PCIe 4.0 Support",
+        "RAID Support"
+      ],
+      "power": {
+        "idle_power": 10.5,
+        "load_power": 55.0,
+        "vrm_efficiency": 92.0,
+        "max_tdp_support": 105
+      },
+      "cost": 110.0,
+      "form_factor": "microATX",
+      "pcie_slots": {
+        "x16": 2,
+        "x1": 2
+      }
+    },
+    {
+      "model": "MPG B550 GAMING PLUS",
+      "manufacturer": "MSI",
+      "socket": "AM4",
+      "chipset": "B550",
+      "memory": {
+        "slots": 4,
+        "max_speed": 4400,
+        "max_capacity": 128,
+        "voltage": 1.35,
+        "ecc_support": true
+      },
+      "features": [
+        "USB 3.0 Native Support",
+        "Advanced Power Management",
+        "PCIe 4.0 Support",
+        "RAID Support"
+      ],
+      "power": {
+        "idle_power": 11.0,
+        "load_power": 60.0,
+        "vrm_efficiency": 91.0,
+        "max_tdp_support": 105
+      },
+      "cost": 145.0,
+      "form_factor": "ATX",
+      "pcie_slots": {
+        "x16": 2,
+        "x1": 3
+      }
+    },
+    {
+      "model": "ROG STRIX B550-F GAMING",
+      "manufacturer": "ASUS",
+      "socket": "AM4",
+      "chipset": "B550",
+      "memory": {
+        "slots": 4,
+        "max_speed": 5100,
+        "max_capacity": 128,
+        "voltage": 1.35,
+        "ecc_support": true
+      },
+      "features": [
+        "USB 3.0 Native Support",
+        "Advanced Power Management",
+        "PCIe 4.0 Support",
+        "RAID Support",
+        "Intel vPro Technology"
+      ],
+      "power": {
+        "idle_power": 12.0,
+        "load_power": 65.0,
+        "vrm_efficiency": 93.0,
+        "max_tdp_support": 105
+      },
+      "cost": 180.0,
+      "form_factor": "ATX",
+      "pcie_slots": {
+        "x16": 2,
+        "x1": 4
+      }
+    },
+    {
+      "model": "DH61CR",
+      "manufacturer": "Intel",
+      "socket": "LGA 1155",
+      "chipset": "H61",
+      "memory": {
+        "slots": 2,
+        "max_speed": 1333,
+        "max_capacity": 16,
+        "voltage": 1.5,
+        "ecc_support": false
+      },
+      "features": [
+        "Advanced Power Management"
+      ],
+      "power": {
+        "idle_power": 12.5,
+        "load_power": 65.0,
+        "vrm_efficiency": 85.0,
+        "max_tdp_support": 95
+      },
+      "cost": 85.0,
+      "form_factor": "microATX",
+      "pcie_slots": {
+        "x16": 1,
+        "x1": 2
+      }
+    },
+    {
+      "model": "Q85LI",
+      "manufacturer": "Lenovo",
+      "socket": "LGA 1150",
+      "chipset": "Q85",
+      "memory": {
+        "slots": 4,
+        "max_speed": 1600,
+        "max_capacity": 32,
+        "voltage": 1.5,
+        "ecc_support": true
+      },
+      "features": [
+        "USB 3.0 Native Support",
+        "Intel vPro Technology",
+        "Advanced Power Management",
+        "RAID Support",
+        "PCIe 3.0 Support"
+      ],
+      "power": {
+        "idle_power": 14.0,
+        "load_power": 75.0,
+        "vrm_efficiency": 88.0,
+        "max_tdp_support": 95
+      },
+      "cost": 120.0,
+      "form_factor": "ATX",
+      "pcie_slots": {
+        "x16": 1,
+        "x8": 1,
+        "x1": 2
+      }
+    },
+    {
+      "model": "B660M-HDV",
+      "manufacturer": "ASRock",
+      "socket": "LGA 1200",
+      "chipset": "B660",
+      "memory": {
+        "slots": 2,
+        "max_speed": 3200,
+        "max_capacity": 64,
+        "voltage": 1.35,
+        "ecc_support": false
+      },
+      "features": [
+        "USB 3.0 Native Support",
+        "Advanced Power Management",
+        "PCIe 4.0 Support",
+        "RAID Support"
+      ],
+      "power": {
+        "idle_power": 11.0,
+        "load_power": 58.0,
+        "vrm_efficiency": 90.0,
+        "max_tdp_support": 125
+      },
+      "cost": 95.0,
+      "form_factor": "microATX",
+      "pcie_slots": {
+        "x16": 1,
+        "x1": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+analysis_results:
+  quality_metrics:
+    accuracy: 1.0
+    completeness: 1.0
+    consistency: 1.0
+  statistical_analysis:
+    analyzed_systems:
+      max: 7.0
+      mean: 7.0
+      min: 7.0
+      std: 0.0
+    optimization_metrics_performance_score:
+      max: 0.85
+      mean: 0.85
+      min: 0.85
+      std: 0.0
+    optimization_metrics_resource_efficiency:
+      max: 0.78
+      mean: 0.78
+      min: 0.78
+      std: 0.0
+    optimization_metrics_scalability_index:
+      max: 0.92
+      mean: 0.92
+      min: 0.92
+      std: 0.0
+data_structure:
+  constraints:
+  - fields:
+    - analysis_timestamp
+    - analyzed_systems
+    - optimization_metrics
+    - recommendations
+    type: required
+  relationships:
+  - fields:
+    - analysis_timestamp
+    - analyzed_systems
+    - optimization_metrics
+    - recommendations
+    type: correlation
+  schema:
+    analysis_timestamp:
+      required: true
+      type: str
+    analyzed_systems:
+      required: true
+      type: int
+    optimization_metrics:
+      performance_score:
+        required: true
+        type: float
+      resource_efficiency:
+        required: true
+        type: float
+      scalability_index:
+        required: true
+        type: float
+    recommendations:
+      required: true
+      type: list
+metadata:
+  analysis_version: '1.0'
+  bot_name: optimization_bot
+  timestamp: '2025-02-24T15:30:24.535069'
+raw_data:
+  analysis_timestamp: '2025-02-24T15:30:24.535046'
+  analyzed_systems: 7
+  optimization_metrics:
+    performance_score: 0.85
+    resource_efficiency: 0.78
+    scalability_index: 0.92
+  recommendations:
+  - Optimize resource allocation
+  - Enhance system modularity
+  - Improve error handling

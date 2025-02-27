@@ -1,0 +1,59 @@
+{
+    "mongodb": {
+        "studio3t": {
+            "uri": "mongodb://localhost:27017",
+            "database": "cg4f_analytics",
+            "collections": {
+                "metrics": "vehicle_metrics",
+                "predictions": "ml_predictions",
+                "optimization": "system_optimization",
+                "patterns": "usage_patterns",
+                "alerts": "system_alerts"
+            },
+            "options": {
+                "retryWrites": true,
+                "w": "majority",
+                "maxPoolSize": 50,
+                "connectTimeoutMS": 5000
+            }
+        }
+    },
+    "ibm_cloud": {
+        "credentials": {
+            "apikey": "YOUR_IBM_API_KEY",
+            "url": "YOUR_IBM_CLOUD_URL",
+            "instance_id": "YOUR_INSTANCE_ID"
+        },
+        "services": {
+            "db2": {
+                "database": "CG4F_PROD",
+                "schema": "analytics",
+                "tables": {
+                    "metrics": "vehicle_metrics",
+                    "predictions": "ml_predictions",
+                    "optimization": "system_optimization"
+                }
+            },
+            "cloudant": {
+                "database": "cg4f_realtime",
+                "collections": {
+                    "events": "system_events",
+                    "logs": "system_logs"
+                }
+            },
+            "object_storage": {
+                "bucket": "cg4f-analytics-data",
+                "region": "us-south"
+            }
+        },
+        "ml_services": {
+            "watson_studio": {
+                "project_id": "YOUR_PROJECT_ID",
+                "space_id": "YOUR_SPACE_ID"
+            },
+            "watson_machine_learning": {
+                "instance_id": "YOUR_WML_INSTANCE_ID"
+            }
+        }
+    }
+}

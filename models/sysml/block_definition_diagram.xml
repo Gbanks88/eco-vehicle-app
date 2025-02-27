@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://schema.omg.org/spec/SysML/1.4/sysml.xsd">
+    <blocks>
+        <!-- System Overview -->
+        <block name="EcoVehicleMonitoringSystem">
+            <parts>
+                <part name="monitoringSubsystem" type="MonitoringSubsystem"/>
+                <part name="analysisSubsystem" type="AnalysisSubsystem"/>
+                <part name="visualizationSubsystem" type="VisualizationSubsystem"/>
+                <part name="dataManagementSubsystem" type="DataManagementSubsystem"/>
+            </parts>
+            <flows>
+                <flow name="metricsFlow" source="monitoringSubsystem" target="analysisSubsystem"/>
+                <flow name="analysisFlow" source="analysisSubsystem" target="visualizationSubsystem"/>
+                <flow name="storageFlow" source="monitoringSubsystem" target="dataManagementSubsystem"/>
+            </flows>
+        </block>
+
+        <!-- Monitoring Subsystem -->
+        <block name="MonitoringSubsystem">
+            <parts>
+                <part name="systemMonitor" type="SystemMonitor"/>
+                <part name="metricsCollector" type="MetricsCollector"/>
+                <part name="alertManager" type="AlertManager"/>
+            </parts>
+            <ports>
+                <port name="metricOutput" type="MetricsInterface"/>
+                <port name="alertOutput" type="AlertInterface"/>
+            </ports>
+            <constraints>
+                <constraint name="updateFrequency">
+                    <text>Update interval must be ≤ 100ms</text>
+                </constraint>
+            </constraints>
+        </block>
+
+        <!-- Analysis Subsystem -->
+        <block name="AnalysisSubsystem">
+            <parts>
+                <part name="performanceAnalyzer" type="PerformanceAnalyzer"/>
+                <part name="environmentalAnalyzer" type="EnvironmentalAnalyzer"/>
+                <part name="predictiveModel" type="PredictiveModel"/>
+            </parts>
+            <ports>
+                <port name="dataInput" type="MetricsInterface"/>
+                <port name="analysisOutput" type="AnalysisInterface"/>
+            </ports>
+            <constraints>
+                <constraint name="accuracy">
+                    <text>Prediction accuracy must be ≥ 95%</text>
+                </constraint>
+            </constraints>
+        </block>
+
+        <!-- Visualization Subsystem -->
+        <block name="VisualizationSubsystem">
+            <parts>
+                <part name="dashboard" type="DashboardWidget"/>
+                <part name="charts" type="ChartManager"/>
+                <part name="alertView" type="AlertView"/>
+            </parts>
+            <ports>
+                <port name="displayInput" type="DisplayInterface"/>
+                <port name="userInput" type="UserInterface"/>
+            </ports>
+            <constraints>
+                <constraint name="refreshRate">
+                    <text>Display refresh rate must be ≥ 30fps</text>
+                </constraint>
+            </constraints>
+        </block>
+
+        <!-- Data Management Subsystem -->
+        <block name="DataManagementSubsystem">
+            <parts>
+                <part name="database" type="TimeSeriesDB"/>
+                <part name="dataExporter" type="DataExporter"/>
+                <part name="storageManager" type="StorageManager"/>
+            </parts>
+            <ports>
+                <port name="storageInput" type="StorageInterface"/>
+                <port name="queryOutput" type="QueryInterface"/>
+            </ports>
+            <constraints>
+                <constraint name="retention">
+                    <text>Data retention period must be ≥ 30 days</text>
+                </constraint>
+            </constraints>
+        </block>
+
+        <!-- Value Types -->
+        <valueType name="Metrics">
+            <attributes>
+                <attribute name="timestamp" type="DateTime"/>
+                <attribute name="values" type="Map&lt;string, double&gt;"/>
+            </attributes>
+        </valueType>
+
+        <valueType name="Alert">
+            <attributes>
+                <attribute name="id" type="string"/>
+                <attribute name="severity" type="AlertSeverity"/>
+                <attribute name="message" type="string"/>
+            </attributes>
+        </valueType>
+
+        <!-- Interfaces -->
+        <interface name="MetricsInterface">
+            <operations>
+                <operation name="sendMetrics" parameters="metrics: Metrics"/>
+                <operation name="receiveMetrics" returns="Metrics"/>
+            </operations>
+        </interface>
+
+        <interface name="AnalysisInterface">
+            <operations>
+                <operation name="analyzeData" parameters="data: TimeSeries"/>
+                <operation name="getResults" returns="AnalysisResults"/>
+            </operations>
+        </interface>
+    </blocks>
+</model>

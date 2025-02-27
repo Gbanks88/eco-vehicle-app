@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}CG4F Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Welcome to CG4F Dashboard</h1>
+    
+    <div class="grid">
+        <div class="card">
+            <h2>System Monitoring</h2>
+            <p>View detailed system metrics, performance data, and real-time alerts.</p>
+            <a href="/monitoring" class="button button-primary">Open Monitoring</a>
+        </div>
+        
+        <div class="card">
+            <h2>Vehicle Analytics</h2>
+            <p>Access vehicle data, performance metrics, and eco-friendly statistics.</p>
+            <a href="/analytics" class="button button-secondary">View Analytics</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

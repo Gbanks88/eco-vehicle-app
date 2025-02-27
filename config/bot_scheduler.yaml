@@ -1,0 +1,84 @@
+scheduler_config:
+  default_schedules:
+    requirements_bot:
+      frequency: "daily"
+      preferred_time: "03:00"  # After daily analytics aggregation
+      max_runtime: 1800  # 30 minutes
+      retry_attempts: 3
+      conditions:
+        - "no_active_development"
+        - "system_resources_available"
+        - "analytics_data_ready"  # Wait for daily analytics
+    
+    optimization_bot:
+      frequency: "daily"
+      preferred_time: "04:00"  # After requirements analysis
+      max_runtime: 3600  # 1 hour
+      retry_attempts: 2
+      conditions:
+        - "system_load_below_50%"
+        - "sufficient_historical_data"
+        - "price_data_updated"  # Check for price updates
+        - "inventory_data_ready"  # Check inventory status
+    
+    validation_bot:
+      frequency: "hourly"
+      preferred_time: "*/01:00"  # Every hour
+      max_runtime: 900  # 15 minutes
+      retry_attempts: 2
+      conditions:
+        - "critical_changes_detected"
+        - "system_resources_available"
+        - "payment_system_active"  # Ensure payment system is up
+        - "auth_system_active"     # Verify auth system status
+
+  special_triggers:
+    inventory_update:
+      bots: ["optimization_bot", "validation_bot"]
+      max_runtime: 900  # 15 minutes
+      priority: "high"
+      conditions:
+        - "inventory_threshold_reached"
+        - "price_changes_detected"
+    
+    user_surge:
+      bots: ["optimization_bot", "validation_bot"]
+      max_runtime: 600  # 10 minutes
+      priority: "critical"
+      conditions:
+        - "traffic_spike_detected"
+        - "cart_abandonment_increase"
+    
+    payment_activity:
+      bots: ["validation_bot"]
+      max_runtime: 300  # 5 minutes
+      priority: "critical"
+      conditions:
+        - "unusual_payment_patterns"
+        - "high_value_transactions"
+    
+    search_optimization:
+      bots: ["optimization_bot"]
+      max_runtime: 1800  # 30 minutes
+      priority: "high"
+      conditions:
+        - "search_pattern_changes"
+        - "new_trending_products"
+
+  resource_limits:
+    cpu_threshold: 60  # Lower CPU threshold for better responsiveness
+    memory_threshold: 70  # Lower memory threshold for better performance
+    disk_space_required: 2000  # Increased for analytics data
+    network_bandwidth: 100  # Higher bandwidth for concurrent users
+    database_connections: 1000  # Maximum concurrent DB connections
+    cache_size: 4096  # Redis cache size in MB
+
+  data_retention:
+    user_format: 90  # days
+    ai_patterns: 180  # days
+    system_analysis: 365  # days
+    logs: 30  # days
+    search_patterns: 60  # days
+    user_behavior: 45  # days
+    price_history: 730  # days
+    inventory_trends: 365  # days

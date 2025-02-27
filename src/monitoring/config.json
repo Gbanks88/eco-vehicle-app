@@ -1,0 +1,4 @@
+{
+  "update_interval": 1.0,
+  "log_dir": "logs"
+}

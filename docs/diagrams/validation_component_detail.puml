@@ -1,0 +1,106 @@
+@startuml Validation Component Detail
+
+skinparam component {
+    BackgroundColor LightYellow
+    BorderColor Orange
+    ArrowColor Orange
+}
+
+package "Validation Pipeline" {
+    [Ambiguity Checker] as ambig
+    [Metric Validator] as metrics
+    [Completeness Checker] as complete
+    [Consistency Checker] as consist
+    [Dependency Validator] as dep
+    [Quality Scorer] as quality
+    
+    interface "Requirement Input" as input
+    interface "Validation Results" as results
+    interface "Quality Score" as score
+    interface "Issues" as issues
+    interface "Suggestions" as suggest
+}
+
+database "Validation Rules" {
+    [Quality Patterns]
+    [Required Fields]
+    [Consistency Rules]
+    [Scoring Criteria]
+}
+
+database "Historical Data" {
+    [Past Requirements]
+    [Common Issues]
+    [Resolution Patterns]
+}
+
+cloud "External Validators" {
+    [Domain Validator]
+    [Security Validator]
+    [Performance Validator]
+}
+
+' Flow
+input --> ambig
+ambig --> metrics
+metrics --> complete
+complete --> consist
+consist --> dep
+dep --> quality
+
+' Outputs
+ambig ..> issues : Ambiguity Issues
+metrics ..> issues : Metric Issues
+complete ..> issues : Completeness Issues
+consist ..> issues : Consistency Issues
+dep ..> issues : Dependency Issues
+quality ..> score : Quality Score
+
+' Rule Usage
+[Quality Patterns] --> ambig
+[Required Fields] --> complete
+[Consistency Rules] --> consist
+[Scoring Criteria] --> quality
+
+' Historical Data Usage
+[Past Requirements] --> consist
+[Common Issues] --> quality
+[Resolution Patterns] --> suggest
+
+' External Validators
+[Domain Validator] --> consist
+[Security Validator] --> quality
+[Performance Validator] --> metrics
+
+note right of ambig
+  Checks for:
+  - Vague terms
+  - Subjective language
+  - Unclear requirements
+end note
+
+note right of metrics
+  Validates:
+  - Performance metrics
+  - Resource metrics
+  - Time constraints
+  - Cost metrics
+end note
+
+note right of complete
+  Ensures presence of:
+  - Required fields
+  - Acceptance criteria
+  - Stakeholders
+  - Dependencies
+end note
+
+note right of consist
+  Checks:
+  - Internal consistency
+  - Cross-requirement consistency
+  - Domain compliance
+  - Standard compliance
+end note
+
+@enduml

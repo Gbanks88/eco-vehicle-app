@@ -1,0 +1,72 @@
+{
+    "dashboard": {
+        "port": 5000,
+        "debug": true,
+        "features": {
+            "real_time_monitoring": true,
+            "alerts": true,
+            "data_export": true
+        }
+    },
+    "viewer": {
+        "port": 8081,
+        "models_dir": "static/models",
+        "features": {
+            "wireframe": true,
+            "measurements": true,
+            "cross_section": true
+        }
+    },
+    "monitor": {
+        "update_interval": 1.0,
+        "log_dir": "logs",
+        "metrics": {
+            "power": true,
+            "emissions": true,
+            "temperature": true,
+            "efficiency": true
+        }
+    },
+    "power": {
+        "default_state": "STANDBY",
+        "voltage_range": [42.0, 52.0],
+        "current_range": [0, 100],
+        "features": {
+            "auto_optimization": true,
+            "fault_detection": true,
+            "power_saving": true
+        }
+    },
+    "analytics": {
+        "update_interval": 300,
+        "prediction_horizon": 3600,
+        "min_samples": 1000,
+        "features": [
+            "voltage",
+            "current",
+            "temperature",
+            "speed",
+            "acceleration",
+            "terrain_grade"
+        ],
+        "optimization": {
+            "enable_real_time": true,
+            "parameter_ranges": {
+                "voltage": [42.0, 52.0],
+                "current": [0, 100],
+                "temperature": [15, 35]
+            },
+            "objectives": [
+                "efficiency",
+                "emissions",
+                "battery_life"
+            ]
+        },
+        "ml_model": {
+            "type": "random_forest",
+            "n_estimators": 100,
+            "max_depth": 10,
+            "cross_validation": true
+        }
+    }
+}

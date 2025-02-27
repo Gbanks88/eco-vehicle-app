@@ -1,0 +1,86 @@
+{
+    "version": "1.0",
+    "voices": [
+        {
+            "id": "default",
+            "name": "Default Voice",
+            "language": "en-US",
+            "gender": "neutral",
+            "description": "Default system voice for the Eco-Vehicle Monitoring System"
+        }
+    ],
+    "samples": [
+        {
+            "id": "welcome",
+            "file": "voice.m4a",
+            "text": "Welcome to the Eco-Vehicle Monitoring System",
+            "duration": 3.5,
+            "metadata": {
+                "context": "startup",
+                "priority": "high",
+                "category": "system"
+            }
+        },
+        {
+            "id": "model_created",
+            "file": "model_created.m4a",
+            "text": "New model has been created successfully",
+            "duration": 2.0,
+            "metadata": {
+                "context": "modeling",
+                "priority": "normal",
+                "category": "feedback"
+            }
+        },
+        {
+            "id": "analysis_complete",
+            "file": "analysis_complete.m4a",
+            "text": "Analysis has been completed. Results are ready for review",
+            "duration": 3.0,
+            "metadata": {
+                "context": "analysis",
+                "priority": "high",
+                "category": "notification"
+            }
+        },
+        {
+            "id": "error_detected",
+            "file": "error_detected.m4a",
+            "text": "An error has been detected. Please review the logs for details",
+            "duration": 3.0,
+            "metadata": {
+                "context": "error",
+                "priority": "high",
+                "category": "alert"
+            }
+        },
+        {
+            "id": "help_available",
+            "file": "help_available.m4a",
+            "text": "Help is available. Press F1 or click the help icon for assistance",
+            "duration": 3.0,
+            "metadata": {
+                "context": "help",
+                "priority": "normal",
+                "category": "guidance"
+            }
+        }
+    ],
+    "contextualHints": {
+        "modeling": [
+            "To create a new model, click the plus icon or use Ctrl+N",
+            "Double-click a model to open it for editing",
+            "Right-click for additional options"
+        ],
+        "analysis": [
+            "Select parameters before starting analysis",
+            "Results will be displayed in real-time",
+            "Export options are available in the toolbar"
+        ],
+        "settings": [
+            "Changes are saved automatically",
+            "System restart may be required for some changes",
+            "Default settings can be restored using the reset button"
+        ]
+    }
+}

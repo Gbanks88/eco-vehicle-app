@@ -1,0 +1,69 @@
+@startuml System Components
+
+skinparam component {
+    BackgroundColor LightBlue
+    BorderColor Blue
+    ArrowColor Blue
+    FontName Arial
+}
+
+title Eco Vehicle System Components
+
+package "Power Management" {
+    [PowerController] as PC
+    [StateManager] as SM
+    [PowerOptimizer] as PO
+    [FaultHandler] as FH
+}
+
+package "Environmental Monitoring" {
+    [EmissionsMonitor] as EM
+    [AirQualitySensor] as AQ
+    [EfficiencyAnalyzer] as EA
+}
+
+package "Vehicle Control" {
+    [DriveController] as DC
+    [RouteOptimizer] as RO
+    [RegenerativeBraking] as RB
+}
+
+package "Data Management" {
+    [DataLogger] as DL
+    [MetricsAnalyzer] as MA
+    [AlertSystem] as AS
+}
+
+package "User Interface" {
+    [WebDashboard] as WD
+    [MobileApp] as MA
+    [DesktopClient] as DC
+}
+
+' Power Management relationships
+PC --> SM : state updates
+SM --> PO : optimization requests
+SM --> FH : fault events
+PO --> PC : power settings
+
+' Environmental monitoring relationships
+EM --> AQ : air data
+EM --> EA : efficiency data
+EA --> PO : efficiency metrics
+
+' Vehicle control relationships
+DC --> RO : route data
+DC --> RB : braking control
+RB --> PC : power regeneration
+
+' Data management relationships
+DL --> MA : raw metrics
+MA --> AS : alert triggers
+AS --> WD : notifications
+
+' User interface relationships
+WD --> SM : control commands
+MA --> SM : mobile control
+DC --> SM : desktop control
+
+@enduml

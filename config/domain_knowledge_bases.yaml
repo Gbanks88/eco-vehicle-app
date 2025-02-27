@@ -1,0 +1,369 @@
+---
+# Domain-Specific Knowledge Bases for Requirements Bot
+
+machine_learning_ai:
+  keywords:
+    - neural network
+    - deep learning
+    - machine learning
+    - training data
+    - inference
+    - model accuracy
+    - supervised learning
+    - unsupervised learning
+    - reinforcement learning
+    - feature extraction
+  standards:
+    - ISO/IEC 25012 (Data Quality)
+    - IEEE 2807-2019 (AI Systems)
+    - ISO/IEC 20546 (Big Data)
+    - ISO/IEC 38507 (AI Governance)
+  regulations:
+    - GDPR
+    - CCPA
+    - AI Act
+    - IEEE Ethics Guidelines
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - F1-score
+    - AUC-ROC
+    - inference time
+    - training time
+    - model size
+  stakeholders:
+    - Data Scientists
+    - ML Engineers
+    - Data Engineers
+    - AI Ethicists
+    - Domain Experts
+
+chip_design:
+  keywords:
+    - ASIC
+    - FPGA
+    - RTL
+    - synthesis
+    - verification
+    - layout
+    - timing analysis
+    - power analysis
+    - DRC
+    - LVS
+  standards:
+    - IEEE 1364 (Verilog)
+    - IEEE 1800 (SystemVerilog)
+    - ISO 26262 (Functional Safety)
+    - IEC 61508 (Safety)
+  regulations:
+    - ITAR
+    - EAR
+    - RoHS
+    - REACH
+  metrics:
+    - power consumption
+    - gate count
+    - clock frequency
+    - yield rate
+    - area efficiency
+    - thermal performance
+  stakeholders:
+    - Chip Architects
+    - Verification Engineers
+    - Layout Engineers
+    - Process Engineers
+    - Reliability Engineers
+
+embedded_iot:
+  keywords:
+    - microcontroller
+    - RTOS
+    - sensor network
+    - firmware
+    - embedded linux
+    - real-time processing
+    - power management
+    - wireless protocols
+  standards:
+    - IEC 61508 (Functional Safety)
+    - ISO/IEC 30141 (IoT Reference)
+    - IEEE 2413 (IoT Architecture)
+    - EN 300 328 (RF Requirements)
+  regulations:
+    - CE marking
+    - FCC regulations
+    - ETSI standards
+    - Low Voltage Directive
+  metrics:
+    - power efficiency
+    - latency
+    - reliability
+    - bandwidth
+    - battery life
+    - response time
+    - throughput
+  stakeholders:
+    - Embedded Engineers
+    - IoT Architects
+    - System Integrators
+    - Hardware Engineers
+    - Network Engineers
+
+power_energy:
+  keywords:
+    - power distribution
+    - energy efficiency
+    - renewable energy
+    - grid management
+    - power quality
+    - energy storage
+    - smart grid
+  standards:
+    - IEEE 1547 (Interconnection)
+    - IEC 61850 (Power Systems)
+    - IEEE C37.118 (Synchrophasors)
+    - IEC 62443 (Security)
+  regulations:
+    - NERC CIP
+    - Energy Star
+    - EU Energy Directive
+    - FERC Standards
+  metrics:
+    - efficiency
+    - power factor
+    - energy density
+    - conversion rate
+    - thermal efficiency
+    - response time
+  stakeholders:
+    - Power Engineers
+    - Energy Analysts
+    - Grid Operators
+    - Compliance Officers
+    - Safety Engineers
+
+aerospace:
+  keywords:
+    - avionics
+    - propulsion
+    - navigation
+    - flight control
+    - thermal management
+    - life support
+    - radiation hardening
+  standards:
+    - DO-178C (Software)
+    - DO-254 (Hardware)
+    - AS9100 (Quality)
+    - MIL-STD-1553
+  regulations:
+    - FAA regulations
+    - EASA requirements
+    - Space debris mitigation
+    - Export control
+  metrics:
+    - reliability
+    - fault tolerance
+    - radiation resistance
+    - thrust efficiency
+    - weight efficiency
+    - thermal performance
+  stakeholders:
+    - Aerospace Engineers
+    - Flight System Engineers
+    - Safety Officers
+    - Quality Assurance
+    - Test Engineers
+
+military:
+  keywords:
+    - command control
+    - battlefield management
+    - secure communications
+    - electronic warfare
+    - target acquisition
+    - situational awareness
+  standards:
+    - MIL-STD-461 (EMC)
+    - MIL-STD-810 (Environmental)
+    - MIL-STD-1553 (Data Bus)
+    - STANAG 4586
+  regulations:
+    - ITAR
+    - EAR
+    - NATO requirements
+    - National security directives
+  metrics:
+    - reliability
+    - survivability
+    - interoperability
+    - security level
+    - detection range
+    - response time
+  stakeholders:
+    - Military Officers
+    - Defense Contractors
+    - Security Specialists
+    - System Integrators
+    - Test Engineers
+
+healthcare:
+  keywords:
+    - patient monitoring
+    - diagnostic systems
+    - medical imaging
+    - clinical decision support
+    - telemedicine
+    - health records
+  standards:
+    - ISO 13485 (Medical Devices)
+    - IEC 62304 (Software)
+    - DICOM
+    - HL7 FHIR
+  regulations:
+    - HIPAA
+    - GDPR
+    - FDA regulations
+    - CE marking
+  metrics:
+    - accuracy
+    - reliability
+    - response time
+    - data security
+    - patient safety
+    - diagnostic precision
+  stakeholders:
+    - Medical Professionals
+    - Biomedical Engineers
+    - Clinical Specialists
+    - Regulatory Affairs
+    - Quality Assurance
+
+hardware_manufacturing:
+  keywords:
+    - PCB design
+    - signal integrity
+    - thermal management
+    - manufacturing process
+    - test automation
+    - quality control
+  standards:
+    - IPC-A-610
+    - ISO 9001
+    - IEC 60068
+    - JEDEC standards
+  regulations:
+    - RoHS
+    - REACH
+    - FCC regulations
+    - CE marking
+  metrics:
+    - yield rate
+    - defect rate
+    - throughput
+    - reliability
+    - thermal performance
+    - signal quality
+  stakeholders:
+    - Hardware Engineers
+    - Manufacturing Engineers
+    - Quality Engineers
+    - Process Engineers
+    - Test Engineers
+
+cybersecurity:
+  keywords:
+    - threat detection
+    - encryption
+    - authentication
+    - network security
+    - incident response
+    - vulnerability assessment
+  standards:
+    - ISO 27001
+    - NIST CSF
+    - PCI DSS
+    - Common Criteria
+  regulations:
+    - GDPR
+    - CCPA
+    - HIPAA
+    - SOX
+  metrics:
+    - detection rate
+    - false positive rate
+    - response time
+    - uptime
+    - recovery time
+    - encryption strength
+  stakeholders:
+    - Security Engineers
+    - Network Administrators
+    - Risk Analysts
+    - Compliance Officers
+    - Incident Responders
+
+environment:
+  keywords:
+    - environmental monitoring
+    - pollution control
+    - resource management
+    - sustainability
+    - climate modeling
+    - conservation
+  standards:
+    - ISO 14001
+    - EPA standards
+    - ASTM standards
+    - GRI guidelines
+  regulations:
+    - Clean Air Act
+    - Clean Water Act
+    - REACH
+    - Environmental Protection Acts
+  metrics:
+    - emission levels
+    - resource efficiency
+    - compliance rate
+    - environmental impact
+    - sustainability index
+    - energy efficiency
+  stakeholders:
+    - Environmental Engineers
+    - Compliance Officers
+    - Scientists
+    - Policy Makers
+    - Conservation Specialists
+
+biomedical:
+  keywords:
+    - biocompatibility
+    - clinical trials
+    - medical devices
+    - drug delivery
+    - tissue engineering
+    - biomechanics
+  standards:
+    - ISO 13485
+    - ISO 14971
+    - ASTM F748
+    - IEEE 11073
+  regulations:
+    - FDA regulations
+    - EU MDR
+    - GMP
+    - IRB requirements
+  metrics:
+    - efficacy
+    - safety
+    - reliability
+    - biocompatibility
+    - sterility
+    - shelf life
+  stakeholders:
+    - Biomedical Engineers
+    - Clinical Researchers
+    - Regulatory Affairs
+    - Medical Professionals
+    - Quality Assurance

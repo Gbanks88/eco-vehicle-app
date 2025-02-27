@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "bot_name": "requirements_bot",
+    "timestamp": "2025-02-24T15:22:09.093249",
+    "pattern_version": "1.0"
+  },
+  "raw_data": {
+    "analysis_timestamp": "2025-02-24T15:22:09.093218",
+    "processed_domains": 11,
+    "processed_templates": 11,
+    "domain_coverage": {
+      "coverage_score": 1.0,
+      "total_domains": 11,
+      "covered_domains": 11
+    },
+    "template_metrics": {
+      "total_templates": 11,
+      "completeness_score": 0.9,
+      "quality_score": 0.85
+    }
+  },
+  "pattern_analysis": {
+    "data_types": {
+      "analysis_timestamp": "str",
+      "processed_domains": "int",
+      "processed_templates": "int",
+      "domain_coverage_coverage_score": "float",
+      "domain_coverage_total_domains": "int",
+      "domain_coverage_covered_domains": "int",
+      "template_metrics_total_templates": "int",
+      "template_metrics_completeness_score": "float",
+      "template_metrics_quality_score": "float"
+    },
+    "value_distributions": {
+      "analysis_timestamp": {
+        "type": "categorical",
+        "unique_values": [
+          "2025-02-24T15:22:09.093218"
+        ]
+      },
+      "processed_domains": {
+        "type": "numerical",
+        "min": 11,
+        "max": 11,
+        "mean": 11
+      },
+      "processed_templates": {
+        "type": "numerical",
+        "min": 11,
+        "max": 11,
+        "mean": 11
+      },
+      "domain_coverage_coverage_score": {
+        "type": "numerical",
+        "min": 1.0,
+        "max": 1.0,
+        "mean": 1.0
+      },
+      "domain_coverage_total_domains": {
+        "type": "numerical",
+        "min": 11,
+        "max": 11,
+        "mean": 11
+      },
+      "domain_coverage_covered_domains": {
+        "type": "numerical",
+        "min": 11,
+        "max": 11,
+        "mean": 11
+      },
+      "template_metrics_total_templates": {
+        "type": "numerical",
+        "min": 11,
+        "max": 11,
+        "mean": 11
+      },
+      "template_metrics_completeness_score": {
+        "type": "numerical",
+        "min": 0.9,
+        "max": 0.9,
+        "mean": 0.9
+      },
+      "template_metrics_quality_score": {
+        "type": "numerical",
+        "min": 0.85,
+        "max": 0.85,
+        "mean": 0.85
+      }
+    },
+    "relationship_patterns": [
+      {
+        "type": "correlation",
+        "fields": [
+          "analysis_timestamp",
+          "processed_domains",
+          "processed_templates",
+          "domain_coverage",
+          "template_metrics"
+        ]
+      }
+    ]
+  }
+}

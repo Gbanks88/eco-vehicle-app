@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Vehicle CAD Viewer</title>
+    <script src="https://unpkg.com/dxf-viewer@1.0.19/dist/dxf-viewer.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        #viewer-container {
+            width: 100%;
+            height: 80vh;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eco Vehicle CAD Viewer</h1>
+    <div class="controls">
+        <button onclick="zoomIn()">Zoom In</button>
+        <button onclick="zoomOut()">Zoom Out</button>
+        <button onclick="resetView()">Reset View</button>
+    </div>
+    <div id="viewer-container"></div>
+
+    <script>
+        let viewer;
+
+        // Initialize the viewer
+        async function initViewer() {
+            try {
+                // Fetch the DXF file
+                const response = await fetch('/outputs/cad/eco_vehicle.dxf');
+                const dxfContent = await response.text();
+                
+                // Create the viewer
+                viewer = new DxfViewer(document.getElementById('viewer-container'), {
+                    width: '100%',
+                    height: '100%',
+                    background: '#ffffff',
+                    autoResize: true
+                });
+                
+                // Load the DXF content
+                await viewer.load(dxfContent);
+                
+                // Fit the drawing to the view
+                viewer.zoomExtents();
+                
+            } catch (error) {
+                console.error('Error loading DXF file:', error);
+                document.getElementById('viewer-container').innerHTML = 
+                    '<div style="color: red; text-align: center; padding: 20px;">Error loading DXF file</div>';
+            }
+        }
+
+        // Zoom controls
+        function zoomIn() {
+            if (viewer) viewer.zoom(1.5);
+        }
+
+        function zoomOut() {
+            if (viewer) viewer.zoom(0.75);
+        }
+
+        function resetView() {
+            if (viewer) viewer.zoomExtents();
+        }
+
+        // Initialize when the page loads
+        window.onload = initViewer;
+    </script>
+</body>
+</html>

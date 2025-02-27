@@ -1,0 +1,76 @@
+@startuml Error Handling Flow
+
+skinparam ActivityBackgroundColor LightPink
+skinparam ActivityBorderColor Red
+skinparam ArrowColor Red
+
+|Error Detection|
+start
+fork
+    :Input Validation Error;
+fork again
+    :NLP Processing Error;
+fork again
+    :Generation Error;
+fork again
+    :Database Error;
+end fork
+
+|Error Classification|
+:Classify Error Type;
+switch (Error Category)
+case (Input)
+    :Validate Input Format;
+    if (Recoverable?) then (yes)
+        :Clean Input;
+        :Retry Processing;
+    else (no)
+        :Request New Input;
+    endif
+case (Processing)
+    :Check NLP Pipeline;
+    if (Service Available?) then (yes)
+        :Retry Processing;
+        :Use Backup Service;
+    else (no)
+        :Switch to Basic Mode;
+    endif
+case (System)
+    :Check System Resources;
+    if (Resource Issue?) then (yes)
+        :Free Resources;
+        :Retry Operation;
+    else (no)
+        :Log System Error;
+    endif
+case (Database)
+    :Check Connection;
+    if (Connected?) then (yes)
+        :Retry Operation;
+    else (no)
+        :Use Local Cache;
+    endif
+endswitch
+
+|Error Recovery|
+:Log Error Details;
+:Update Error Statistics;
+if (Auto-Recovery Possible?) then (yes)
+    :Execute Recovery Procedure;
+    if (Recovery Successful?) then (yes)
+        :Resume Normal Operation;
+    else (no)
+        :Escalate to Manual Handling;
+    endif
+else (no)
+    :Notify Administrator;
+    :Switch to Fallback Mode;
+endif
+
+|Error Reporting|
+:Generate Error Report;
+:Update System Status;
+:Notify Affected Components;
+stop
+
+@enduml

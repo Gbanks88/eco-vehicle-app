@@ -1,0 +1,70 @@
+\contentsline {section}{\numberline {1}Executive Summary}{4}{section.1}%
+\contentsline {section}{\numberline {2}System Architecture}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Frontend Components}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Deployment Infrastructure}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Pending Implementations}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Backend Development}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}AI Features}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Search Engine Architecture}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Core Components}{5}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Document Processing}{5}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Query Processing}{5}{subsubsection.4.1.2}%
+\contentsline {section}{\numberline {5}Security Implementation}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Environment Configuration}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Security Headers}{6}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Future Roadmap}{6}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Short-term Goals}{6}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Long-term Goals}{6}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Abstract}{6}{section.7}%
+\contentsline {section}{\numberline {8}Introduction}{6}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Background}{6}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Research Objectives}{7}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Literature Review}{7}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Current State of Eco-Vehicle Technology}{7}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}AI in Transportation Systems}{7}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Methodology}{7}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Environmental Impact}{7}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Technological Innovation}{8}{subsection.10.2}%
+\contentsline {section}{\numberline {11}AI Integration Framework}{8}{section.11}%
+\contentsline {subsection}{\numberline {11.1}IBM AI Components}{8}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Machine Learning Pipeline}{8}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Database Architecture}{8}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Studio 3T Integration}{8}{subsection.12.1}%
+\contentsline {section}{\numberline {13}Results}{9}{section.13}%
+\contentsline {subsection}{\numberline {13.1}System Performance Analysis}{9}{subsection.13.1}%
+\contentsline {subsubsection}{\numberline {13.1.1}AI Component Evaluation}{9}{subsubsection.13.1.1}%
+\contentsline {subsubsection}{\numberline {13.1.2}Database Performance}{9}{subsubsection.13.1.2}%
+\contentsline {section}{\numberline {14}Discussion}{9}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Integration Effectiveness}{9}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Limitations and Future Work}{10}{subsection.14.2}%
+\contentsline {section}{\numberline {15}Conclusion}{10}{section.15}%
+\contentsline {section}{\numberline {16}Model-Based Design Approach}{10}{section.16}%
+\contentsline {subsection}{\numberline {16.1}UML Architecture}{10}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Autodesk Integration}{10}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Digital Twin Implementation}{11}{subsection.16.3}%
+\contentsline {section}{\numberline {17}System Architecture}{11}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Technical Overview}{11}{subsection.17.1}%
+\contentsline {section}{\numberline {18}System Diagrams}{11}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Class Diagram}{11}{subsection.18.1}%
+\contentsline {subsection}{\numberline {18.2}Sequence Diagram}{11}{subsection.18.2}%
+\contentsline {section}{\numberline {19}Technical Requirements}{11}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Dependencies}{11}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Infrastructure Requirements}{12}{subsection.19.2}%
+\contentsline {section}{\numberline {20}Optimization Strategies}{12}{section.20}%
+\contentsline {subsection}{\numberline {20.1}Performance Optimization}{12}{subsection.20.1}%
+\contentsline {subsection}{\numberline {20.2}Quality Assurance}{13}{subsection.20.2}%
+\contentsline {section}{\numberline {21}Environmental Impact Analysis}{13}{section.21}%
+\contentsline {subsection}{\numberline {21.1}Carbon Footprint Reduction}{13}{subsection.21.1}%
+\contentsline {subsection}{\numberline {21.2}Waste Reduction Mechanisms}{13}{subsection.21.2}%
+\contentsline {subsubsection}{\numberline {21.2.1}Material Recovery}{13}{subsubsection.21.2.1}%
+\contentsline {subsubsection}{\numberline {21.2.2}Energy Recovery}{14}{subsubsection.21.2.2}%
+\contentsline {subsection}{\numberline {21.3}Eco-Friendly Operations}{14}{subsection.21.3}%
+\contentsline {subsubsection}{\numberline {21.3.1}Electric Powertrain Efficiency}{14}{subsubsection.21.3.1}%
+\contentsline {subsubsection}{\numberline {21.3.2}Optimal Speed Profile}{14}{subsubsection.21.3.2}%
+\contentsline {subsection}{\numberline {21.4}Global Warming Impact}{14}{subsection.21.4}%
+\contentsline {subsubsection}{\numberline {21.4.1}Greenhouse Gas Reduction}{14}{subsubsection.21.4.1}%
+\contentsline {subsubsection}{\numberline {21.4.2}Life Cycle Assessment}{14}{subsubsection.21.4.2}%
+\contentsline {subsection}{\numberline {21.5}Smart Energy Management}{15}{subsection.21.5}%
+\contentsline {subsubsection}{\numberline {21.5.1}Dynamic Power Distribution}{15}{subsubsection.21.5.1}%
+\contentsline {subsubsection}{\numberline {21.5.2}Thermal Management}{15}{subsubsection.21.5.2}%
+\contentsline {section}{\numberline {22}Conclusion}{15}{section.22}%

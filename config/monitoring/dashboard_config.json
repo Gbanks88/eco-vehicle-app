@@ -1,0 +1,135 @@
+{
+  "dashboards": [
+    {
+      "name": "CG4F Infrastructure Overview",
+      "refresh": "1m",
+      "panels": [
+        {
+          "title": "DNS Health",
+          "type": "status",
+          "metrics": [
+            {
+              "query": "dns_resolution_time{domain='cg4f.online'}",
+              "legend": "DNS Resolution Time"
+            },
+            {
+              "query": "dns_record_count{domain='cg4f.online'}",
+              "legend": "Active DNS Records"
+            }
+          ],
+          "thresholds": {
+            "warning": 500,
+            "critical": 1000
+          }
+        },
+        {
+          "title": "SSL Certificate Status",
+          "type": "gauge",
+          "metrics": [
+            {
+              "query": "ssl_expiry_days{domain='cg4f.online'}",
+              "legend": "Days until SSL expiry"
+            }
+          ],
+          "thresholds": {
+            "warning": 30,
+            "critical": 7
+          }
+        },
+        {
+          "title": "Security Events",
+          "type": "time-series",
+          "metrics": [
+            {
+              "query": "rate(waf_blocked_requests{domain='cg4f.online'}[5m])",
+              "legend": "WAF Blocks"
+            },
+            {
+              "query": "rate(rate_limit_exceeded{domain='cg4f.online'}[5m])",
+              "legend": "Rate Limit Exceeded"
+            }
+          ]
+        },
+        {
+          "title": "API Performance",
+          "type": "time-series",
+          "metrics": [
+            {
+              "query": "http_request_duration_seconds{domain='api.cg4f.online'}",
+              "legend": "Response Time"
+            },
+            {
+              "query": "http_requests_total{domain='api.cg4f.online'}",
+              "legend": "Request Count"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Security Overview",
+      "refresh": "30s",
+      "panels": [
+        {
+          "title": "WAF Events",
+          "type": "time-series",
+          "metrics": [
+            {
+              "query": "sum by (rule) (rate(waf_events_total{domain='cg4f.online'}[5m]))",
+              "legend": "WAF Events by Rule"
+            }
+          ]
+        },
+        {
+          "title": "Top Blocked IPs",
+          "type": "table",
+          "metrics": [
+            {
+              "query": "topk(10, sum by (src_ip) (blocked_requests_total{domain='cg4f.online'}))",
+              "legend": "Blocked IPs"
+            }
+          ]
+        },
+        {
+          "title": "SSL/TLS Protocol Usage",
+          "type": "pie",
+          "metrics": [
+            {
+              "query": "sum by (tls_version) (tls_handshakes_total{domain='cg4f.online'})",
+              "legend": "TLS Version Distribution"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    {
+      "name": "SSL Certificate Expiry",
+      "query": "ssl_expiry_days{domain='cg4f.online'} < 30",
+      "severity": "warning",
+      "annotations": {
+        "summary": "SSL certificate expiring soon",
+        "description": "SSL certificate for {{ $labels.domain }} will expire in {{ $value }} days"
+      }
+    },
+    {
+      "name": "High WAF Block Rate",
+      "query": "rate(waf_blocked_requests{domain='cg4f.online'}[5m]) > 100",
+      "severity": "critical",
+      "annotations": {
+        "summary": "High rate of WAF blocks",
+        "description": "WAF is blocking requests at a rate of {{ $value }} per second"
+      }
+    },
+    {
+      "name": "DNS Resolution Issues",
+      "query": "dns_resolution_time{domain='cg4f.online'} > 1000",
+      "severity": "critical",
+      "annotations": {
+        "summary": "DNS resolution time too high",
+        "description": "DNS resolution time is {{ $value }}ms"
+      }
+    }
+  ]
+}

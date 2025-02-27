@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block title %}CG4F Brand Guide{% endblock %}
+
+{% block extra_css %}
+<style>
+    .brand-section {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .color-card {
+        padding: var(--spacing-lg);
+        border-radius: var(--spacing-md);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 150px;
+    }
+    
+    .color-name {
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    
+    .color-value {
+        font-family: var(--font-mono);
+        opacity: 0.9;
+    }
+    
+    .typography-grid {
+        display: grid;
+        gap: var(--spacing-lg);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .type-sample {
+        padding: var(--spacing-lg);
+        background: white;
+        border-radius: var(--spacing-md);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .component-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-lg);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .component-card {
+        background: white;
+        padding: var(--spacing-lg);
+        border-radius: var(--spacing-md);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .theme-selector {
+        display: flex;
+        gap: var(--spacing-md);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .theme-option {
+        width: 100px;
+        height: 100px;
+        border-radius: var(--spacing-md);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .theme-option:hover {
+        transform: scale(1.05);
+    }
+    
+    .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: var(--spacing-md);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .icon-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: var(--spacing-md);
+        background: white;
+        border-radius: var(--spacing-md);
+        font-size: 0.9em;
+        text-align: center;
+    }
+    
+    .icon-card i {
+        font-size: 24px;
+        margin-bottom: var(--spacing-sm);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="brand-section">
+    <h1>CG4F Brand Guide</h1>
+    <p class="subtitle">Creating Greatness 4 Foundation - Brand Identity Guidelines</p>
+</div>
+
+<div class="brand-section">
+    <h2>Logo</h2>
+    <div class="card">
+        <img src="/static/brand/logo.svg" alt="CG4F Logo" style="max-width: 200px;">
+        <div style="margin-top: var(--spacing-lg);">
+            <h3>Usage Guidelines</h3>
+            <ul>
+                <li>Maintain clear space around the logo</li>
+                <li>Don't modify the logo colors</li>
+                <li>Don't stretch or distort the logo</li>
+                <li>Use the appropriate version for different backgrounds</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="brand-section">
+    <h2>Color Palette</h2>
+    <div class="color-grid">
+        <div class="color-card" style="background: var(--primary-color);">
+            <span class="color-name">Primary</span>
+            <span class="color-value">#4299e1</span>
+        </div>
+        <div class="color-card" style="background: var(--secondary-color);">
+            <span class="color-name">Secondary</span>
+            <span class="color-value">#667eea</span>
+        </div>
+        <div class="color-card" style="background: var(--accent-color);">
+            <span class="color-name">Accent</span>
+            <span class="color-value">#48bb78</span>
+        </div>
+        <div class="color-card" style="background: var(--text-color); color: white;">
+            <span class="color-name">Text</span>
+            <span class="color-value">#2d3748</span>
+        </div>
+    </div>
+    
+    <h3>Gradients</h3>
+    <div class="color-grid">
+        <div class="color-card" style="background: var(--primary-gradient);">
+            <span class="color-name">Primary Gradient</span>
+            <span class="color-value">linear-gradient(135deg, #4299e1, #667eea)</span>
+        </div>
+        <div class="color-card" style="background: var(--secondary-gradient);">
+            <span class="color-name">Secondary Gradient</span>
+            <span class="color-value">linear-gradient(135deg, #48bb78, #38b2ac)</span>
+        </div>
+    </div>
+</div>
+
+<div class="brand-section">
+    <h2>Typography</h2>
+    <div class="typography-grid">
+        <div class="type-sample">
+            <h1 style="font-family: var(--font-primary);">Primary Font: Poppins</h1>
+            <p style="font-size: 1.2em;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</p>
+        </div>
+        <div class="type-sample">
+            <h1 style="font-family: var(--font-secondary);">Secondary Font: Inter</h1>
+            <p style="font-size: 1.2em;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</p>
+        </div>
+    </div>
+</div>
+
+<div class="brand-section">
+    <h2>Components</h2>
+    <div class="component-grid">
+        <div class="component-card">
+            <h3>Buttons</h3>
+            <button class="button button-primary">Primary Button</button>
+            <button class="button button-secondary">Secondary Button</button>
+        </div>
+        <div class="component-card">
+            <h3>Cards</h3>
+            <div class="card" style="margin: var(--spacing-md) 0;">
+                Sample Card Content
+            </div>
+        </div>
+        <div class="component-card">
+            <h3>Charts</h3>
+            <div class="chart-container" style="height: 150px;">
+                Sample Chart
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="brand-section">
+    <h2>Theme Presets</h2>
+    <div class="theme-selector">
+        <div class="theme-option" style="background: var(--primary-gradient);" onclick="setTheme('default')">
+            <span class="theme-name">Default</span>
+        </div>
+        <div class="theme-option" style="background: linear-gradient(135deg, #6b46c1, #805ad5);" onclick="setTheme('purple')">
+            <span class="theme-name">Purple</span>
+        </div>
+        <div class="theme-option" style="background: linear-gradient(135deg, #2c7a7b, #319795);" onclick="setTheme('teal')">
+            <span class="theme-name">Teal</span>
+        </div>
+        <div class="theme-option" style="background: linear-gradient(135deg, #c53030, #e53e3e);" onclick="setTheme('red')">
+            <span class="theme-name">Red</span>
+        </div>
+    </div>
+</div>
+
+<div class="brand-section">
+    <h2>Icons</h2>
+    <div class="icon-grid">
+        <div class="icon-card">
+            <i class="mdi mdi-chart-line"></i>
+            <span>Analytics</span>
+        </div>
+        <div class="icon-card">
+            <i class="mdi mdi-cog"></i>
+            <span>Settings</span>
+        </div>
+        <div class="icon-card">
+            <i class="mdi mdi-account"></i>
+            <span>User</span>
+        </div>
+        <div class="icon-card">
+            <i class="mdi mdi-bell"></i>
+            <span>Notifications</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function setTheme(theme) {
+        // Theme switching logic
+        const themes = {
+            default: {
+                primary: '#4299e1',
+                secondary: '#667eea',
+                accent: '#48bb78'
+            },
+            purple: {
+                primary: '#6b46c1',
+                secondary: '#805ad5',
+                accent: '#9f7aea'
+            },
+            teal: {
+                primary: '#2c7a7b',
+                secondary: '#319795',
+                accent: '#38b2ac'
+            },
+            red: {
+                primary: '#c53030',
+                secondary: '#e53e3e',
+                accent: '#f56565'
+            }
+        };
+        
+        const root = document.documentElement;
+        const colors = themes[theme];
+        
+        root.style.setProperty('--primary-color', colors.primary);
+        root.style.setProperty('--secondary-color', colors.secondary);
+        root.style.setProperty('--accent-color', colors.accent);
+        root.style.setProperty('--primary-gradient', `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`);
+        root.style.setProperty('--secondary-gradient', `linear-gradient(135deg, ${colors.accent}, ${colors.secondary})`);
+    }
+</script>
+{% endblock %}

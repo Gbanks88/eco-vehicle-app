@@ -1,0 +1,107 @@
+{
+    "app_name": "Creating Greatness 4 Foundation",
+    "app_short_name": "CG4F",
+    "version": "1.0.0",
+    "theme": {
+        "colors": {
+            "primary": "#4299e1",
+            "secondary": "#667eea",
+            "accent": "#48bb78",
+            "background": "#f0f4f8",
+            "text": "#2d3748",
+            "text_secondary": "#718096",
+            "success": "#48bb78",
+            "warning": "#ecc94b",
+            "error": "#f56565"
+        },
+        "gradients": {
+            "primary": "linear-gradient(135deg, #4299e1 0%, #667eea 100%)",
+            "secondary": "linear-gradient(135deg, #48bb78 0%, #38b2ac 100%)"
+        },
+        "fonts": {
+            "primary": "Poppins, Arial, sans-serif",
+            "secondary": "Inter, system-ui, sans-serif",
+            "monospace": "Fira Code, monospace"
+        },
+        "spacing": {
+            "xs": "4px",
+            "sm": "8px",
+            "md": "16px",
+            "lg": "24px",
+            "xl": "32px"
+        },
+        "borderRadius": {
+            "sm": "4px",
+            "md": "8px",
+            "lg": "12px",
+            "xl": "16px"
+        }
+    },
+    "layout": {
+        "maxWidth": "1440px",
+        "containerPadding": "24px",
+        "grid": {
+            "columns": 12,
+            "gap": "24px"
+        }
+    },
+    "components": {
+        "card": {
+            "background": "white",
+            "shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+            "padding": "24px",
+            "borderRadius": "12px"
+        },
+        "button": {
+            "primary": {
+                "background": "var(--primary-gradient)",
+                "color": "white",
+                "padding": "12px 24px",
+                "borderRadius": "8px",
+                "fontSize": "16px"
+            },
+            "secondary": {
+                "background": "transparent",
+                "border": "2px solid var(--primary-color)",
+                "color": "var(--primary-color)",
+                "padding": "10px 20px",
+                "borderRadius": "8px",
+                "fontSize": "16px"
+            }
+        },
+        "input": {
+            "background": "white",
+            "border": "1px solid #e2e8f0",
+            "borderRadius": "8px",
+            "padding": "12px 16px",
+            "fontSize": "16px"
+        }
+    },
+    "animations": {
+        "transition": {
+            "quick": "0.2s ease-in-out",
+            "default": "0.3s ease-in-out",
+            "slow": "0.5s ease-in-out"
+        },
+        "hover": {
+            "scale": "1.02",
+            "shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+        }
+    },
+    "charts": {
+        "colors": [
+            "#4299e1",
+            "#48bb78",
+            "#ecc94b",
+            "#ed64a6",
+            "#667eea",
+            "#9f7aea"
+        ],
+        "fontFamily": "Inter, system-ui, sans-serif",
+        "fontSize": "12px",
+        "grid": {
+            "color": "#e2e8f0",
+            "width": "1px"
+        }
+    }
+}

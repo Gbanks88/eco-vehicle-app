@@ -1,0 +1,112 @@
+monitoring:
+  endpoints:
+    - name: Main Website
+      url: https://cg4f.online
+      method: GET
+      frequency: 60
+      timeout: 5
+      conditions:
+        - type: status
+          value: 200
+        - type: response_time
+          value: 2000
+        - type: ssl_valid
+          value: true
+    
+    - name: API Endpoint
+      url: https://api.cg4f.online
+      method: GET
+      frequency: 30
+      timeout: 3
+      conditions:
+        - type: status
+          value: 200
+        - type: response_time
+          value: 1000
+        - type: ssl_valid
+          value: true
+
+    - name: CDN
+      url: https://cdn.cg4f.online
+      method: GET
+      frequency: 60
+      timeout: 5
+      conditions:
+        - type: status
+          value: 200
+        - type: response_time
+          value: 1500
+        - type: ssl_valid
+          value: true
+
+alerts:
+  channels:
+    email:
+      - admin@cg4f.online
+    slack:
+      webhook: https://hooks.slack.com/services/your-webhook-url
+    pagerduty:
+      service_key: your-pagerduty-service-key
+
+  rules:
+    - name: High Response Time
+      condition: response_time > 2000
+      severity: warning
+      channels: [email, slack]
+
+    - name: SSL Certificate Expiring
+      condition: ssl_expiry < 30 days
+      severity: critical
+      channels: [email, slack, pagerduty]
+
+    - name: Service Down
+      condition: status != 200
+      severity: critical
+      channels: [email, slack, pagerduty]
+      
+    - name: Security Event
+      condition: waf_events > 100
+      severity: critical
+      channels: [email, slack, pagerduty]
+
+logging:
+  retention: 30d
+  storage:
+    type: cloud
+    provider: ibm
+    bucket: cg4f-logs
+
+metrics:
+  collection_interval: 60
+  retention: 90d
+  exporters:
+    - type: prometheus
+      endpoint: https://prometheus.cg4f.online
+    - type: grafana
+      endpoint: https://grafana.cg4f.online
+
+dashboards:
+  - name: Overview
+    metrics:
+      - response_time
+      - requests_per_second
+      - error_rate
+      - ssl_expiry
+    refresh_rate: 30
+
+  - name: Security
+    metrics:
+      - waf_events
+      - blocked_requests
+      - suspicious_ips
+      - rate_limit_violations
+    refresh_rate: 15
+
+backup:
+  frequency: daily
+  retention: 30d
+  type: incremental
+  storage:
+    provider: ibm
+    bucket: cg4f-backups
+    region: us-south

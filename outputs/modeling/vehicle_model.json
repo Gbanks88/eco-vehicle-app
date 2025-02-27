@@ -1,0 +1,44 @@
+{
+    "total_mass": 370,
+    "center_of_mass": [
+        4.532432432432432,
+        1.8324324324324324,
+        0.10200000000000001
+    ],
+    "components": {
+        "Main Chassis": {
+            "material": {
+                "name": "Aluminum 6061-T6",
+                "density": 2700,
+                "yield_strength": 276,
+                "thermal_conductivity": 167,
+                "cost_per_kg": 2.5
+            },
+            "mass": 250,
+            "dimensions": [
+                4.5,
+                1.8,
+                0.15
+            ],
+            "max_stress": 200,
+            "safety_factor": 1.5
+        },
+        "Body Panels": {
+            "material": {
+                "name": "Carbon Fiber Composite",
+                "density": 1600,
+                "yield_strength": 600,
+                "thermal_conductivity": 5,
+                "cost_per_kg": 30.0
+            },
+            "mass": 120,
+            "dimensions": [
+                4.6,
+                1.9,
+                0.002
+            ],
+            "max_stress": 250,
+            "safety_factor": 1.5
+        }
+    }
+}

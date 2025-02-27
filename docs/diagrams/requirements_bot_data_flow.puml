@@ -1,0 +1,93 @@
+@startuml Requirements Bot Data Flow
+
+skinparam component {
+    BackgroundColor LightBlue
+    BorderColor Blue
+    ArrowColor Blue
+}
+
+database "Configuration DB" as config {
+    [Quality Patterns]
+    [Templates]
+    [Validation Rules]
+}
+
+database "Requirements Store" as store {
+    [Requirements]
+    [Version History]
+    [Validation Reports]
+}
+
+[Input Processor] as input
+[NLP Engine] as nlp
+[Requirement Generator] as generator
+[Validator] as validator
+[Suggestion Engine] as suggester
+[Export Engine] as exporter
+
+cloud "External Services" as external {
+    [Spacy NLP]
+    [NLTK]
+}
+
+actor "User" as user
+
+user --> input : Raw Requirement Text
+input --> nlp : Preprocessed Text
+config --> input : Load Config
+nlp --> generator : Processed Text
+generator --> validator : Requirement Object
+validator --> suggester : Validation Results
+suggester --> exporter : Suggestions
+exporter --> user : Final Output
+
+store --> validator : Historical Data
+store <-- exporter : Store Results
+
+external --> nlp : NLP Services
+
+note right of input
+  Handles:
+  * Text cleaning
+  * Initial validation
+  * Config loading
+end note
+
+note right of nlp
+  Processes:
+  * Entity recognition
+  * Dependency parsing
+  * Semantic analysis
+end note
+
+note right of generator
+  Generates:
+  * Requirement structure
+  * Metrics
+  * Acceptance criteria
+end note
+
+note right of validator
+  Validates:
+  * Completeness
+  * Consistency
+  * Measurability
+  * Ambiguity
+end note
+
+note right of suggester
+  Suggests:
+  * Improvements
+  * Alternatives
+  * Best practices
+end note
+
+note right of exporter
+  Exports to:
+  * JSON
+  * YAML
+  * Markdown
+  * HTML
+end note
+
+@enduml

@@ -1,0 +1,218 @@
+---
+# Advanced Technical Domain Knowledge Bases
+
+digital_signal_processing:
+  keywords:
+    - FIR filter
+    - IIR filter
+    - z-transform
+    - frequency response
+    - filter stability
+    - quantization
+    - discrete-time systems
+    - fast algorithms
+    - filter implementation
+    - multirate processing
+  standards:
+    - IEEE 1451.4 (Transducer)
+    - IEEE P1788 (Interval Arithmetic)
+    - ISO/IEC 14496 (Audio Coding)
+  metrics:
+    - frequency response
+    - phase response
+    - group delay
+    - stopband attenuation
+    - passband ripple
+    - computational complexity
+    - memory requirements
+  design_constraints:
+    - filter order
+    - cutoff frequencies
+    - sampling rate
+    - wordlength
+    - coefficient quantization
+    - arithmetic precision
+
+control_systems:
+  keywords:
+    - stability analysis
+    - performance criteria
+    - time domain
+    - frequency domain
+    - state space
+    - robust control
+    - nonlinear control
+    - hybrid systems
+    - direct digital control
+    - system identification
+  standards:
+    - ISA-95 (Control Systems)
+    - IEC 61131 (PLC)
+    - IEC 61508 (Functional Safety)
+  metrics:
+    - settling time
+    - overshoot
+    - steady-state error
+    - phase margin
+    - gain margin
+    - bandwidth
+    - robustness margins
+  analysis_methods:
+    - root locus
+    - nyquist plots
+    - bode diagrams
+    - state feedback
+    - optimal control
+    - adaptive control
+
+modern_architecture:
+  keywords:
+    - CPU design
+    - GPU architecture
+    - ML accelerators
+    - pipelining
+    - instruction parallelism
+    - superscalar
+    - VLIW
+    - memory systems
+    - cache hierarchy
+    - branch prediction
+  standards:
+    - IEEE 754 (Floating Point)
+    - RISC-V ISA
+    - ARM Architecture
+  metrics:
+    - IPC (Instructions Per Cycle)
+    - cache hit rate
+    - branch prediction accuracy
+    - power efficiency
+    - throughput
+    - latency
+    - area efficiency
+  design_aspects:
+    - pipeline stages
+    - execution units
+    - register file
+    - memory hierarchy
+    - interconnect
+    - clock distribution
+
+communication_systems:
+  keywords:
+    - source coding
+    - channel coding
+    - modulation
+    - detection
+    - error correction
+    - wireless protocols
+    - network protocols
+    - packet switching
+    - circuit switching
+    - mobile networks
+  standards:
+    - IEEE 802.11 (WiFi)
+    - 3GPP Standards
+    - IEEE 802.3 (Ethernet)
+  metrics:
+    - bit error rate
+    - signal-to-noise ratio
+    - spectral efficiency
+    - channel capacity
+    - throughput
+    - latency
+    - packet loss rate
+  protocols:
+    - TCP/IP
+    - UDP
+    - ATM
+    - MAC protocols
+    - routing protocols
+
+embedded_ml:
+  keywords:
+    - edge computing
+    - model compression
+    - quantization
+    - pruning
+    - hardware acceleration
+    - power optimization
+    - memory optimization
+    - inference optimization
+    - real-time processing
+  standards:
+    - ISO/IEC 25010 (Quality)
+    - ISO/IEC 25012 (Data Quality)
+    - IEC 62443 (Security)
+  metrics:
+    - inference latency
+    - power consumption
+    - memory footprint
+    - accuracy degradation
+    - throughput
+    - energy efficiency
+  optimization_techniques:
+    - model pruning
+    - weight quantization
+    - knowledge distillation
+    - neural architecture search
+    - hardware-aware training
+
+storage_systems:
+  keywords:
+    - storage arrays
+    - reliability
+    - fault tolerance
+    - data integrity
+    - security threats
+    - performance optimization
+    - caching
+    - redundancy
+    - error correction
+  standards:
+    - ANSI T10 (SCSI)
+    - NVMe
+    - SATA
+    - SAS
+  metrics:
+    - IOPS
+    - throughput
+    - latency
+    - reliability
+    - data durability
+    - error rates
+    - power efficiency
+  protection_methods:
+    - RAID levels
+    - erasure coding
+    - checksums
+    - encryption
+    - deduplication
+
+cyber_physical_systems:
+  keywords:
+    - real-time scheduling
+    - fault tolerance
+    - sensor fusion
+    - actuator control
+    - safety-critical
+    - power management
+    - system modeling
+    - hardware/software codesign
+    - reliability
+  standards:
+    - IEC 61508 (Safety)
+    - ISO 26262 (Automotive)
+    - DO-178C (Aviation)
+  metrics:
+    - response time
+    - jitter
+    - reliability
+    - safety integrity
+    - power consumption
+    - fault coverage
+  design_aspects:
+    - task scheduling
+    - resource allocation
+    - fault detection
+    - recovery mechanisms
+    - power optimization

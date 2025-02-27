@@ -1,0 +1,82 @@
+analysis_results:
+  quality_metrics:
+    accuracy: 1.0
+    completeness: 1.0
+    consistency: 1.0
+  statistical_analysis:
+    systems_validated:
+      max: 4.0
+      mean: 4.0
+      min: 4.0
+      std: 0.0
+    validation_results_compliance_score:
+      max: 0.95
+      mean: 0.95
+      min: 0.95
+      std: 0.0
+    validation_results_reliability_score:
+      max: 0.91
+      mean: 0.91
+      min: 0.91
+      std: 0.0
+    validation_results_security_score:
+      max: 0.88
+      mean: 0.88
+      min: 0.88
+      std: 0.0
+data_structure:
+  constraints:
+  - fields:
+    - validation_timestamp
+    - systems_validated
+    - validation_results
+    - issues_found
+    - recommendations
+    type: required
+  relationships:
+  - fields:
+    - validation_timestamp
+    - systems_validated
+    - validation_results
+    - issues_found
+    - recommendations
+    type: correlation
+  schema:
+    issues_found:
+      required: true
+      type: list
+    recommendations:
+      required: true
+      type: list
+    systems_validated:
+      required: true
+      type: int
+    validation_results:
+      compliance_score:
+        required: true
+        type: float
+      reliability_score:
+        required: true
+        type: float
+      security_score:
+        required: true
+        type: float
+    validation_timestamp:
+      required: true
+      type: str
+metadata:
+  analysis_version: '1.0'
+  bot_name: validation_bot
+  timestamp: '2025-02-25T10:00:25.155837'
+raw_data:
+  issues_found: []
+  recommendations:
+  - Enhance security measures
+  - Improve fault tolerance
+  - Update compliance checks
+  systems_validated: 4
+  validation_results:
+    compliance_score: 0.95
+    reliability_score: 0.91
+    security_score: 0.88
+  validation_timestamp: '2025-02-25T10:00:25.155823'

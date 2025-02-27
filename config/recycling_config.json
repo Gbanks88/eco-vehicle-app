@@ -1,0 +1,55 @@
+{
+    "simulation_parameters": {
+        "time_step": 0.1,
+        "max_temperature": 2000,
+        "ambient_temperature": 298.15,
+        "max_simulation_time": 300,
+        "min_process_time": 30
+    },
+    "process_efficiencies": {
+        "metal": {
+            "base_efficiency": 0.85,
+            "energy_per_kg": 5000,
+            "co2_saved_per_kg": 9.2,
+            "water_saved_per_kg": 13.6
+        },
+        "plastic": {
+            "base_efficiency": 0.75,
+            "energy_per_kg": 3500,
+            "co2_saved_per_kg": 1.5,
+            "water_saved_per_kg": 16.9
+        },
+        "paper": {
+            "base_efficiency": 0.65,
+            "energy_per_kg": 2000,
+            "co2_saved_per_kg": 0.9,
+            "water_saved_per_kg": 25.0
+        },
+        "glass": {
+            "base_efficiency": 0.90,
+            "energy_per_kg": 4200,
+            "co2_saved_per_kg": 0.6,
+            "water_saved_per_kg": 7.5
+        }
+    },
+    "scoring": {
+        "base_points": 100,
+        "efficiency_multiplier": 2.0,
+        "speed_bonus": 50,
+        "accuracy_bonus": 100,
+        "combo_multiplier": 1.5
+    },
+    "educational": {
+        "difficulty_levels": ["beginner", "intermediate", "advanced"],
+        "quiz_points": {
+            "easy": 10,
+            "medium": 25,
+            "hard": 50
+        },
+        "achievement_thresholds": {
+            "recycling_novice": 1000,
+            "recycling_expert": 5000,
+            "eco_warrior": 10000
+        }
+    }
+}

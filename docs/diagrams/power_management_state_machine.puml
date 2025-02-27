@@ -1,0 +1,91 @@
+@startuml Power Management State Machine
+
+skinparam state {
+    BackgroundColor LightGreen
+    BorderColor Green
+    ArrowColor Green
+    FontName Arial
+    AttributeFontColor Green
+}
+
+title Power Management State Machine Diagram
+
+[*] --> STANDBY
+
+state STANDBY {
+    [*] --> LOW_POWER_MODE
+    LOW_POWER_MODE --> READY_TO_START : Wake Signal
+}
+
+state "POWER_ON" as POWER_ON {
+    state "INITIALIZATION" as INIT {
+        [*] --> SELF_TEST
+        SELF_TEST --> SYSTEM_CHECK
+        SYSTEM_CHECK --> POWER_DISTRIBUTION
+    }
+    
+    state "OPERATIONAL" as OP {
+        [*] --> NORMAL_POWER
+        NORMAL_POWER --> HIGH_POWER : High Demand
+        NORMAL_POWER --> ECO_POWER : Eco Mode
+        HIGH_POWER --> NORMAL_POWER : Demand Reduced
+        ECO_POWER --> NORMAL_POWER : Eco Mode Off
+    }
+    
+    state "POWER_OPTIMIZATION" as OPT {
+        [*] --> LOAD_BALANCING
+        LOAD_BALANCING --> THERMAL_MANAGEMENT
+        THERMAL_MANAGEMENT --> EFFICIENCY_ADJUSTMENT
+        EFFICIENCY_ADJUSTMENT --> LOAD_BALANCING
+    }
+}
+
+STANDBY --> POWER_ON : Start Command
+POWER_ON --> STANDBY : Shutdown Command
+
+state "CHARGING_MANAGEMENT" as CHARGING {
+    [*] --> CHARGE_INIT
+    
+    state "CHARGING_ACTIVE" as ACTIVE {
+        [*] --> SLOW_CHARGING
+        SLOW_CHARGING --> FAST_CHARGING : Fast Charge Available
+        FAST_CHARGING --> SLOW_CHARGING : Temperature High
+    }
+    
+    CHARGE_INIT --> ACTIVE : Connection Valid
+    ACTIVE --> CHARGE_COMPLETE : Full Charge
+}
+
+POWER_ON --> CHARGING : Charger Connected
+CHARGING --> POWER_ON : Charge Complete/Disconnected
+
+state "FAULT_HANDLING" as FAULT {
+    [*] --> FAULT_DETECTION
+    FAULT_DETECTION --> SAFE_SHUTDOWN : Critical Fault
+    FAULT_DETECTION --> REDUCED_POWER : Minor Fault
+    REDUCED_POWER --> POWER_ON : Fault Cleared
+}
+
+POWER_ON --> FAULT : Fault Detected
+FAULT --> STANDBY : System Reset
+
+' State Attributes
+state POWER_ON {
+    SystemVoltage : V
+    CurrentDraw : A
+    Temperature : °C
+}
+
+state CHARGING {
+    ChargingMode : String
+    InputCurrent : A
+    BatteryTemp : °C
+}
+
+state FAULT {
+    FaultCode : String
+    Severity : Level
+    TimeStamp : DateTime
+}
+
+@enduml

@@ -1,0 +1,106 @@
+@startuml EcoVehicle Data Flow
+
+!define RECTANGLE class
+!define DATABASE database
+!define QUEUE queue
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ArrowColor black
+skinparam ComponentStyle uml2
+
+rectangle "Hardware Sensors" as Sensors {
+    [CPU Sensor]
+    [Memory Sensor]
+    [Network Sensor]
+    [Battery Sensor]
+    [Environmental Sensors]
+}
+
+rectangle "Data Collection Layer" as Collection {
+    QUEUE "Metrics Queue" as MetricsQueue
+    [Metrics Collector] as Collector
+    [Sensor Interface] as SensorIF
+    
+    Sensors --> SensorIF
+    SensorIF --> Collector
+    Collector --> MetricsQueue
+}
+
+rectangle "Processing Layer" as Processing {
+    [Stream Processor] as StreamProc
+    DATABASE "In-Memory Cache" as Cache
+    [Data Validator] as Validator
+    [Data Transformer] as Transformer
+    
+    MetricsQueue --> StreamProc
+    StreamProc --> Validator
+    Validator --> Transformer
+    Transformer --> Cache
+}
+
+rectangle "Analysis Layer" as Analysis {
+    [Performance Analyzer] as PerfAnalyzer
+    [Environmental Analyzer] as EnvAnalyzer
+    [Anomaly Detector] as AnomalyDetector
+    [Trend Analyzer] as TrendAnalyzer
+    DATABASE "Analysis Cache" as AnalysisCache
+    
+    Cache --> PerfAnalyzer
+    Cache --> EnvAnalyzer
+    Cache --> AnomalyDetector
+    Cache --> TrendAnalyzer
+    PerfAnalyzer --> AnalysisCache
+    EnvAnalyzer --> AnalysisCache
+    AnomalyDetector --> AnalysisCache
+    TrendAnalyzer --> AnalysisCache
+}
+
+rectangle "Storage Layer" as Storage {
+    DATABASE "Time Series DB" as TSDB
+    DATABASE "Alert DB" as AlertDB
+    DATABASE "Analytics DB" as AnalyticsDB
+    [Data Archiver] as Archiver
+    
+    Cache --> TSDB
+    AnalysisCache --> AlertDB
+    AnalysisCache --> AnalyticsDB
+    TSDB --> Archiver
+    AlertDB --> Archiver
+    AnalyticsDB --> Archiver
+}
+
+rectangle "Visualization Layer" as Visualization {
+    [Dashboard Controller] as DashboardCtrl
+    [Chart Manager] as ChartMgr
+    [Alert View] as AlertView
+    [Report Generator] as ReportGen
+    
+    TSDB --> DashboardCtrl
+    AlertDB --> AlertView
+    AnalyticsDB --> ChartMgr
+    AnalyticsDB --> ReportGen
+}
+
+rectangle "API Layer" as API {
+    [REST API] as RestAPI
+    [WebSocket Server] as WSServer
+    [gRPC Service] as GRPCService
+    
+    DashboardCtrl --> RestAPI
+    DashboardCtrl --> WSServer
+    DashboardCtrl --> GRPCService
+}
+
+rectangle "External Systems" as External {
+    [Maintenance System]
+    [Fleet Management]
+    [Environmental Reporting]
+    
+    RestAPI --> [Maintenance System]
+    WSServer --> [Fleet Management]
+    GRPCService --> [Environmental Reporting]
+}
+
+@enduml

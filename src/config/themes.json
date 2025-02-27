@@ -1,0 +1,154 @@
+{
+    "themes": {
+        "default": {
+            "name": "CG4F Default",
+            "description": "The default CG4F brand theme with blue and green accents",
+            "colors": {
+                "primary": "#4299e1",
+                "secondary": "#667eea",
+                "accent": "#48bb78",
+                "background": "#f0f4f8",
+                "text": "#2d3748",
+                "text_secondary": "#718096"
+            },
+            "gradients": {
+                "primary": "linear-gradient(135deg, #4299e1 0%, #667eea 100%)",
+                "secondary": "linear-gradient(135deg, #48bb78 0%, #38b2ac 100%)"
+            }
+        },
+        "purple_rain": {
+            "name": "Purple Rain",
+            "description": "A rich purple theme with royal accents",
+            "colors": {
+                "primary": "#6b46c1",
+                "secondary": "#805ad5",
+                "accent": "#9f7aea",
+                "background": "#f3f0ff",
+                "text": "#2a1f6f",
+                "text_secondary": "#6b46c1"
+            },
+            "gradients": {
+                "primary": "linear-gradient(135deg, #6b46c1 0%, #805ad5 100%)",
+                "secondary": "linear-gradient(135deg, #9f7aea 0%, #6b46c1 100%)"
+            }
+        },
+        "ocean_breeze": {
+            "name": "Ocean Breeze",
+            "description": "Calming teal and blue tones inspired by the ocean",
+            "colors": {
+                "primary": "#2c7a7b",
+                "secondary": "#319795",
+                "accent": "#38b2ac",
+                "background": "#e6fffa",
+                "text": "#234e52",
+                "text_secondary": "#285e61"
+            },
+            "gradients": {
+                "primary": "linear-gradient(135deg, #2c7a7b 0%, #319795 100%)",
+                "secondary": "linear-gradient(135deg, #38b2ac 0%, #319795 100%)"
+            }
+        },
+        "sunset_glow": {
+            "name": "Sunset Glow",
+            "description": "Warm and energetic theme with sunset colors",
+            "colors": {
+                "primary": "#c53030",
+                "secondary": "#e53e3e",
+                "accent": "#f56565",
+                "background": "#fff5f5",
+                "text": "#742a2a",
+                "text_secondary": "#9b2c2c"
+            },
+            "gradients": {
+                "primary": "linear-gradient(135deg, #c53030 0%, #e53e3e 100%)",
+                "secondary": "linear-gradient(135deg, #f56565 0%, #e53e3e 100%)"
+            }
+        },
+        "forest_mist": {
+            "name": "Forest Mist",
+            "description": "Natural green tones with a misty atmosphere",
+            "colors": {
+                "primary": "#2f855a",
+                "secondary": "#38a169",
+                "accent": "#48bb78",
+                "background": "#f0fff4",
+                "text": "#22543d",
+                "text_secondary": "#276749"
+            },
+            "gradients": {
+                "primary": "linear-gradient(135deg, #2f855a 0%, #38a169 100%)",
+                "secondary": "linear-gradient(135deg, #48bb78 0%, #38a169 100%)"
+            }
+        },
+        "midnight_tech": {
+            "name": "Midnight Tech",
+            "description": "Dark mode theme with neon accents",
+            "colors": {
+                "primary": "#1a202c",
+                "secondary": "#2d3748",
+                "accent": "#4299e1",
+                "background": "#171923",
+                "text": "#f7fafc",
+                "text_secondary": "#e2e8f0"
+            },
+            "gradients": {
+                "primary": "linear-gradient(135deg, #1a202c 0%, #2d3748 100%)",
+                "secondary": "linear-gradient(135deg, #4299e1 0%, #2d3748 100%)"
+            }
+        }
+    },
+    "fonts": {
+        "modern": {
+            "primary": "Poppins",
+            "secondary": "Inter",
+            "monospace": "Fira Code"
+        },
+        "classic": {
+            "primary": "Roboto",
+            "secondary": "Open Sans",
+            "monospace": "Source Code Pro"
+        },
+        "elegant": {
+            "primary": "Playfair Display",
+            "secondary": "Lato",
+            "monospace": "JetBrains Mono"
+        }
+    },
+    "animations": {
+        "swift": {
+            "duration": "0.2s",
+            "timing": "ease-in-out"
+        },
+        "smooth": {
+            "duration": "0.3s",
+            "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        "dramatic": {
+            "duration": "0.5s",
+            "timing": "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+        }
+    },
+    "spacing": {
+        "compact": {
+            "xs": "4px",
+            "sm": "8px",
+            "md": "12px",
+            "lg": "16px",
+            "xl": "24px"
+        },
+        "comfortable": {
+            "xs": "8px",
+            "sm": "16px",
+            "md": "24px",
+            "lg": "32px",
+            "xl": "48px"
+        },
+        "spacious": {
+            "xs": "12px",
+            "sm": "24px",
+            "md": "36px",
+            "lg": "48px",
+            "xl": "64px"
+        }
+    }
+}

@@ -1,0 +1,95 @@
+{
+    "domain": "cg4f.online",
+    "dns": {
+        "provider": "ibm",
+        "zone": "cg4f.online",
+        "records": {
+            "a": [
+                {
+                    "name": "@",
+                    "ip": "57.128.180.184",
+                    "ttl": 1800,
+                    "proxied": false
+                },
+                {
+                    "name": "api",
+                    "ip": "57.128.180.184",
+                    "ttl": 3600,
+                    "proxied": false
+                }
+            ],
+            "cname": [
+                {
+                    "name": "cdn",
+                    "value": "cg4l.site",
+                    "ttl": 1800,
+                    "proxied": true
+                }
+            ]
+        }
+    },
+    "cis": {
+        "instance": "cg4f-cis",
+        "plan": "standard-next",
+        "ssl": {
+            "universal": true,
+            "min_tls_version": "1.2"
+        },
+        "security": {
+            "waf": "on",
+            "rate_limiting": {
+                "threshold": 100,
+                "period": 60
+            }
+        },
+        "health_checks": [
+            {
+                "name": "Main Site Monitor",
+                "path": "/",
+                "type": "HTTP",
+                "port": 443,
+                "interval": 60,
+                "retries": 2,
+                "timeout": 5
+            }
+        ],
+        "load_balancing": {
+            "name": "Main Load Balancer",
+            "fallback_pool": "default",
+            "default_pools": ["default"],
+            "proxied": true
+        }
+    },
+    "services": {
+        "watson_assistant": {
+            "api_key": "YOUR_ASSISTANT_API_KEY",
+            "instance_id": "YOUR_ASSISTANT_INSTANCE_ID",
+            "region": "us-south",
+            "service_url": "https://api.us-south.assistant.watson.cloud.ibm.com",
+            "use_ssl": true,
+            "version": "2023-05-01"
+        },
+        "watson_iot": {
+            "api_key": "YOUR_IOT_API_KEY",
+            "instance_id": "YOUR_IOT_ORG_ID",
+            "region": "us-south",
+            "service_url": "https://YOUR_ORG_ID.messaging.internetofthings.ibmcloud.com",
+            "use_ssl": true,
+            "device_type": "eco_vehicle",
+            "device_id": "DEFAULT_DEVICE_ID"
+        },
+        "watson_discovery": {
+            "api_key": "YOUR_DISCOVERY_API_KEY",
+            "instance_id": "YOUR_DISCOVERY_INSTANCE_ID",
+            "region": "us-south",
+            "service_url": "https://api.us-south.discovery.watson.cloud.ibm.com",
+            "use_ssl": true,
+            "version": "2023-05-01"
+        }
+    },
+    "global_settings": {
+        "retry_attempts": 3,
+        "timeout_seconds": 30,
+        "enable_debug_logging": false
+    }
+}

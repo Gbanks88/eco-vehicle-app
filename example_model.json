@@ -1,0 +1,132 @@
+{
+  "name": "Example System",
+  "packages": [
+    {
+      "name": "com.example",
+      "id": "fda8fed5-1d3e-40a7-b82e-963dfe2cf1be",
+      "stereotypes": [],
+      "properties": {},
+      "elements": [
+        {
+          "type": "class",
+          "name": "Vehicle",
+          "id": "06b0751f-3eb2-4dd5-9ff3-f9e99f20032f",
+          "stereotypes": [],
+          "properties": {},
+          "attributes": [
+            {
+              "name": "id",
+              "type": "String",
+              "visibility": "private",
+              "default_value": null,
+              "is_static": false,
+              "is_final": false
+            },
+            {
+              "name": "model",
+              "type": "String",
+              "visibility": "protected",
+              "default_value": null,
+              "is_static": false,
+              "is_final": false
+            }
+          ],
+          "operations": [
+            {
+              "name": "start",
+              "return_type": "void",
+              "parameters": [],
+              "visibility": "public",
+              "is_static": false,
+              "is_abstract": true
+            }
+          ],
+          "is_abstract": true,
+          "is_interface": false
+        },
+        {
+          "type": "class",
+          "name": "Car",
+          "id": "26ecee24-4f2a-4feb-9060-89aa3573c3a2",
+          "stereotypes": [],
+          "properties": {},
+          "attributes": [
+            {
+              "name": "engine",
+              "type": "Engine",
+              "visibility": "private",
+              "default_value": null,
+              "is_static": false,
+              "is_final": false
+            }
+          ],
+          "operations": [
+            {
+              "name": "start",
+              "return_type": "void",
+              "parameters": [],
+              "visibility": "public",
+              "is_static": false,
+              "is_abstract": false
+            }
+          ],
+          "is_abstract": false,
+          "is_interface": false
+        },
+        {
+          "type": "class",
+          "name": "Engine",
+          "id": "37fb1ca3-13aa-424b-9d69-e167f9a254ad",
+          "stereotypes": [],
+          "properties": {},
+          "attributes": [
+            {
+              "name": "power",
+              "type": "int",
+              "visibility": "private",
+              "default_value": null,
+              "is_static": false,
+              "is_final": false
+            }
+          ],
+          "operations": [
+            {
+              "name": "getPower",
+              "return_type": "int",
+              "parameters": [],
+              "visibility": "public",
+              "is_static": false,
+              "is_abstract": false
+            }
+          ],
+          "is_abstract": false,
+          "is_interface": false
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "Car_Vehicle_Inheritance",
+      "id": "293fc795-6c92-4925-9381-497c4820c28d",
+      "source": "26ecee24-4f2a-4feb-9060-89aa3573c3a2",
+      "target": "06b0751f-3eb2-4dd5-9ff3-f9e99f20032f",
+      "relationship_type": "generalization",
+      "stereotypes": [],
+      "properties": {}
+    },
+    {
+      "name": "Car_Engine_Association",
+      "id": "dfacd994-d2cb-4372-8247-bda36cdc4334",
+      "source": "26ecee24-4f2a-4feb-9060-89aa3573c3a2",
+      "target": "37fb1ca3-13aa-424b-9d69-e167f9a254ad",
+      "relationship_type": "association",
+      "stereotypes": [],
+      "properties": {},
+      "multiplicity_source": "1",
+      "multiplicity_target": "1",
+      "navigability_source": true,
+      "navigability_target": true
+    }
+  ]
+}

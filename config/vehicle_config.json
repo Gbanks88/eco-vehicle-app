@@ -1,0 +1,61 @@
+{
+    "vehicle_specs": {
+        "name": "Eco-Vehicle Mark 1",
+        "type": "Hybrid Electric",
+        "target_weight": 1500,
+        "max_speed": 180
+    },
+    "materials": {
+        "aluminum_6061": {
+            "name": "Aluminum 6061-T6",
+            "density": 2700,
+            "yield_strength": 276,
+            "thermal_conductivity": 167,
+            "cost_per_kg": 2.5
+        },
+        "carbon_fiber": {
+            "name": "Carbon Fiber Composite",
+            "density": 1600,
+            "yield_strength": 600,
+            "thermal_conductivity": 5,
+            "cost_per_kg": 30.0
+        },
+        "steel_4130": {
+            "name": "Steel 4130",
+            "density": 7850,
+            "yield_strength": 460,
+            "thermal_conductivity": 42.7,
+            "cost_per_kg": 3.0
+        }
+    },
+    "components": {
+        "chassis": {
+            "material": "aluminum_6061",
+            "mass": 250,
+            "dimensions": [4.5, 1.8, 0.15],
+            "max_stress": 200,
+            "safety_factor": 1.5
+        },
+        "battery_pack": {
+            "material": "aluminum_6061",
+            "mass": 400,
+            "dimensions": [2.0, 1.5, 0.2],
+            "max_stress": 150,
+            "safety_factor": 2.0
+        },
+        "motor_housing": {
+            "material": "steel_4130",
+            "mass": 80,
+            "dimensions": [0.6, 0.6, 0.4],
+            "max_stress": 300,
+            "safety_factor": 1.8
+        },
+        "body_panels": {
+            "material": "carbon_fiber",
+            "mass": 120,
+            "dimensions": [4.6, 1.9, 0.002],
+            "max_stress": 250,
+            "safety_factor": 1.6
+        }
+    }
+}

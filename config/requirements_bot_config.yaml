@@ -1,0 +1,145 @@
+---
+# Requirements Bot Configuration
+
+# Quality Criteria
+quality_patterns:
+  ambiguous_terms:
+    - good
+    - fast
+    - efficient
+    - user-friendly
+    - flexible
+    - approximately
+    - soon
+    - better
+    - worse
+    - normal
+    - regular
+    - easy
+    - hard
+    - complex
+    - simple
+
+  measurable_keywords:
+    - shall
+    - must
+    - will
+    - should
+    - requires
+    - needs to
+
+  metric_patterns:
+    - '\d+\s*(ms|milliseconds)'
+    - '\d+\s*(s|seconds)'
+    - '\d+\s*(m|minutes)'
+    - '\d+\s*(h|hours)'
+    - '\d+\s*(MB|GB|TB)'
+    - '\d+\s*(users|requests)'
+    - '\d+\s*%'
+    - '\d+\s*(fps|Hz)'
+
+# Requirement Categories
+categories:
+  - Functional
+  - Performance
+  - Security
+  - Reliability
+  - Maintainability
+  - Usability
+  - Compatibility
+  - Environmental
+  - Compliance
+  - Documentation
+
+# Priority Levels
+priority_levels:
+  1: Critical
+  2: High
+  3: Medium
+  4: Low
+  5: Optional
+
+# Acceptance Criteria Templates
+acceptance_criteria_templates:
+  performance:
+    - "System performs {action} within {time} under {condition}"
+    - "System handles {load} with {resource} utilization below {threshold}"
+    - "System maintains {metric} at {level} during {duration}"
+  
+  functionality:
+    - "User can successfully {action} with {input}"
+    - "System correctly processes {data} and produces {output}"
+    - "System validates {condition} before {action}"
+  
+  reliability:
+    - "System maintains {uptime}% availability over {period}"
+    - "System recovers from {failure} within {time}"
+    - "System backs up {data} every {interval}"
+
+# Stakeholder Categories
+stakeholder_categories:
+  - End Users
+  - System Administrators
+  - Developers
+  - Project Managers
+  - Business Analysts
+  - Quality Assurance
+  - Compliance Officers
+  - Operations Team
+
+# Version Control
+version_control:
+  major_change_threshold: 0.5
+  minor_change_threshold: 0.2
+  revision_history_length: 10
+
+# Documentation Format
+documentation:
+  template: |
+    # Requirement: {id}
+    ## Title
+    {title}
+    
+    ## Description
+    {description}
+    
+    ## Category
+    {category}
+    
+    ## Priority
+    {priority}
+    
+    ## Metrics
+    {metrics}
+    
+    ## Acceptance Criteria
+    {acceptance_criteria}
+    
+    ## Stakeholders
+    {stakeholders}
+    
+    ## Dependencies
+    {dependencies}
+    
+    ## Version History
+    {version_history}
+
+# Export Settings
+export:
+  formats:
+    - json
+    - yaml
+    - markdown
+    - html
+  default_format: markdown
+  include_metadata: true
+  pretty_print: true
+
+# Validation Rules
+validation:
+  min_description_length: 10
+  min_acceptance_criteria: 2
+  require_metrics: true
+  require_stakeholders: true
+  max_priority_per_category: 5
+  max_dependencies: 10

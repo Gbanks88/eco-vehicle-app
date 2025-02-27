@@ -1,0 +1,109 @@
+analysis_results:
+  quality_metrics:
+    accuracy: 1.0
+    completeness: 1.0
+    consistency: 1.0
+  statistical_analysis:
+    domain_coverage_coverage_score:
+      max: 1.0
+      mean: 1.0
+      min: 1.0
+      std: 0.0
+    domain_coverage_covered_domains:
+      max: 11.0
+      mean: 11.0
+      min: 11.0
+      std: 0.0
+    domain_coverage_total_domains:
+      max: 11.0
+      mean: 11.0
+      min: 11.0
+      std: 0.0
+    processed_domains:
+      max: 11.0
+      mean: 11.0
+      min: 11.0
+      std: 0.0
+    processed_templates:
+      max: 11.0
+      mean: 11.0
+      min: 11.0
+      std: 0.0
+    template_metrics_completeness_score:
+      max: 0.9
+      mean: 0.9
+      min: 0.9
+      std: 0.0
+    template_metrics_quality_score:
+      max: 0.85
+      mean: 0.85
+      min: 0.85
+      std: 0.0
+    template_metrics_total_templates:
+      max: 11.0
+      mean: 11.0
+      min: 11.0
+      std: 0.0
+data_structure:
+  constraints:
+  - fields:
+    - analysis_timestamp
+    - processed_domains
+    - processed_templates
+    - domain_coverage
+    - template_metrics
+    type: required
+  relationships:
+  - fields:
+    - analysis_timestamp
+    - processed_domains
+    - processed_templates
+    - domain_coverage
+    - template_metrics
+    type: correlation
+  schema:
+    analysis_timestamp:
+      required: true
+      type: str
+    domain_coverage:
+      coverage_score:
+        required: true
+        type: float
+      covered_domains:
+        required: true
+        type: int
+      total_domains:
+        required: true
+        type: int
+    processed_domains:
+      required: true
+      type: int
+    processed_templates:
+      required: true
+      type: int
+    template_metrics:
+      completeness_score:
+        required: true
+        type: float
+      quality_score:
+        required: true
+        type: float
+      total_templates:
+        required: true
+        type: int
+metadata:
+  analysis_version: '1.0'
+  bot_name: requirements_bot
+  timestamp: '2025-02-24T15:30:24.561050'
+raw_data:
+  analysis_timestamp: '2025-02-24T15:30:24.561021'
+  domain_coverage:
+    coverage_score: 1.0
+    covered_domains: 11
+    total_domains: 11
+  processed_domains: 11
+  processed_templates: 11
+  template_metrics:
+    completeness_score: 0.9
+    quality_score: 0.85
+    total_templates: 11

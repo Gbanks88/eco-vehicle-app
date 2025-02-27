@@ -1,0 +1,132 @@
+@startuml EcoVehicle Monitoring System
+
+' Style configurations
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+
+package "Core" {
+    class SystemMonitor {
+        - cpuUsage: double
+        - memoryUsage: double
+        - batteryLevel: double
+        - networkLatency: double
+        - environmentalScore: double
+        + collectMetrics(): Metrics
+        + isHealthy(): boolean
+        + getStatus(): string
+        - calculateCpuUsage(): double
+        - calculateMemoryUsage(): double
+        - measureNetworkLatency(): double
+        - calculateEnvironmentalImpact(): double
+    }
+
+    class MetricsCollector {
+        - updateInterval: int
+        - metrics: Map<string, double>
+        + startCollection()
+        + stopCollection()
+        + getMetric(name: string): double
+        - processRawData(data: RawData): Metrics
+    }
+
+    class AlertManager {
+        - alerts: List<Alert>
+        - thresholds: Map<string, double>
+        + addAlert(alert: Alert)
+        + checkThresholds(metrics: Metrics)
+        + getActiveAlerts(): List<Alert>
+        - notifySubscribers(alert: Alert)
+    }
+}
+
+package "Analysis" {
+    class PerformanceAnalyzer {
+        - historicalData: TimeSeries
+        + analyzeTrends(): TrendReport
+        + detectAnomalies(): List<Anomaly>
+        + predictMaintenance(): MaintenanceSchedule
+        - calculateStatistics(): Statistics
+    }
+
+    class EnvironmentalAnalyzer {
+        - impactFactors: Map<string, double>
+        + calculateFootprint(): CarbonFootprint
+        + analyzeEfficiency(): EfficiencyReport
+        + optimizeResource(): ResourcePlan
+    }
+
+    class PredictiveModel {
+        - trainingData: Dataset
+        - modelParameters: Parameters
+        + train(data: Dataset)
+        + predict(input: Features): Prediction
+        - validateModel(): Metrics
+    }
+}
+
+package "Visualization" {
+    class DashboardWidget {
+        - charts: List<Chart>
+        - metrics: CurrentMetrics
+        + updateDisplay(metrics: Metrics)
+        + configureLayout()
+        + exportData(format: string)
+        - createChart(type: ChartType): Chart
+    }
+
+    class Chart {
+        - data: TimeSeries
+        - style: ChartStyle
+        + plot(data: Data)
+        + setStyle(style: Style)
+        + exportImage(format: string)
+    }
+
+    class AlertView {
+        - activeAlerts: List<Alert>
+        + displayAlert(alert: Alert)
+        + clearAlert(id: string)
+        + configureNotifications()
+    }
+}
+
+package "Data" {
+    class Metrics {
+        + timestamp: DateTime
+        + values: Map<string, double>
+        + metadata: Map<string, string>
+    }
+
+    class Alert {
+        + id: string
+        + type: AlertType
+        + severity: Severity
+        + message: string
+        + timestamp: DateTime
+    }
+
+    class TimeSeries {
+        + data: List<DataPoint>
+        + interval: TimeInterval
+        + metadata: SeriesMetadata
+    }
+}
+
+' Relationships
+SystemMonitor --> MetricsCollector
+SystemMonitor --> AlertManager
+SystemMonitor --> PerformanceAnalyzer
+SystemMonitor --> EnvironmentalAnalyzer
+
+MetricsCollector --> "1..*" Metrics
+AlertManager --> "*" Alert
+PerformanceAnalyzer --> PredictiveModel
+PerformanceAnalyzer --> TimeSeries
+
+DashboardWidget --> "*" Chart
+DashboardWidget --> AlertView
+DashboardWidget --> SystemMonitor
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml Requirements Bot Use Cases
+
+skinparam usecase {
+    BackgroundColor LightBlue
+    BorderColor Blue
+    ArrowColor Blue
+}
+
+actor "Requirements Engineer" as RE
+actor "Developer" as Dev
+actor "Project Manager" as PM
+actor "System Admin" as Admin
+
+rectangle "Requirements Bot System" {
+    usecase "Create Requirement" as UC1
+    usecase "Validate Requirement" as UC2
+    usecase "Generate Documentation" as UC3
+    usecase "Export Requirements" as UC4
+    usecase "Manage Templates" as UC5
+    usecase "Configure System" as UC6
+    usecase "View Analytics" as UC7
+    usecase "Batch Process" as UC8
+    usecase "Import Legacy Requirements" as UC9
+    usecase "Review Changes" as UC10
+    usecase "Generate Reports" as UC11
+    usecase "Manage Users" as UC12
+    
+    ' Extensions
+    usecase "Auto-Complete" as UC1.1
+    usecase "Suggest Improvements" as UC1.2
+    usecase "Check Consistency" as UC2.1
+    usecase "Version Control" as UC10.1
+}
+
+' Relationships
+RE --> UC1
+RE --> UC2
+RE --> UC3
+RE --> UC4
+RE --> UC10
+
+Dev --> UC2
+Dev --> UC9
+Dev --> UC10
+
+PM --> UC7
+PM --> UC8
+PM --> UC11
+
+Admin --> UC5
+Admin --> UC6
+Admin --> UC12
+
+' Extensions
+UC1 <.. UC1.1 : extends
+UC1 <.. UC1.2 : extends
+UC2 <.. UC2.1 : extends
+UC10 <.. UC10.1 : extends
+
+' Dependencies
+UC3 ..> UC2 : includes
+UC11 ..> UC7 : includes
+UC8 ..> UC1 : includes
+UC9 ..> UC2 : includes
+
+@enduml

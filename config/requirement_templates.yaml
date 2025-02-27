@@ -1,0 +1,158 @@
+---
+# Domain-Specific Requirement Templates
+
+machine_learning_ai:
+  functional:
+    - "The {system} shall achieve {metric} of at least {value} on {dataset} under {conditions}"
+    - "The model shall be retrained when {condition} occurs, maintaining {performance_metric}"
+    - "The system shall process {data_type} input data within {time} milliseconds"
+    - "The AI model shall provide explainable decisions using {method}"
+  performance:
+    - "The inference time shall not exceed {time} milliseconds for {load} requests"
+    - "The model size shall not exceed {size} MB when deployed"
+    - "The system shall handle up to {number} concurrent inference requests"
+  compliance:
+    - "All data processing shall comply with {regulation} requirements"
+    - "The system shall maintain audit logs for all {activity_type} activities"
+    - "Model decisions shall be reviewable by {stakeholder}"
+
+chip_design:
+  functional:
+    - "The chip shall operate at {frequency} MHz under {conditions}"
+    - "Power consumption shall not exceed {power} watts under {load}"
+    - "The design shall include {feature} for {purpose}"
+    - "The chip shall support {interface_type} interface with {speed} transfer rate"
+  performance:
+    - "The chip shall maintain operation within {temp_range}°C temperature range"
+    - "The design shall achieve {utilization}% resource utilization"
+    - "Clock jitter shall not exceed {jitter} ps"
+  verification:
+    - "All design rules shall be verified using {tool}"
+    - "Timing closure shall be achieved at {frequency} MHz"
+    - "Power analysis shall be performed under {conditions}"
+
+embedded_iot:
+  functional:
+    - "The device shall operate for {duration} hours on a single {battery_type} battery"
+    - "The system shall collect data from {sensor_type} every {interval} seconds"
+    - "Wireless communication shall use {protocol} with {security} encryption"
+  performance:
+    - "Response time shall not exceed {time} ms for {event_type} events"
+    - "The system shall handle {number} concurrent sensor connections"
+    - "Data transmission shall not exceed {bandwidth} KB/s"
+  reliability:
+    - "The system shall maintain {uptime}% uptime in {environment} conditions"
+    - "Data loss shall not exceed {loss_rate}% during normal operation"
+    - "The system shall auto-recover from {failure_type} failures"
+
+power_energy:
+  functional:
+    - "The system shall maintain power factor above {value} under {load} conditions"
+    - "Energy conversion efficiency shall exceed {efficiency}% at {load_level}"
+    - "The system shall support {source_type} energy source integration"
+  safety:
+    - "Emergency shutdown shall activate within {time} ms of {condition}"
+    - "The system shall maintain isolation of {voltage} V with {safety_margin}"
+    - "Temperature shall not exceed {temp}°C at any point"
+  monitoring:
+    - "Power quality parameters shall be monitored every {interval} seconds"
+    - "The system shall log {parameter_type} parameters for {duration}"
+    - "Alerts shall be generated when {threshold} is exceeded"
+
+aerospace:
+  functional:
+    - "The system shall operate at altitudes up to {altitude} feet"
+    - "Navigation accuracy shall be within {accuracy} meters under {conditions}"
+    - "The system shall withstand radiation levels up to {level} rad"
+  safety:
+    - "Redundancy shall be provided for {system_type} with {failover_time} switching"
+    - "The system shall detect {fault_type} faults within {time} milliseconds"
+    - "Emergency procedures shall be executed within {time} seconds"
+  certification:
+    - "Software shall be developed according to {standard} Level {level}"
+    - "Hardware shall comply with {requirement} requirements"
+    - "Documentation shall meet {authority} certification requirements"
+
+military:
+  functional:
+    - "The system shall detect targets at ranges up to {range} kilometers"
+    - "Encryption shall use {algorithm} with minimum {key_length} bit keys"
+    - "Communications shall be jam-resistant up to {power} watts interference"
+  security:
+    - "The system shall prevent unauthorized access using {method}"
+    - "Data shall be sanitized according to {standard} requirements"
+    - "System shall operate in TEMPEST environment Level {level}"
+  reliability:
+    - "The system shall operate in temperatures from {min_temp}°C to {max_temp}°C"
+    - "Mean time between failures shall exceed {hours} hours"
+    - "System shall survive {condition} environmental conditions"
+
+healthcare:
+  functional:
+    - "The system shall monitor {parameter} with {accuracy} accuracy"
+    - "Patient data shall be encrypted using {algorithm} encryption"
+    - "Alerts shall be generated within {time} seconds of {condition}"
+  compliance:
+    - "Data storage shall comply with {regulation} requirements"
+    - "Access control shall implement {standard} standards"
+    - "Audit trails shall be maintained for {duration} years"
+  safety:
+    - "The system shall fail safe under {condition} conditions"
+    - "Backup power shall last for minimum {duration} hours"
+    - "Critical functions shall have {redundancy_level} redundancy"
+
+hardware_manufacturing:
+  functional:
+    - "The production line shall achieve {throughput} units per hour"
+    - "Quality control shall detect {defect_type} with {accuracy}% accuracy"
+    - "Component placement accuracy shall be within {tolerance} millimeters"
+  quality:
+    - "Defect rate shall not exceed {rate}% for {process_type}"
+    - "Environmental conditions shall be maintained at {temp}°C ±{tolerance}°C"
+    - "Calibration shall be performed every {interval} hours"
+  testing:
+    - "Each unit shall pass {test_type} testing at {coverage}% coverage"
+    - "Burn-in testing shall run for {duration} hours at {temp}°C"
+    - "Functional testing shall verify {feature_list} features"
+
+cybersecurity:
+  functional:
+    - "The system shall detect {attack_type} attacks within {time} seconds"
+    - "Authentication shall use {factor_type} factors"
+    - "Encryption shall use minimum {key_length} bit keys"
+  monitoring:
+    - "Security logs shall be retained for {duration} days"
+    - "System shall monitor {parameter_list} parameters"
+    - "Alerts shall be generated for {event_type} events"
+  compliance:
+    - "Access control shall comply with {standard} requirements"
+    - "Data protection shall meet {regulation} standards"
+    - "Audit trails shall be maintained according to {policy}"
+
+environment:
+  functional:
+    - "The system shall monitor {parameter} levels every {interval} minutes"
+    - "Emissions shall not exceed {limit} {unit} under {condition}"
+    - "Data collection shall cover {area} square kilometers"
+  compliance:
+    - "Monitoring shall comply with {standard} requirements"
+    - "Reporting shall meet {authority} guidelines"
+    - "Calibration shall follow {protocol} protocols"
+  analysis:
+    - "Analysis shall be performed on {timeframe} of historical data"
+    - "Predictive models shall forecast {parameter} for {duration}"
+    - "Accuracy shall be within {tolerance}% for {measurement_type}"
+
+biomedical:
+  functional:
+    - "The device shall measure {parameter} with {accuracy} accuracy"
+    - "Sterilization shall achieve {level} sterility assurance level"
+    - "The system shall maintain {condition} under {circumstances}"
+  safety:
+    - "Biocompatibility shall meet {standard} requirements"
+    - "Safety features shall prevent {hazard_type} hazards"
+    - "Emergency shutdown shall activate within {time} seconds"
+  clinical:
+    - "Clinical validation shall include {number} subjects"
+    - "Efficacy shall be demonstrated for {condition} treatment"
+    - "Follow-up shall continue for {duration} months"

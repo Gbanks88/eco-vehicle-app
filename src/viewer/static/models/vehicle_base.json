@@ -1,0 +1,41 @@
+{
+    "name": "vehicle_base",
+    "version": "1.0",
+    "components": [
+        {
+            "type": "chassis",
+            "dimensions": {
+                "length": 4.5,
+                "width": 1.8,
+                "height": 1.4
+            },
+            "material": "aluminum",
+            "color": "#808080"
+        },
+        {
+            "type": "battery_pack",
+            "position": {
+                "x": 0,
+                "y": -0.2,
+                "z": 0
+            },
+            "dimensions": {
+                "length": 2.0,
+                "width": 1.5,
+                "height": 0.2
+            },
+            "capacity": "75kWh",
+            "color": "#404040"
+        },
+        {
+            "type": "motor",
+            "position": {
+                "x": -1.5,
+                "y": -0.1,
+                "z": 0
+            },
+            "power": "150kW",
+            "color": "#606060"
+        }
+    ]
+}

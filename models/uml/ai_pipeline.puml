@@ -1,0 +1,111 @@
+@startuml EcoVehicle AI Pipeline
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam componentStyle uml2
+
+' AI Pipeline Components
+package "Data Collection" {
+    [Raw Data Collector] as RDC
+    [Sensor Interface] as SI
+    [Data Validator] as DV
+    database "Raw Data Store" as RDS
+}
+
+package "Data Processing" {
+    [Feature Extractor] as FE
+    [Data Transformer] as DT
+    [Normalizer] as NM
+    database "Feature Store" as FS
+}
+
+package "Model Training" {
+    [Model Trainer] as MT
+    [Hyperparameter Tuner] as HT
+    [Cross Validator] as CV
+    database "Model Registry" as MR
+}
+
+package "Online Learning" {
+    [Online Learner] as OL
+    [Model Updater] as MU
+    [Performance Monitor] as PM
+    database "Version Store" as VS
+}
+
+package "Inference Engine" {
+    [Anomaly Detector] as AD
+    [Trend Analyzer] as TA
+    [Maintenance Predictor] as MP
+    [Resource Optimizer] as RO
+}
+
+package "Model Serving" {
+    [Model Server] as MS
+    [Inference API] as IA
+    [Result Cache] as RC
+    database "Prediction Store" as PS
+}
+
+' Data Flow
+RDC --> SI : raw data
+SI --> DV : validated data
+DV --> RDS : store raw data
+RDS --> FE : fetch data
+
+FE --> DT : extracted features
+DT --> NM : transformed data
+NM --> FS : normalized features
+FS --> MT : training data
+
+MT --> HT : initial model
+HT --> CV : tuned model
+CV --> MR : validated model
+MR --> OL : production model
+
+OL --> MU : learning updates
+MU --> PM : model updates
+PM --> VS : version control
+VS --> MS : serve model
+
+MS --> AD : serve anomaly model
+MS --> TA : serve trend model
+MS --> MP : serve maintenance model
+MS --> RO : serve optimizer model
+
+AD --> IA : anomaly predictions
+TA --> IA : trend predictions
+MP --> IA : maintenance predictions
+RO --> IA : optimization results
+
+IA --> RC : cache results
+RC --> PS : store predictions
+
+' Notes
+note right of RDC
+  Collects data from multiple
+  sensor sources
+end note
+
+note right of FE
+  Extracts relevant features
+  for ML models
+end note
+
+note right of MT
+  Trains models using
+  distributed computing
+end note
+
+note right of OL
+  Continuously updates models
+  with new data
+end note
+
+note right of MS
+  Serves models with
+  low-latency inference
+end note
+
+@enduml

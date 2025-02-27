@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="1.221" timestamp="2025-02-24T15:18:00.952080-07:00" hostname="iMac.local"><testcase classname="tests.unit.requirements_bot.test_domain_knowledge.TestDomainKnowledge" name="test_advanced_domains" time="0.138" /><testcase classname="tests.unit.requirements_bot.test_domain_knowledge.TestDomainKnowledge" name="test_complex_systems" time="0.149" /><testcase classname="tests.unit.requirements_bot.test_domain_knowledge.TestDomainKnowledge" name="test_knowledge_structure" time="0.204" /><testcase classname="tests.unit.requirements_bot.test_domain_knowledge.TestDomainKnowledge" name="test_standards_validity" time="0.140"><failure message="AssertionError: False is not true : Invalid standard format: JEDEC standards">self = &lt;test_domain_knowledge.TestDomainKnowledge testMethod=test_standards_validity&gt;
+
+    def test_standards_validity(self):
+        """Test that standards references are valid"""
+        for domain in self.domain_knowledge.values():
+            for standard in domain["standards"]:
+                # Standards can be either:
+                # 1. Standard format: Letters + Numbers (e.g., "ISO 9001")
+                # 2. Acronym format: All caps (e.g., "DICOM")
+                # 3. Combined format: Letters + Numbers + Description (e.g., "ISO/IEC 27001 Security")
+&gt;               self.assertTrue(
+                    bool(re.match(r"^[A-Z]+.*\s*\d+.*$", standard)) or  # Standard format
+                    bool(re.match(r"^[A-Z]+$", standard)) or           # Acronym format
+                    bool(re.match(r"^[A-Z]+[/-][A-Z]+.*$", standard)), # Combined format
+                    f"Invalid standard format: {standard}"
+                )
+E               AssertionError: False is not true : Invalid standard format: JEDEC standards
+
+tests/unit/requirements_bot/test_domain_knowledge.py:53: AssertionError</failure></testcase><testcase classname="tests.unit.requirements_bot.test_requirement_templates.TestRequirementTemplates" name="test_advanced_templates" time="0.078" /><testcase classname="tests.unit.requirements_bot.test_requirement_templates.TestRequirementTemplates" name="test_complex_system_templates" time="0.113" /><testcase classname="tests.unit.requirements_bot.test_requirement_templates.TestRequirementTemplates" name="test_template_completeness" time="0.086" /><testcase classname="tests.unit.requirements_bot.test_requirement_templates.TestRequirementTemplates" name="test_template_format" time="0.089" /></testsuite></testsuites>

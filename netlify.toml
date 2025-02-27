@@ -1,0 +1,12 @@
+[build]
+  publish = "web/static"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self' https://developer.api.autodesk.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://developer.api.autodesk.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://developer.api.autodesk.com"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"

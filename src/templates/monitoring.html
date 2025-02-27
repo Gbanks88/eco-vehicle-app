@@ -1,0 +1,660 @@
+{% extends "base.html" %}
+
+{% block title %}CG4F System Monitoring{% endblock %}
+
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" rel="stylesheet" />
+<style>
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .metric-card {
+        background: white;
+        border-radius: var(--spacing-md);
+        padding: var(--spacing-lg);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .metric-header {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .metric-header i {
+        font-size: 1.5em;
+        color: var(--primary-color);
+    }
+
+    .performance-grid {
+        display: grid;
+        gap: var(--spacing-md);
+    }
+
+    .performance-item {
+        display: grid;
+        gap: var(--spacing-sm);
+    }
+
+    .progress-bar {
+        height: 8px;
+        background: var(--background-secondary);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+    }
+
+    .network-stats,
+    .storage-stats {
+        display: grid;
+        gap: var(--spacing-md);
+    }
+
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9em;
+    }
+
+    .stat-value {
+        font-weight: bold;
+        color: var(--text-primary);
+    }
+
+    .metric-details {
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-md);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .detail-label {
+        color: var(--text-secondary);
+        font-size: 0.9em;
+    }
+    
+    .metric-value {
+        font-size: 2em;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .metric-label {
+        color: var(--text-secondary);
+        font-size: 0.9em;
+    }
+    
+    .chart-container {
+        background: white;
+        border-radius: var(--spacing-md);
+        padding: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+        height: 400px;
+    }
+    
+    .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: var(--spacing-sm);
+    }
+    
+    .status-healthy {
+        background-color: var(--success-color);
+    }
+    
+    .status-warning {
+        background-color: var(--warning-color);
+    }
+    
+    .status-error {
+        background-color: var(--error-color);
+    }
+    
+    .tabs {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .tab {
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-radius: var(--spacing-sm);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+        background: var(--primary-gradient);
+        color: white;
+    }
+    
+    .alert {
+        padding: var(--spacing-md);
+        border-radius: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .alert-warning {
+        background-color: var(--warning-color);
+        color: white;
+    }
+    
+    .alert-error {
+        background-color: var(--error-color);
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="monitoring-dashboard">
+    <h1>System Monitoring</h1>
+    
+    <!-- System Status Overview -->
+    <div class="metrics-grid">
+        <!-- Database Health -->
+        <div class="metric-card" v-for="(db, name) in metrics.databases" :key="name">
+            <div class="metric-header">
+                <i class="mdi mdi-database"></i>
+                <span class="metric-label">{{ name }} Status</span>
+            </div>
+            <div class="metric-value">
+                <span class="status-indicator" :class="getStatusClass(db.status)"></span>
+                {{ db.status }}
+            </div>
+            <div class="metric-details">
+                <div class="detail-item">
+                    <span class="detail-label">Connections:</span>
+                    <span class="detail-value">{{ db.connections }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Latency:</span>
+                    <span class="detail-value">{{ db.latency }}ms</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="metric-card performance">
+            <div class="metric-header">
+                <i class="mdi mdi-speedometer"></i>
+                <span class="metric-label">System Performance</span>
+            </div>
+            <div class="performance-grid">
+                <div class="performance-item">
+                    <span class="item-label">CPU Load</span>
+                    <div class="progress-bar">
+                        <div class="progress" :style="{width: metrics.performance.cpu.usage + '%'}"></div>
+                    </div>
+                    <span class="item-value">{{ metrics.performance.cpu.usage }}%</span>
+                </div>
+                <div class="performance-item">
+                    <span class="item-label">Memory Usage</span>
+                    <div class="progress-bar">
+                        <div class="progress" :style="{width: metrics.performance.memory.percent + '%'}"></div>
+                    </div>
+                    <span class="item-value">{{ metrics.performance.memory.percent }}%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Status -->
+        <div class="metric-card network">
+            <div class="metric-header">
+                <i class="mdi mdi-network"></i>
+                <span class="metric-label">Network Status</span>
+            </div>
+            <div class="network-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Throughput</span>
+                    <span class="stat-value">{{ formatBytes(metrics.network.throughput) }}/s</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Active Connections</span>
+                    <span class="stat-value">{{ metrics.network.connections.established }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Storage Status -->
+        <div class="metric-card storage">
+            <div class="metric-header">
+                <i class="mdi mdi-harddisk"></i>
+                <span class="metric-label">Storage Status</span>
+            </div>
+            <div class="storage-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Used Space</span>
+                    <div class="progress-bar">
+                        <div class="progress" :style="{width: metrics.storage.usage.percent + '%'}"></div>
+                    </div>
+                    <span class="stat-value">{{ formatBytes(metrics.storage.usage.used) }} / {{ formatBytes(metrics.storage.usage.total) }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">I/O Operations</span>
+                    <span class="stat-value">{{ metrics.storage.io_stats.operations }}/s</span>
+                </div>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Database Status</div>
+            <div class="metric-value">
+                <span class="status-indicator" :class="dbStatus.class"></span>
+                {{ dbStatus.text }}
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">API Health</div>
+            <div class="metric-value">
+                <span class="status-indicator" :class="apiStatus.class"></span>
+                {{ apiStatus.text }}
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Active Vehicles</div>
+            <div class="metric-value">{{ activeVehicles }}</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">System Load</div>
+            <div class="metric-value">{{ systemLoad }}%</div>
+        </div>
+    </div>
+    
+    <!-- Alerts Section -->
+    <div class="section">
+        <h2>Active Alerts</h2>
+        <div class="alerts-container">
+            <div v-for="alert in alerts" :key="alert.id" 
+                 :class="['alert', `alert-${alert.type}`]">
+                <i :class="['mdi', alert.icon]"></i>
+                <div>
+                    <strong>{{ alert.title }}</strong>
+                    <p>{{ alert.message }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Database Metrics -->
+    <div class="section">
+        <h2>Database Metrics</h2>
+        <div class="tabs">
+            <div v-for="tab in dbTabs" 
+                 :key="tab.id"
+                 :class="['tab', { active: activeTab === tab.id }]"
+                 @click="activeTab = tab.id">
+                {{ tab.name }}
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div id="dbMetricsChart"></div>
+        </div>
+    </div>
+    
+    <!-- Real-time Events -->
+    <div class="section">
+        <h2>Real-time Events</h2>
+        <div id="eventsGrid"></div>
+    </div>
+    
+    <!-- System Resources -->
+    <div class="section">
+        <h2>System Resources</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">CPU Usage</div>
+                <div class="chart-container" style="height: 200px;">
+                    <div id="cpuChart"></div>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Memory Usage</div>
+                <div class="chart-container" style="height: 200px;">
+                    <div id="memoryChart"></div>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Disk Usage</div>
+                <div class="chart-container" style="height: 200px;">
+                    <div id="diskChart"></div>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Network Traffic</div>
+                <div class="chart-container" style="height: 200px;">
+                    <div id="networkChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+<script>
+new Vue({
+    el: '.monitoring-dashboard',
+    data: {
+        metrics: {
+            databases: {},
+            performance: {
+                cpu: {
+                    usage: 0,
+                    times: {},
+                    frequency: {},
+                    stats: {}
+                },
+                memory: {
+                    total: 0,
+                    used: 0,
+                    free: 0,
+                    percent: 0,
+                    swap: {}
+                },
+                process: {}
+            },
+            network: {
+                throughput: 0,
+                connections: {
+                    established: 0,
+                    listen: 0,
+                    time_wait: 0,
+                    close_wait: 0
+                },
+                interfaces: {}
+            },
+            storage: {
+                usage: {
+                    total: 0,
+                    used: 0,
+                    free: 0,
+                    percent: 0
+                },
+                io_stats: {
+                    operations: 0,
+                    read_bytes: 0,
+                    write_bytes: 0
+                },
+                partitions: []
+            }
+        },
+        dbStatus: {
+            text: 'Healthy',
+            class: 'status-healthy'
+        },
+        apiStatus: {
+            text: 'Operational',
+            class: 'status-healthy'
+        },
+        activeVehicles: 42,
+        systemLoad: 67,
+        activeTab: 'mongodb',
+        dbTabs: [
+            { id: 'mongodb', name: 'MongoDB' },
+            { id: 'db2', name: 'IBM DB2' },
+            { id: 'cloudant', name: 'Cloudant' }
+        ],
+        alerts: [
+            {
+                id: 1,
+                type: 'warning',
+                icon: 'mdi-alert',
+                title: 'High Memory Usage',
+                message: 'System memory usage exceeds 80%'
+            },
+            {
+                id: 2,
+                type: 'error',
+                icon: 'mdi-alert-circle',
+                title: 'Database Sync Delay',
+                message: 'Data synchronization is delayed by 5 minutes'
+            }
+        ]
+    },
+    mounted() {
+        this.initCharts();
+        this.initEventsGrid();
+        this.startRealTimeUpdates();
+    },
+    methods: {
+        getStatusClass(status) {
+            const statusMap = {
+                'healthy': 'status-healthy',
+                'warning': 'status-warning',
+                'error': 'status-error'
+            };
+            return statusMap[status.toLowerCase()] || 'status-error';
+        },
+        
+        formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        },
+        
+        updateMetrics(data) {
+            this.metrics = data;
+            this.updateCharts();
+        },
+        
+        updateCharts() {
+            // Update CPU chart
+            Plotly.update('cpuChart', {
+                y: [[this.metrics.performance.cpu.usage]]
+            });
+            
+            // Update Memory chart
+            Plotly.update('memoryChart', {
+                y: [[this.metrics.performance.memory.percent]]
+            });
+            
+            // Update Disk chart
+            Plotly.update('diskChart', {
+                values: [
+                    this.metrics.storage.usage.used,
+                    this.metrics.storage.usage.free
+                ]
+            });
+            
+            // Update Network chart
+            Plotly.update('networkChart', {
+                y: [[
+                    this.metrics.network.throughput
+                ]]
+            });
+        },
+        initCharts() {
+            // CPU Usage Chart
+            Plotly.newPlot('cpuChart', [{
+                y: [0],
+                type: 'line',
+                line: { color: '#2196F3' },
+                fill: 'tozeroy'
+            }], {
+                margin: { t: 0, b: 30, l: 30, r: 10 },
+                yaxis: { range: [0, 100] },
+                showlegend: false
+            });
+            
+            // Memory Usage Chart
+            Plotly.newPlot('memoryChart', [{
+                y: [0],
+                type: 'line',
+                line: { color: '#4CAF50' },
+                fill: 'tozeroy'
+            }], {
+                margin: { t: 0, b: 30, l: 30, r: 10 },
+                yaxis: { range: [0, 100] },
+                showlegend: false
+            });
+            
+            // Disk Usage Chart
+            Plotly.newPlot('diskChart', [{
+                values: [0, 100],
+                labels: ['Used', 'Free'],
+                type: 'pie',
+                marker: {
+                    colors: ['#FF5722', '#E0E0E0']
+                }
+            }], {
+                margin: { t: 0, b: 0, l: 0, r: 0 },
+                showlegend: true,
+                legend: { orientation: 'h' }
+            });
+            
+            // Network Traffic Chart
+            Plotly.newPlot('networkChart', [{
+                y: [0],
+                type: 'line',
+                line: { color: '#9C27B0' },
+                fill: 'tozeroy'
+            }], {
+                margin: { t: 0, b: 30, l: 30, r: 10 },
+                showlegend: false
+            });
+            // Database Metrics Chart
+            const dbData = {
+                x: ['00:00', '01:00', '02:00', '03:00', '04:00'],
+                y: [30, 45, 32, 67, 89],
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: {
+                    color: '#4299e1',
+                    width: 2
+                }
+            };
+            
+            Plotly.newPlot('dbMetricsChart', [dbData], {
+                margin: { t: 20, r: 20, b: 40, l: 40 },
+                xaxis: { showgrid: false },
+                yaxis: { showgrid: true, gridcolor: '#e2e8f0' }
+            });
+            
+            // System Resource Charts
+            const resourceCharts = ['cpu', 'memory', 'disk', 'network'];
+            resourceCharts.forEach(type => {
+                const data = {
+                    values: [67, 33],
+                    type: 'pie',
+                    hole: 0.7,
+                    marker: {
+                        colors: ['#4299e1', '#e2e8f0']
+                    }
+                };
+                
+                Plotly.newPlot(`${type}Chart`, [data], {
+                    margin: { t: 0, r: 0, b: 0, l: 0 },
+                    showlegend: false,
+                    annotations: [{
+                        text: '67%',
+                        showarrow: false,
+                        font: {
+                            size: 20,
+                            color: '#4299e1'
+                        }
+                    }]
+                });
+            });
+        },
+        
+        initEventsGrid() {
+            new gridjs.Grid({
+                columns: ['Timestamp', 'Event Type', 'Description', 'Status'],
+                data: [
+                    ['2025-02-25 15:00:00', 'Database Sync', 'Completed successfully', 'Success'],
+                    ['2025-02-25 14:55:00', 'System Backup', 'Backup created', 'Success'],
+                    ['2025-02-25 14:50:00', 'API Error', 'Connection timeout', 'Error']
+                ],
+                search: true,
+                sort: true,
+                pagination: {
+                    limit: 10
+                }
+            }).render(document.getElementById('eventsGrid'));
+        },
+        
+        startRealTimeUpdates() {
+            const socket = io();
+            
+            socket.on('metrics_update', (data) => {
+                this.updateMetrics(data);
+            });
+            
+            socket.on('alert', (alert) => {
+                this.alerts.push({
+                    id: Date.now(),
+                    ...alert,
+                    icon: this.getAlertIcon(alert.type)
+                });
+            });
+            
+            // Request initial metrics
+            socket.emit('get_metrics');
+            
+            // Clean up old alerts
+            setInterval(() => {
+                const now = Date.now();
+                this.alerts = this.alerts.filter(alert => {
+                    return (now - alert.id) < 1000 * 60 * 5; // Keep alerts for 5 minutes
+                });
+            }, 1000 * 60); // Check every minute
+            setInterval(() => {
+                // Update metrics
+                this.systemLoad = Math.floor(Math.random() * 30) + 60;
+                this.activeVehicles = Math.floor(Math.random() * 20) + 30;
+                
+                // Update charts
+                Plotly.update('dbMetricsChart', {
+                    y: [[Math.random() * 100]]
+                });
+            }, 5000);
+        }
+    }
+});
+</script>
+{% endblock %}

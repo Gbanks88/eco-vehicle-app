@@ -1,0 +1,101 @@
+---
+# Advanced Technical Requirement Templates
+
+digital_signal_processing:
+  filter_design:
+    - "The {filter_type} filter shall achieve {attenuation} dB stopband attenuation at {frequency} Hz"
+    - "The filter shall maintain {ripple} dB maximum passband ripple in the range {freq_range} Hz"
+    - "Filter coefficients shall be quantized to {bits} bits while maintaining stability"
+    - "The implementation shall use no more than {operations} multiply-accumulate operations per sample"
+  implementation:
+    - "The DSP system shall process {channels} channels in real-time at {sample_rate} Hz"
+    - "The processing delay shall not exceed {latency} milliseconds"
+    - "Memory usage shall not exceed {memory} KB for coefficient storage"
+  performance:
+    - "The system shall maintain {snr} dB signal-to-noise ratio under {conditions}"
+    - "Computational complexity shall not exceed {mips} MIPS"
+    - "The implementation shall use {precision}-bit fixed-point arithmetic"
+
+control_systems:
+  stability:
+    - "The closed-loop system shall maintain stability with up to {uncertainty}% parameter variation"
+    - "Phase margin shall be at least {margin} degrees at {frequency} Hz crossover"
+    - "The system shall be robust to {disturbance_type} disturbances up to {magnitude} amplitude"
+  performance:
+    - "Settling time shall not exceed {time} seconds for {step_size} step input"
+    - "Steady-state error shall be less than {error}% for {input_type} inputs"
+    - "Overshoot shall not exceed {percent}% under nominal conditions"
+  implementation:
+    - "The controller shall execute at {rate} Hz sampling rate"
+    - "Control signal saturation shall be handled using {method} anti-windup"
+    - "State estimation shall achieve {accuracy} accuracy within {time} seconds"
+
+modern_architecture:
+  processor_design:
+    - "The pipeline shall achieve {ipc} instructions per cycle under {workload}"
+    - "Branch prediction accuracy shall exceed {accuracy}% for {benchmark}"
+    - "Cache hit rate shall be at least {rate}% for {cache_level} cache"
+  memory_system:
+    - "Memory bandwidth shall support {bandwidth} GB/s sustained transfer"
+    - "Memory latency shall not exceed {latency} cycles for {access_pattern}"
+    - "Cache coherency protocol shall maintain consistency within {time} cycles"
+  accelerator:
+    - "The ML accelerator shall achieve {throughput} TOPS under {precision} precision"
+    - "Power consumption shall not exceed {power} watts at {utilization}% utilization"
+    - "The design shall support {ops} different operation types"
+
+communication_systems:
+  physical_layer:
+    - "The system shall achieve {ber} bit error rate at {snr} dB SNR"
+    - "Modulation scheme shall adapt between {schemes} based on channel conditions"
+    - "Signal detection shall work at {sensitivity} dBm minimum received power"
+  protocol:
+    - "The protocol shall handle {connections} simultaneous connections"
+    - "Packet loss shall not exceed {loss_rate}% under {load} load"
+    - "Error recovery shall complete within {time} milliseconds"
+  network:
+    - "Network throughput shall exceed {throughput} Mbps under {conditions}"
+    - "Routing shall optimize for {metric} using {algorithm} algorithm"
+    - "Quality of Service shall guarantee {latency} ms maximum delay for {class} traffic"
+
+embedded_ml:
+  model_optimization:
+    - "The compressed model shall maintain {accuracy}% of baseline accuracy"
+    - "Model size shall not exceed {size} MB after quantization"
+    - "Inference shall complete within {time} ms on {platform}"
+  implementation:
+    - "Memory usage shall not exceed {memory} MB during inference"
+    - "Power consumption shall be below {power} mW at {duty_cycle}% duty cycle"
+    - "The system shall support {batch_size} batch size processing"
+  performance:
+    - "Throughput shall exceed {throughput} inferences per second"
+    - "Latency variation shall be within {jitter} ms"
+    - "The implementation shall achieve {efficiency}% hardware utilization"
+
+storage_systems:
+  reliability:
+    - "The storage system shall maintain {durability} data durability"
+    - "Mean time between failures shall exceed {mtbf} hours"
+    - "Data recovery shall complete within {time} hours for {failure_type}"
+  performance:
+    - "The system shall deliver {iops} IOPS under {workload}"
+    - "Latency shall not exceed {latency} ms for {percentile}th percentile"
+    - "Throughput shall exceed {throughput} MB/s for {access_pattern}"
+  security:
+    - "Data at rest shall be encrypted using {algorithm} encryption"
+    - "Access control shall implement {method} authentication"
+    - "Security scanning shall complete within {time} hours"
+
+cyber_physical_systems:
+  real_time:
+    - "Task scheduling shall guarantee {deadline} ms deadline for {priority} tasks"
+    - "Context switching overhead shall not exceed {time} microseconds"
+    - "The system shall handle {events} events per second"
+  safety:
+    - "Safety functions shall achieve {sil} safety integrity level"
+    - "Fault detection shall complete within {time} milliseconds"
+    - "The system shall maintain safe state during {failure_mode}"
+  power:
+    - "Power consumption shall not exceed {power} watts in {mode} mode"
+    - "Energy harvesting shall provide {energy} mWh per {period}"
+    - "Battery life shall exceed {duration} hours under {usage_pattern}"

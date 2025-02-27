@@ -1,0 +1,90 @@
+---
+# Complex Systems Requirement Templates
+
+smart_city:
+  infrastructure:
+    - "The {system_type} infrastructure shall support a population of {number} with {capacity}% reserve"
+    - "Transportation network shall handle {volume} peak hour movements with {delay} maximum delay"
+    - "Utility systems shall maintain {reliability}% uptime with {redundancy} redundancy"
+  environmental:
+    - "Air quality index shall remain below {threshold} for {period}% of time"
+    - "Green spaces shall cover minimum {percentage}% of urban area"
+    - "Waste management shall achieve {recycling_rate}% recycling rate"
+  energy:
+    - "Smart grid shall integrate {percentage}% renewable energy sources"
+    - "Energy management shall reduce peak demand by {reduction}%"
+    - "Building systems shall achieve {efficiency} energy efficiency rating"
+  services:
+    - "Emergency response time shall not exceed {minutes} minutes for {priority} calls"
+    - "Healthcare facilities shall be within {distance} km of {percentage}% population"
+    - "Public services shall achieve {satisfaction}% citizen satisfaction"
+  economic:
+    - "Business districts shall support {density} businesses per square kilometer"
+    - "Innovation hubs shall generate {startups} new ventures annually"
+    - "Employment zones shall maintain {rate}% occupancy rate"
+
+airline_manufacturing:
+  engineering:
+    - "Aircraft design shall achieve {efficiency}% fuel efficiency improvement"
+    - "Structural components shall maintain integrity under {load} loading conditions"
+    - "Systems integration shall complete validation within {duration} months"
+  production:
+    - "Manufacturing line shall achieve {rate} units per month output"
+    - "Quality control shall maintain defect rate below {threshold}%"
+    - "Assembly operations shall achieve {efficiency}% labor efficiency"
+  project_management:
+    - "Program schedule shall maintain {buffer}% schedule reserve"
+    - "Risk management shall identify {percentage}% of risks before impact"
+    - "Resource utilization shall exceed {target}% efficiency"
+  certification:
+    - "Certification testing shall complete within {duration} months"
+    - "Documentation shall achieve {compliance}% regulatory compliance"
+    - "Safety systems shall demonstrate {reliability}% reliability"
+  financial:
+    - "Development costs shall not exceed {budget} million dollars"
+    - "Production costs shall achieve {reduction}% reduction target"
+    - "Program shall achieve {roi}% return on investment"
+
+smart_grid:
+  reliability:
+    - "Grid shall maintain {availability}% availability over {period}"
+    - "Power quality shall meet {standard} standards {percentage}% of time"
+    - "Fault detection shall occur within {time} milliseconds"
+  efficiency:
+    - "Transmission losses shall not exceed {percentage}% under peak load"
+    - "Demand response shall reduce peak load by {reduction}%"
+    - "Storage systems shall achieve {efficiency}% round-trip efficiency"
+  market:
+    - "Trading platform shall handle {transactions} transactions per second"
+    - "Price settlement shall complete within {time} minutes"
+    - "Market liquidity shall exceed {threshold} at all times"
+  security:
+    - "Cybersecurity shall prevent {percentage}% of identified threats"
+    - "Authentication shall complete within {time} milliseconds"
+    - "Data encryption shall meet {standard} standards"
+  integration:
+    - "System shall integrate {sources} different generation sources"
+    - "Communication network shall maintain {latency} ms maximum latency"
+    - "Control systems shall process {events} events per second"
+
+systems_thinking:
+  modeling:
+    - "System model shall represent {components} interacting components"
+    - "Behavioral analysis shall capture {states} system states"
+    - "Interface definitions shall include {parameters} parameters"
+  analysis:
+    - "Performance analysis shall evaluate {metrics} system metrics"
+    - "Risk assessment shall identify {risks} potential risks"
+    - "Trade studies shall compare {alternatives} alternatives"
+  optimization:
+    - "System optimization shall consider {objectives} objectives"
+    - "Resource allocation shall optimize across {resources} resources"
+    - "Performance improvement shall achieve {target}% enhancement"
+  integration:
+    - "Subsystem integration shall maintain {coupling} coupling level"
+    - "Communication protocols shall support {bandwidth} data flow"
+    - "Control systems shall manage {variables} system variables"
+  validation:
+    - "System validation shall cover {scenarios} operational scenarios"
+    - "Model accuracy shall be within {tolerance}% of actual behavior"
+    - "Testing shall achieve {coverage}% requirements coverage"

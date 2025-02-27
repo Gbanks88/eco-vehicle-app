@@ -1,0 +1,95 @@
+name: Example System
+packages:
+- elements:
+  - attributes:
+    - default_value: null
+      is_final: false
+      is_static: false
+      name: id
+      type: String
+      visibility: private
+    - default_value: null
+      is_final: false
+      is_static: false
+      name: model
+      type: String
+      visibility: protected
+    id: 06b0751f-3eb2-4dd5-9ff3-f9e99f20032f
+    is_abstract: true
+    is_interface: false
+    name: Vehicle
+    operations:
+    - is_abstract: true
+      is_static: false
+      name: start
+      parameters: []
+      return_type: void
+      visibility: public
+    properties: {}
+    stereotypes: []
+    type: class
+  - attributes:
+    - default_value: null
+      is_final: false
+      is_static: false
+      name: engine
+      type: Engine
+      visibility: private
+    id: 26ecee24-4f2a-4feb-9060-89aa3573c3a2
+    is_abstract: false
+    is_interface: false
+    name: Car
+    operations:
+    - is_abstract: false
+      is_static: false
+      name: start
+      parameters: []
+      return_type: void
+      visibility: public
+    properties: {}
+    stereotypes: []
+    type: class
+  - attributes:
+    - default_value: null
+      is_final: false
+      is_static: false
+      name: power
+      type: int
+      visibility: private
+    id: 37fb1ca3-13aa-424b-9d69-e167f9a254ad
+    is_abstract: false
+    is_interface: false
+    name: Engine
+    operations:
+    - is_abstract: false
+      is_static: false
+      name: getPower
+      parameters: []
+      return_type: int
+      visibility: public
+    properties: {}
+    stereotypes: []
+    type: class
+  id: fda8fed5-1d3e-40a7-b82e-963dfe2cf1be
+  name: com.example
+  properties: {}
+  stereotypes: []
+relationships:
+- id: 293fc795-6c92-4925-9381-497c4820c28d
+  name: Car_Vehicle_Inheritance
+  properties: {}
+  relationship_type: generalization
+  source: 26ecee24-4f2a-4feb-9060-89aa3573c3a2
+  stereotypes: []
+  target: 06b0751f-3eb2-4dd5-9ff3-f9e99f20032f
+- id: dfacd994-d2cb-4372-8247-bda36cdc4334
+  multiplicity_source: '1'
+  multiplicity_target: '1'
+  name: Car_Engine_Association
+  navigability_source: true
+  navigability_target: true
+  properties: {}
+  relationship_type: association
+  source: 26ecee24-4f2a-4feb-9060-89aa3573c3a2
+  stereotypes: []
+  target: 37fb1ca3-13aa-424b-9d69-e167f9a254ad

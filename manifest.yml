@@ -1,0 +1,17 @@
+applications:
+- name: eco-vehicle-app
+  memory: 512M
+  instances: 2
+  buildpack: python_buildpack
+  command: python web/app.py
+  routes:
+    - route: eco-vehicle.cg4f.online
+  env:
+    FLASK_ENV: production
+    PYTHON_VERSION: 3.9
+  services:
+    - eco-vehicle-redis
+    - eco-vehicle-cloudant
+  health-check-type: http
+  health-check-http-endpoint: /health
+  timeout: 180

@@ -1,0 +1,11 @@
+{
+  "default_state": "STANDBY",
+  "voltage_range": [
+    42.0,
+    52.0
+  ],
+  "current_range": [
+    0,
+    100
+  ]
+}

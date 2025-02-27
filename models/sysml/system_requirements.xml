@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://schema.omg.org/spec/SysML/1.4/sysml.xsd">
+    <requirements>
+        <!-- Functional Requirements -->
+        <requirement id="REQ-1" name="Real-time Monitoring">
+            <text>System shall monitor vehicle metrics in real-time with maximum latency of 100ms</text>
+            <derived>
+                <requirement id="REQ-1.1" name="CPU Monitoring">
+                    <text>Monitor CPU usage with 1% accuracy</text>
+                </requirement>
+                <requirement id="REQ-1.2" name="Memory Monitoring">
+                    <text>Monitor memory usage with 1MB resolution</text>
+                </requirement>
+                <requirement id="REQ-1.3" name="Network Monitoring">
+                    <text>Monitor network latency with 1ms accuracy</text>
+                </requirement>
+                <requirement id="REQ-1.4" name="Battery Monitoring">
+                    <text>Monitor battery levels with 0.1% accuracy</text>
+                </requirement>
+            </derived>
+        </requirement>
+
+        <!-- Environmental Requirements -->
+        <requirement id="REQ-2" name="Environmental Impact">
+            <text>System shall track and analyze environmental impact metrics</text>
+            <derived>
+                <requirement id="REQ-2.1" name="Energy Efficiency">
+                    <text>Monitor power consumption and efficiency</text>
+                </requirement>
+                <requirement id="REQ-2.2" name="Carbon Footprint">
+                    <text>Calculate carbon footprint based on usage patterns</text>
+                </requirement>
+                <requirement id="REQ-2.3" name="Resource Usage">
+                    <text>Track resource utilization and optimization opportunities</text>
+                </requirement>
+            </derived>
+        </requirement>
+
+        <!-- Performance Requirements -->
+        <requirement id="REQ-3" name="System Performance">
+            <text>System shall maintain high performance and reliability</text>
+            <derived>
+                <requirement id="REQ-3.1" name="Response Time">
+                    <text>UI updates within 50ms of data change</text>
+                </requirement>
+                <requirement id="REQ-3.2" name="Data Accuracy">
+                    <text>99.9% accuracy in metric reporting</text>
+                </requirement>
+                <requirement id="REQ-3.3" name="Resource Usage">
+                    <text>Monitor application must use less than 5% CPU and 100MB RAM</text>
+                </requirement>
+            </derived>
+        </requirement>
+
+        <!-- Analysis Requirements -->
+        <requirement id="REQ-4" name="Data Analysis">
+            <text>System shall provide comprehensive data analysis capabilities</text>
+            <derived>
+                <requirement id="REQ-4.1" name="Trend Analysis">
+                    <text>Identify and display performance trends</text>
+                </requirement>
+                <requirement id="REQ-4.2" name="Anomaly Detection">
+                    <text>Detect and alert on system anomalies</text>
+                </requirement>
+                <requirement id="REQ-4.3" name="Predictive Maintenance">
+                    <text>Predict maintenance needs based on metrics</text>
+                </requirement>
+            </derived>
+        </requirement>
+
+        <!-- Interface Requirements -->
+        <requirement id="REQ-5" name="User Interface">
+            <text>System shall provide intuitive and responsive user interface</text>
+            <derived>
+                <requirement id="REQ-5.1" name="Dashboard View">
+                    <text>Real-time dashboard with key metrics</text>
+                </requirement>
+                <requirement id="REQ-5.2" name="Alert System">
+                    <text>Visual and configurable alert system</text>
+                </requirement>
+                <requirement id="REQ-5.3" name="Data Export">
+                    <text>Export capabilities for metrics and analysis</text>
+                </requirement>
+            </derived>
+        </requirement>
+    </requirements>
+</model>

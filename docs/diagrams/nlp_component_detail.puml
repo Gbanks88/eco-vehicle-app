@@ -1,0 +1,88 @@
+@startuml NLP Component Detail
+
+skinparam component {
+    BackgroundColor LightGreen
+    BorderColor Green
+    ArrowColor Green
+}
+
+package "NLP Processing Pipeline" {
+    [Text Preprocessor] as preproc
+    [Tokenizer] as token
+    [Entity Recognizer] as ner
+    [Dependency Parser] as dep
+    [Semantic Analyzer] as sem
+    [Metric Extractor] as metric
+    [Pattern Matcher] as pattern
+    
+    interface "Raw Text" as raw
+    interface "Processed Text" as processed
+    interface "Entities" as entities
+    interface "Dependencies" as deps
+    interface "Metrics" as metrics
+    interface "Patterns" as patterns
+    
+    database "NLP Models" {
+        [Language Model]
+        [Entity Model]
+        [Pattern Database]
+    }
+}
+
+cloud "External NLP Services" {
+    [Spacy Service]
+    [NLTK Service]
+    [Custom Models]
+}
+
+' Flow
+raw --> preproc
+preproc --> token
+token --> ner
+ner --> dep
+dep --> sem
+sem --> metric
+metric --> pattern
+
+' Interfaces
+preproc ..> processed
+ner ..> entities
+dep ..> deps
+metric ..> metrics
+pattern ..> patterns
+
+' Model Usage
+[Language Model] --> token
+[Entity Model] --> ner
+[Pattern Database] --> pattern
+
+' External Services
+[Spacy Service] --> ner
+[NLTK Service] --> token
+[Custom Models] --> sem
+
+note right of preproc
+  - Text cleaning
+  - Normalization
+  - Special character handling
+end note
+
+note right of ner
+  - Organization detection
+  - Technical term identification
+  - Metric recognition
+end note
+
+note right of sem
+  - Context understanding
+  - Requirement classification
+  - Priority detection
+end note
+
+note right of metric
+  - Performance metrics
+  - Resource requirements
+  - Time constraints
+end note
+
+@enduml
