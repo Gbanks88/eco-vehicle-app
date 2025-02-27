@@ -7,17 +7,17 @@ from dotenv import load_dotenv
 
 def get_forge_token():
     """Get Forge API access token"""
-    client_id = os.environ.get('FORGE_CLIENT_ID')
-    client_secret = os.environ.get('FORGE_CLIENT_SECRET')
+    client_id = os.environ.get('AUTODESK_CLIENT_ID') or os.environ.get('FORGE_CLIENT_ID')
+    client_secret = os.environ.get('AUTODESK_CLIENT_SECRET') or os.environ.get('FORGE_CLIENT_SECRET')
     
     data = {
         'grant_type': 'client_credentials',
-        'scope': 'data:read data:write data:create bucket:read bucket:create'
+        'scope': 'data:read data:write data:create bucket:create bucket:read account:read account:write'
     }
     
     try:
         response = requests.post(
-            'https://developer.api.autodesk.com/authentication/v1/authenticate',
+            'https://developer.api.autodesk.com/authentication/v2/token',
             data=data,
             auth=(client_id, client_secret)
         )
@@ -36,12 +36,13 @@ def create_bucket(token, bucket_key):
     
     data = {
         'bucketKey': bucket_key,
-        'policyKey': 'transient'  # Delete after 24 hours
+        'policyKey': 'persistent',
+        'region': 'us'
     }
     
     try:
         response = requests.post(
-            'https://developer.api.autodesk.com/oss/v2/buckets',
+            'https://developer.api.autodesk.com/aps/v2/data/buckets',
             headers=headers,
             json=data
         )
@@ -49,8 +50,12 @@ def create_bucket(token, bucket_key):
             return True
         response.raise_for_status()
         return True
-    except Exception as e:
-        print(f"Error creating bucket: {str(e)}")
+    except requests.exceptions.RequestException as e:
+        if hasattr(e.response, 'json'):
+            error_data = e.response.json()
+            print(f"Error creating bucket: {error_data}")
+        else:
+            print(f"Error creating bucket: {str(e)}")
         return False
 
 def upload_file(token, bucket_key, file_path):
@@ -65,14 +70,18 @@ def upload_file(token, bucket_key, file_path):
     try:
         with open(file_path, 'rb') as f:
             response = requests.put(
-                f'https://developer.api.autodesk.com/oss/v2/buckets/{bucket_key}/objects/{file_name}',
+                f'https://developer.api.autodesk.com/aps/v2/data/buckets/{bucket_key}/objects/{file_name}',
                 headers=headers,
                 data=f
             )
         response.raise_for_status()
         return response.json()['objectId']
-    except Exception as e:
-        print(f"Error uploading file: {str(e)}")
+    except requests.exceptions.RequestException as e:
+        if hasattr(e.response, 'json'):
+            error_data = e.response.json()
+            print(f"Error uploading file: {error_data}")
+        else:
+            print(f"Error uploading file: {str(e)}")
         return None
 
 def translate_file(token, object_id):

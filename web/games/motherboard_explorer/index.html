@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motherboard Explorer - Educational Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tweenjs@1.0.2/dist/tween.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="multiplayer-panel" class="side-panel">
+            <h3>Online Players</h3>
+            <div id="players-list"></div>
+            <div id="chat-container">
+                <div id="chat-box"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type a message...">
+                    <button onclick="game.sendChatMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        <div id="hud">
+            <div id="score">Score: <span id="score-value">0</span></div>
+            <div id="level">Level: <span id="level-value">1</span></div>
+            <div id="timer">Time: <span id="timer-value">60</span>s</div>
+        </div>
+        <div id="info-panel">
+            <h2>Component Info</h2>
+            <p id="component-description"></p>
+        </div>
+        <canvas id="game-canvas"></canvas>
+        <div id="quiz-panel" class="hidden">
+            <h3 id="quiz-question"></h3>
+            <div id="quiz-options"></div>
+        </div>
+    </div>
+    <div id="tutorial" class="overlay">
+        <div class="tutorial-content">
+            <h2>Welcome to Motherboard Explorer!</h2>
+            <p>Learn about computer motherboards in this interactive 3D game:</p>
+            <ul>
+                <li>Click on components to learn about them</li>
+                <li>Answer questions to earn points</li>
+                <li>Complete challenges to unlock new levels</li>
+                <li>Try to identify all motherboard components</li>
+            </ul>
+            <button id="start-game">Start Game</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -9,16 +9,16 @@ services:
         value: 3.9.0
       - key: FLASK_ENV
         value: production
-      - key: FORGE_CLIENT_ID
+      - key: AUTODESK_CLIENT_ID
         value: Gb5FqoCZj4jMGFGqQUKe6r8DEz5cdq96stVVeX5hnblLmfs9
-      - key: FORGE_CLIENT_SECRET
-        value: aRctTxqAxTYYJqYv13QZzEGnAyJ6CyYKxnz7mMouCm2GlmmiLrRNcWvEoXBDhiKm
+      - key: AUTODESK_CLIENT_SECRET
+        value: RTdFbxewamXc1JJYSaieft6gXAP5URrfuAEZO4LMuSIHY4oq3ltY5qd5p4PEm3Hd
       - key: FORGE_CALLBACK_URL
         value: https://eco-vehicle-app.onrender.com/api/forge/callback
       - key: MODEL_DERIVATIVE_API_URL
         value: https://developer.api.autodesk.com/modelderivative/v2/
       - key: FORGE_BUCKET_KEY
-        value: eco-vehicle-models
+        value: ecovehicleapp20250227
       - key: FLASK_SECRET_KEY
         value: eco_vehicle_secret_key_2025
       - key: REDIS_URL

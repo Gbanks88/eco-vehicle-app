@@ -7,6 +7,7 @@ attrs==25.1.0
 bidict==0.23.1
 black==25.1.0
 blinker==1.9.0
+cachelib==0.13.0
 certifi==2025.1.31
 cffi==1.17.1
 charset-normalizer==3.4.1
@@ -19,17 +20,19 @@ cryptography==44.0.1
 cycler==0.12.1
 dill==0.3.9
 dnspython==2.7.0
-# Editable install with no version control (eco-vehicle-modeling==0.1.0)
--e /Volumes/Learn_Space/eco_vehicle_project
+-e git+https://github.com/yourusername/eco-vehicle-app.git@70ca596e5ce4852de4976d4812c00ee6d5c5489b#egg=eco_vehicle_modeling
 elementpath==4.7.0
+eventlet==0.39.0
 execnet==2.1.1
 ezdxf==1.3.5
 Flask==3.1.0
+Flask-Session==0.8.0
 Flask-SocketIO==5.5.1
 fonttools==4.56.0
 freezegun==1.2.2
 frozenlist==1.5.0
 graphviz==0.20.3
+greenlet==3.1.1
 gunicorn==23.0.0
 h11==0.14.0
 httplib2==0.22.0
@@ -59,6 +62,7 @@ MarkupSafe==3.0.2
 matplotlib==3.10.0
 mccabe==0.7.0
 mpmath==1.3.0
+msgspec==0.19.0
 multidict==6.1.0
 mypy==1.15.0
 mypy-extensions==1.0.0
