@@ -3,10 +3,14 @@ from datetime import datetime
 import os
 import redis
 from flask_socketio import SocketIO
+from api.forge import forge_api
 
 # Initialize Flask app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', os.urandom(24))
+
+# Register blueprints
+app.register_blueprint(forge_api)
 
 # Configure Redis
 redis_url = os.getenv('REDIS_URL')

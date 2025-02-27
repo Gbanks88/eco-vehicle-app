@@ -69,7 +69,18 @@
             Autodesk.Viewing.Initializer(options, () => {
                 viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'));
                 viewer.start();
-                loadDocument('your-model-urn');
+                
+                // Get the model URN from the server
+                fetch('/api/forge/urn/default')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.urn) {
+                            loadDocument(data.urn);
+                        } else {
+                            console.error('No model URN available');
+                        }
+                    })
+                    .catch(error => console.error('Error getting model URN:', error));
             });
         }
         
