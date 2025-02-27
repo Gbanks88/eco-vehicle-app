@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Vehicle - 3D Model Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css">
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js"></script>
+    <style>
+        .viewer-container {
+            width: 100%;
+            height: calc(100vh - 56px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #forgeViewer {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .controls-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Eco Vehicle</a>
+        </div>
+    </nav>
+
+    <div class="viewer-container">
+        <div id="forgeViewer"></div>
+        <div class="controls-panel">
+            <h5>View Controls</h5>
+            <div class="btn-group mb-3" role="group">
+                <button onclick="setView('front')" class="btn btn-outline-primary">Front</button>
+                <button onclick="setView('back')" class="btn btn-outline-primary">Back</button>
+                <button onclick="setView('top')" class="btn btn-outline-primary">Top</button>
+            </div>
+            <div class="d-grid gap-2">
+                <button onclick="toggleWireframe()" class="btn btn-outline-secondary">Toggle Wireframe</button>
+                <button onclick="toggleExploded()" class="btn btn-outline-secondary">Toggle Exploded</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let viewer;
+        let viewerApp;
+        
+        function initializeViewer() {
+            const options = {
+                env: 'AutodeskProduction',
+                api: 'derivativeV2',
+                getAccessToken: getForgeToken
+            };
+            
+            Autodesk.Viewing.Initializer(options, () => {
+                viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'));
+                viewer.start();
+                loadDocument('your-model-urn');
+            });
+        }
+        
+        function getForgeToken(callback) {
+            fetch('/api/forge/oauth/token')
+                .then(response => response.json())
+                .then(data => callback(data.access_token, data.expires_in))
+                .catch(error => console.error('Error getting Forge token:', error));
+        }
+        
+        function loadDocument(urn) {
+            const documentId = 'urn:' + urn;
+            Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
+        }
+        
+        function onDocumentLoadSuccess(doc) {
+            const viewables = doc.getRoot().getDefaultGeometry();
+            viewer.loadDocumentNode(doc, viewables).then(function(result) {
+                console.log('Model loaded successfully');
+            });
+        }
+        
+        function onDocumentLoadFailure(error) {
+            console.error('Error loading document:', error);
+        }
+        
+        function setView(type) {
+            if (!viewer) return;
+            
+            switch(type) {
+                case 'front':
+                    viewer.setViewFromFile();
+                    break;
+                case 'back':
+                    viewer.setViewFromFile(1);
+                    break;
+                case 'top':
+                    viewer.setViewFromFile(2);
+                    break;
+            }
+        }
+        
+        let wireframeMode = false;
+        function toggleWireframe() {
+            if (!viewer) return;
+            wireframeMode = !wireframeMode;
+            viewer.impl.toggleWireframe(wireframeMode);
+        }
+        
+        let explodedMode = false;
+        function toggleExploded() {
+            if (!viewer) return;
+            explodedMode = !explodedMode;
+            const scale = explodedMode ? 1 : 0;
+            viewer.explode(scale);
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeViewer);
+    </script>
+</body>
+</html>
