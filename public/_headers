@@ -8,8 +8,8 @@
   X-XSS-Protection: 1; mode=block
   Cache-Control: public, max-age=3600
 
-# Tech site specific
-/tech/*
+# Eco-Vehicle site specific
+/ev/*
   Cache-Control: public, max-age=3600
   Access-Control-Allow-Origin: https://cg4l.online
 
@@ -17,7 +17,19 @@
   Cache-Control: public, max-age=3600
   Access-Control-Allow-Origin: https://cg4l.online
 
-/echo/*
+/tech/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: https://cg4l.online
+
+/charging/*
+  Cache-Control: no-cache
+  Access-Control-Allow-Origin: https://cg4l.online
+
+/parts/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: https://cg4l.online
+
+/service/*
   Cache-Control: no-cache
   Access-Control-Allow-Origin: https://cg4l.online
 

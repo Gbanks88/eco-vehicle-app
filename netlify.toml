@@ -2,7 +2,7 @@
   command = "npm run build"
   publish = ".next"
 
-# CG4L Tech Site Redirects
+# CG4L Eco-Vehicle Site Redirects
 [[redirects]]
   from = "https://www.cg4l.online/*"
   to = "https://cg4l.online/:splat"
@@ -10,8 +10,8 @@
   force = true
 
 [[redirects]]
-  from = "https://tech.cg4l.online/*"
-  to = "/tech/:splat"
+  from = "https://ev.cg4l.online/*"
+  to = "/ev/:splat"
   status = 200
 
 [[redirects]]
@@ -20,18 +20,23 @@
   status = 200
 
 [[redirects]]
-  from = "https://echo.cg4l.online/*"
-  to = "/echo/:splat"
+  from = "https://tech.cg4l.online/*"
+  to = "/tech/:splat"
   status = 200
 
 [[redirects]]
-  from = "https://demo.cg4l.online/*"
-  to = "/demo/:splat"
+  from = "https://charging.cg4l.online/*"
+  to = "/charging/:splat"
   status = 200
 
 [[redirects]]
-  from = "https://lab.cg4l.online/*"
-  to = "/lab/:splat"
+  from = "https://parts.cg4l.online/*"
+  to = "/parts/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://service.cg4l.online/*"
+  to = "/service/:splat"
   status = 200
 
 # JohnAllens Fashion Site Redirects
