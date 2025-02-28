@@ -2,9 +2,45 @@
   command = "npm run build"
   publish = ".next"
 
+# Domain redirects
+[[redirects]]
+  from = "https://www.cg4l.online/*"
+  to = "https://cg4l.online/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.johnallens.com/*"
+  to = "https://johnallens.com/:splat"
+  status = 301
+  force = true
+
+# API subdomain handling
+[[redirects]]
+  from = "https://api.cg4l.online/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://api.johnallens.com/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# CDN subdomain handling
+[[redirects]]
+  from = "https://cdn.cg4l.online/*"
+  to = "/cdn-content/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://cdn.johnallens.com/*"
+  to = "/cdn-content/:splat"
+  status = 200
+
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
   NODE_VERSION = "18"
+  NODE_ENV = "production"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -31,13 +67,6 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:;"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-
-[build.environment]
-  NEXT_TELEMETRY_DISABLED = "1"
-  NODE_ENV = "production"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
 
 [[plugins]]
   package = "netlify-plugin-submit-sitemap"
