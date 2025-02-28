@@ -3,6 +3,39 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app *.cg4l.online *.johnallens.com; img-src 'self' data: https: *.cloudinary.com; media-src 'self' https:; connect-src 'self' https:; frame-src 'self' https://sketchfab.com https://youtube.com;
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-XSS-Protection: 1; mode=block
+  Cache-Control: public, max-age=3600
+
+# Tech site specific
+/tech/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: https://cg4l.online
+
+/3d/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: https://cg4l.online
+
+/echo/*
+  Cache-Control: no-cache
+  Access-Control-Allow-Origin: https://cg4l.online
+
+# Fashion site specific
+/mens/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: https://johnallens.com
+
+/womens/*
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: https://johnallens.com
+
+/shop/*
+  Cache-Control: no-cache
+  Access-Control-Allow-Origin: https://johnallens.com
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
   Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app *.cg4l.online *.johnallens.com; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:;
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-XSS-Protection: 1; mode=block

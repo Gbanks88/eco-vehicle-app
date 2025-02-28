@@ -2,7 +2,7 @@
   command = "npm run build"
   publish = ".next"
 
-# Domain redirects
+# CG4L Tech Site Redirects
 [[redirects]]
   from = "https://www.cg4l.online/*"
   to = "https://cg4l.online/:splat"
@@ -10,10 +10,71 @@
   force = true
 
 [[redirects]]
+  from = "https://tech.cg4l.online/*"
+  to = "/tech/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://3d.cg4l.online/*"
+  to = "/3d/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://echo.cg4l.online/*"
+  to = "/echo/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://demo.cg4l.online/*"
+  to = "/demo/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://lab.cg4l.online/*"
+  to = "/lab/:splat"
+  status = 200
+
+# JohnAllens Fashion Site Redirects
+[[redirects]]
   from = "https://www.johnallens.com/*"
   to = "https://johnallens.com/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "https://mens.johnallens.com/*"
+  to = "/mens/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://womens.johnallens.com/*"
+  to = "/womens/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://boutique.johnallens.com/*"
+  to = "/boutique/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://sale.johnallens.com/*"
+  to = "/sale/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://shop.johnallens.com/*"
+  to = "/shop/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://cart.johnallens.com/*"
+  to = "/cart/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://checkout.johnallens.com/*"
+  to = "/checkout/:splat"
+  status = 200
 
 # API subdomain handling
 [[redirects]]
