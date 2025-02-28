@@ -1,0 +1,58 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NODE_ENV = "production"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self' https://johnallens.com https://www.amazon.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.amazon.com https://johnallens.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://www.amazon.com https://johnallens.com; connect-src 'self' https://www.amazon.com https://johnallens.com; frame-src https://www.amazon.com https://johnallens.com"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+[[redirects]]
+  from = "http://eco-vehicle.com/*"
+  to = "https://eco-vehicle.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.eco-vehicle.com/*"
+  to = "https://eco-vehicle.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.eco-vehicle.com/*"
+  to = "https://eco-vehicle.com/:splat"
+  status = 301
+  force = true

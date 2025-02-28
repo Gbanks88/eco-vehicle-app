@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Vehicle Learning Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .game-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-tabs {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Eco Vehicle Learning Hub</h1>
+        
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="games-tab" data-bs-toggle="tab" data-bs-target="#games" type="button" role="tab">Educational Games</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="model-tab" data-bs-toggle="tab" data-bs-target="#model" type="button" role="tab">3D Model</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sysml-tab" data-bs-toggle="tab" data-bs-target="#sysml" type="button" role="tab">System Model</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="myTabContent">
+            <!-- Games Tab -->
+            <div class="tab-pane fade show active" id="games" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card game-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Motherboard Explorer</h5>
+                                <p class="card-text">Learn about computer components and their recycling impact.</p>
+                                <a href="/games/motherboard_explorer" class="btn btn-primary">Play Game</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card game-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Recycling Challenge</h5>
+                                <p class="card-text">Test your knowledge about eco-friendly vehicle components.</p>
+                                <a href="/games/recycling_challenge" class="btn btn-primary">Play Game</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3D Model Tab -->
+            <div class="tab-pane fade" id="model" role="tabpanel">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="/viewer" style="width: 100%; height: 600px; border: none;"></iframe>
+                </div>
+            </div>
+            
+            <!-- SysML Tab -->
+            <div class="tab-pane fade" id="sysml" role="tabpanel">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="/sysml" style="width: 100%; height: 800px; border: none;"></iframe>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Model-Based Systems Engineering (MBSE)</h5>
+                                <p>Explore the eco-vehicle system architecture through interactive SysML diagrams:</p>
+                                <ul>
+                                    <li><strong>Block Definition Diagram (BDD):</strong> Shows the structural composition of the system</li>
+                                    <li><strong>Subsystem Analysis:</strong> Details the relationships between different subsystems</li>
+                                    <li><strong>System Requirements:</strong> Maps the technical and functional requirements</li>
+                                </ul>
+                                <p>Click on any element in the diagrams above to view detailed properties and documentation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // Load and render SysML diagrams
+        async function loadSysMLDiagrams() {
+            try {
+                const bdd = await fetch('/models/sysml/block_definition_diagram.xml');
+                const subsystem = await fetch('/models/sysml/subsystem_analysis.xml');
+                const requirements = await fetch('/models/sysml/system_requirements.xml');
+                
+                // Render diagrams using D3.js
+                // Add visualization code here
+            } catch (error) {
+                console.error('Error loading SysML diagrams:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSysMLDiagrams);
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self' https://johnallens.com https://www.amazon.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.amazon.com https://johnallens.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://www.amazon.com https://johnallens.com; connect-src 'self' https://www.amazon.com https://johnallens.com; frame-src https://www.amazon.com https://johnallens.com
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

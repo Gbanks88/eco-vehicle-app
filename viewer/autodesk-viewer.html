@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Vehicle - Autodesk Viewer</title>
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css">
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #viewer-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+        #toolbar {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 4px;
+            background: #0696d7;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0570a3;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="viewer-container">
+        <div id="toolbar">
+            <button onclick="loadModel()">Load Model</button>
+            <button onclick="viewer.showAll()">Show All</button>
+            <button onclick="viewer.isolate()">Reset Isolation</button>
+            <button onclick="toggleMeasure()">Measure</button>
+            <button onclick="toggleExplode()">Explode</button>
+        </div>
+        <div id="loading">Loading model...</div>
+        <div id="forgeViewer"></div>
+    </div>
+
+    <script>
+        let viewer;
+        let measureExtension;
+        let explodeExtension;
+        
+        async function initializeViewer() {
+            try {
+                const options = {
+                    env: 'AutodeskProduction',
+                    api: 'streamingV2',
+                    getAccessToken: getForgeToken
+                };
+
+                const viewerApp = new Autodesk.Viewing.ViewingApplication('forgeViewer');
+                viewer = viewerApp.registerViewer(viewerApp.k3D, new Autodesk.Viewing.Private.GuiViewer3D(document.getElementById('forgeViewer')));
+                
+                await viewer.start();
+                viewer.setTheme('light-theme');
+                
+                // Load extensions
+                viewer.loadExtension('Autodesk.Measure');
+                viewer.loadExtension('Autodesk.Explode');
+                
+                measureExtension = await viewer.getExtension('Autodesk.Measure');
+                explodeExtension = await viewer.getExtension('Autodesk.Explode');
+            } catch (error) {
+                console.error('Viewer initialization error:', error);
+            }
+        }
+
+        async function getForgeToken(callback) {
+            try {
+                const response = await fetch('/api/forge/token');
+                const json = await response.json();
+                callback(json.access_token, json.expires_in);
+            } catch (error) {
+                console.error('Token fetch error:', error);
+            }
+        }
+
+        async function loadModel() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                
+                const response = await fetch('/api/forge/models/latest');
+                const { urn } = await response.json();
+                
+                viewer.loadDocumentNode(urn).then(model => {
+                    document.getElementById('loading').style.display = 'none';
+                }).catch(error => {
+                    console.error('Model load error:', error);
+                    document.getElementById('loading').style.display = 'none';
+                });
+            } catch (error) {
+                console.error('Model fetch error:', error);
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function toggleMeasure() {
+            if (measureExtension.isActive()) {
+                measureExtension.deactivate();
+            } else {
+                measureExtension.activate();
+            }
+        }
+
+        function toggleExplode() {
+            if (explodeExtension.isActive()) {
+                explodeExtension.deactivate();
+            } else {
+                explodeExtension.activate();
+            }
+        }
+
+        // Initialize when the page loads
+        Autodesk.Viewing.Initializer({ env: 'AutodeskProduction', getAccessToken: getForgeToken }, () => {
+            initializeViewer();
+        });
+    </script>
+</body>
+</html>

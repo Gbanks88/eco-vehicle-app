@@ -1,0 +1,12 @@
+# Force HTTPS
+/* https://:splat 301!
+
+# Handle client-side routing
+/* /index.html 200
+
+# Redirect www to non-www
+https://www.eco-vehicle-static.netlify.app/* https://eco-vehicle-static.netlify.app/:splat 301!
+
+# Redirect old URLs to new ones (add more as needed)
+/home / 301
+/about-us /about 301

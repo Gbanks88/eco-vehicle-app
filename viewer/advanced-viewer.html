@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Eco Vehicle Viewer</title>
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css">
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        #viewer-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+        }
+        #sidebar {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        #viewer {
+            flex-grow: 1;
+        }
+        #toolbar {
+            position: absolute;
+            top: 20px;
+            left: 320px;
+            z-index: 100;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .tool-group {
+            margin-bottom: 20px;
+        }
+        .tool-group h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px 5px 0;
+            border: none;
+            border-radius: 4px;
+            background: #0696d7;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        button:hover {
+            background: #0570a3;
+        }
+        button.active {
+            background: #044e70;
+        }
+        #properties-panel {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .property-group {
+            margin-bottom: 15px;
+        }
+        .property-group h4 {
+            margin: 0 0 5px 0;
+            font-size: 13px;
+            color: #333;
+        }
+        .property-item {
+            font-size: 12px;
+            margin: 3px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="viewer-container">
+        <div id="sidebar">
+            <h2>Eco Vehicle Model</h2>
+            <div class="tool-group">
+                <h3>Model Type</h3>
+                <select id="modelType" onchange="switchModel(this.value)">
+                    <option value="inventor">Inventor Assembly</option>
+                    <option value="twinmotion">Twinmotion Scene</option>
+                </select>
+            </div>
+            <div class="tool-group">
+                <h3>Views</h3>
+                <button onclick="loadSavedView('front')">Front</button>
+                <button onclick="loadSavedView('side')">Side</button>
+                <button onclick="loadSavedView('top')">Top</button>
+                <button onclick="loadSavedView('isometric')">Isometric</button>
+            </div>
+            <div id="properties-panel">
+                <h3>Properties</h3>
+                <div id="properties-content">
+                    Select a component to view properties
+                </div>
+            </div>
+        </div>
+        
+        <div id="viewer"></div>
+        
+        <div id="toolbar">
+            <div class="tool-group">
+                <h3>Navigation</h3>
+                <button onclick="viewer.showAll()">Fit to View</button>
+                <button onclick="toggleOrbit()">Orbit</button>
+                <button onclick="togglePan()">Pan</button>
+                <button onclick="toggleZoom()">Zoom</button>
+            </div>
+            
+            <div class="tool-group">
+                <h3>Analysis</h3>
+                <button onclick="toggleMeasure()">Measure</button>
+                <button onclick="toggleSection()">Section</button>
+                <button onclick="toggleExplode()">Explode</button>
+            </div>
+            
+            <div class="tool-group">
+                <h3>Rendering</h3>
+                <button onclick="setViewMode('realistic')">Realistic</button>
+                <button onclick="setViewMode('wireframe')">Wireframe</button>
+                <button onclick="toggleShadows()">Shadows</button>
+                <button onclick="toggleAO()">Ambient Occlusion</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let viewer;
+        let extensions = {};
+        const viewerOptions = {
+            extensions: [
+                'Autodesk.Measure',
+                'Autodesk.Section',
+                'Autodesk.Explode',
+                'Autodesk.ViewCubeUi',
+                'Autodesk.BimWalk',
+                'Autodesk.Hypermodel',
+                'Autodesk.MaterialManagement'
+            ]
+        };
+
+        async function initializeViewer() {
+            try {
+                const options = {
+                    env: 'AutodeskProduction',
+                    api: 'streamingV2',
+                    getAccessToken: getForgeToken
+                };
+
+                Autodesk.Viewing.Initializer(options, async () => {
+                    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('viewer'), viewerOptions);
+                    viewer.start();
+                    viewer.setTheme('light-theme');
+                    
+                    // Load and initialize extensions
+                    for (const ext of viewerOptions.extensions) {
+                        extensions[ext] = await viewer.loadExtension(ext);
+                    }
+                    
+                    // Set up event listeners
+                    viewer.addEventListener(Autodesk.Viewing.SELECTION_CHANGED_EVENT, onSelectionChanged);
+                    viewer.addEventListener(Autodesk.Viewing.GEOMETRY_LOADED_EVENT, onGeometryLoaded);
+                    
+                    // Load initial model
+                    loadModel('inventor');
+                });
+            } catch (error) {
+                console.error('Viewer initialization error:', error);
+            }
+        }
+
+        async function getForgeToken(callback) {
+            try {
+                const response = await fetch('/api/forge/token');
+                const json = await response.json();
+                callback(json.access_token, json.expires_in);
+            } catch (error) {
+                console.error('Token fetch error:', error);
+            }
+        }
+
+        async function loadModel(type) {
+            try {
+                const response = await fetch(`/api/forge/models/${type}/latest`);
+                const { urn } = await response.json();
+                
+                viewer.loadDocumentNode(urn).then(model => {
+                    console.log('Model loaded successfully');
+                }).catch(error => {
+                    console.error('Model load error:', error);
+                });
+            } catch (error) {
+                console.error('Model fetch error:', error);
+            }
+        }
+
+        function switchModel(type) {
+            loadModel(type);
+        }
+
+        function loadSavedView(viewName) {
+            const views = {
+                front: { position: { x: 0, y: 0, z: 1 }, target: { x: 0, y: 0, z: 0 } },
+                side: { position: { x: 1, y: 0, z: 0 }, target: { x: 0, y: 0, z: 0 } },
+                top: { position: { x: 0, y: 1, z: 0 }, target: { x: 0, y: 0, z: 0 } },
+                isometric: { position: { x: 1, y: 1, z: 1 }, target: { x: 0, y: 0, z: 0 } }
+            };
+            
+            viewer.navigation.setPosition(views[viewName].position);
+            viewer.navigation.setTarget(views[viewName].target);
+        }
+
+        // Tool toggles
+        function toggleMeasure() {
+            const ext = extensions['Autodesk.Measure'];
+            ext.toggle();
+            updateButtonState('measure', ext.isActive());
+        }
+
+        function toggleSection() {
+            const ext = extensions['Autodesk.Section'];
+            ext.toggle();
+            updateButtonState('section', ext.isActive());
+        }
+
+        function toggleExplode() {
+            const ext = extensions['Autodesk.Explode'];
+            ext.toggle();
+            updateButtonState('explode', ext.isActive());
+        }
+
+        // Navigation modes
+        function toggleOrbit() {
+            viewer.setNavigationMode(Autodesk.Viewing.NAVIGATION_MODE.ORBIT);
+            updateNavigationButtons('orbit');
+        }
+
+        function togglePan() {
+            viewer.setNavigationMode(Autodesk.Viewing.NAVIGATION_MODE.PAN);
+            updateNavigationButtons('pan');
+        }
+
+        function toggleZoom() {
+            viewer.setNavigationMode(Autodesk.Viewing.NAVIGATION_MODE.ZOOM);
+            updateNavigationButtons('zoom');
+        }
+
+        // Rendering settings
+        function setViewMode(mode) {
+            if (mode === 'realistic') {
+                viewer.setDisplayStyle(Autodesk.Viewing.RENDER_MODE.TEXTURED);
+            } else if (mode === 'wireframe') {
+                viewer.setDisplayStyle(Autodesk.Viewing.RENDER_MODE.WIREFRAME);
+            }
+        }
+
+        function toggleShadows() {
+            const enabled = viewer.prefs.get('lightPreset') === 1;
+            viewer.prefs.set('lightPreset', enabled ? 0 : 1);
+            updateButtonState('shadows', !enabled);
+        }
+
+        function toggleAO() {
+            const enabled = viewer.prefs.get('ambientOcclusion');
+            viewer.prefs.set('ambientOcclusion', !enabled);
+            updateButtonState('ao', !enabled);
+        }
+
+        // Event handlers
+        function onSelectionChanged(event) {
+            const selection = viewer.getSelection();
+            if (selection.length > 0) {
+                viewer.getProperties(selection[0], displayProperties);
+            }
+        }
+
+        function onGeometryLoaded(event) {
+            viewer.showAll();
+        }
+
+        function displayProperties(result) {
+            const propertiesPanel = document.getElementById('properties-content');
+            let html = '<div class="property-group">';
+            html += `<h4>${result.name}</h4>`;
+            
+            result.properties.forEach(prop => {
+                html += `<div class="property-item">${prop.displayName}: ${prop.displayValue}</div>`;
+            });
+            
+            html += '</div>';
+            propertiesPanel.innerHTML = html;
+        }
+
+        // UI helpers
+        function updateButtonState(button, active) {
+            const btn = document.querySelector(`button[onclick*="${button}"]`);
+            if (btn) {
+                btn.classList.toggle('active', active);
+            }
+        }
+
+        function updateNavigationButtons(active) {
+            ['orbit', 'pan', 'zoom'].forEach(mode => {
+                updateButtonState(mode, mode === active);
+            });
+        }
+
+        // Initialize viewer when page loads
+        document.addEventListener('DOMContentLoaded', initializeViewer);
+    </script>
+</body>
+</html>
