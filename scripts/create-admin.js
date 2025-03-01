@@ -1,5 +1,12 @@
-import dbConnect from '../lib/mongodb';
-import User from '../models/User';
+import { config } from 'dotenv';
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import dbConnect from '../lib/mongodb.js';
+import User from '../models/User.js';
+
+// Load environment variables from .env.local
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+config();
 
 async function createAdmin() {
   try {

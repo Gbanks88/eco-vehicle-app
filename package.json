@@ -2,13 +2,14 @@
   "name": "eco-vehicle-web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "seed": "node -r esm scripts/seed-db.js",
-    "create-admin": "node -r esm scripts/create-admin.js"
+    "create-admin": "node scripts/create-admin.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -19,6 +20,7 @@
     "autoprefixer": "^10.4.14",
     "axios": "^1.5.1",
     "bcryptjs": "^3.0.2",
+    "dotenv": "^16.4.7",
     "esm": "^3.2.25",
     "framer-motion": "^10.16.4",
     "jsonwebtoken": "^9.0.2",
