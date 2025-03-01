@@ -7,15 +7,32 @@ import { generateSearchLink } from '../utils/amazon';
 // This would typically come from your backend or CMS
 const featuredProducts = [
   {
-    title: "Eco-Friendly Vehicle Maintenance Kit",
-    asin: "B08XXXXX",
-    imageUrl: "/images/placeholder.jpg",
-    price: "49.99",
+    title: "LECTRON Level 2 EV Charger",
+    asin: "B09BBLJ8LF",
+    imageUrl: "https://m.media-amazon.com/images/I/71YqfU4d8LL._AC_SL1500_.jpg",
+    price: "199.99",
     rating: 4.5,
-    description: "Complete maintenance kit for eco-friendly vehicles, including biodegradable cleaning solutions.",
+    description: "240V 40 Amp Level 2 EV Charger, Electric Vehicle Charger",
     prime: true
   },
-  // Add more products here
+  {
+    title: "JuiceBox 40 Smart EV Charger",
+    asin: "B07WNMK7CH",
+    imageUrl: "https://m.media-amazon.com/images/I/71FnNwxKBqL._AC_SL1500_.jpg",
+    price: "549.00",
+    rating: 4.7,
+    description: "40 Amp Level 2 Electric Vehicle Charger with WiFi",
+    prime: true
+  },
+  {
+    title: "Chemical Guys Eco-Friendly Car Wash Kit",
+    asin: "B07CTK4TH8",
+    imageUrl: "https://m.media-amazon.com/images/I/91jHFGvzj0L._AC_SL1500_.jpg",
+    price: "69.99",
+    rating: 4.8,
+    description: "Eco-Smart Waterless Car Wash & Wax System",
+    prime: true
+  }
 ];
 
 export default function Products() {

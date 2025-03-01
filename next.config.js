@@ -14,7 +14,7 @@ const nextConfig = {
     ]
   },
   images: {
-    domains: ['johnallens.com'],
+    domains: ['johnallens.com', 'm.media-amazon.com', 'images.unsplash.com'],
   },
   async headers() {
     return [
@@ -27,7 +27,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self' https://johnallens.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://johnallens.com; style-src 'self' 'unsafe-inline' https://johnallens.com; img-src 'self' data: https: https://johnallens.com; connect-src 'self' https://johnallens.com; frame-src https://johnallens.com",
+            value: "default-src 'self' https://johnallens.com https://www.amazon.com https://images.unsplash.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://johnallens.com https://www.amazon.com; style-src 'self' 'unsafe-inline' https://johnallens.com; img-src 'self' data: https: https://johnallens.com https://m.media-amazon.com https://images.unsplash.com; connect-src 'self' https://johnallens.com https://www.amazon.com https://images.unsplash.com; frame-src https://johnallens.com https://www.amazon.com",
           },
         ],
       },

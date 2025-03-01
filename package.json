@@ -14,8 +14,10 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
-    "@react-three/drei": "^9.88.0",
-    "@react-three/fiber": "^8.14.5",
+    "@react-three/cannon": "^6.6.0",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/line-clamp": "^0.4.4",
     "autoprefixer": "^10.4.14",
     "axios": "^1.5.1",

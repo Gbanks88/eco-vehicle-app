@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRightIcon, BoltIcon, GlobeAmericasIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
@@ -14,7 +15,7 @@ export default function EcoVehicleHome() {
       price: 'From $39,900',
       range: '350 miles',
       acceleration: '0-60 in 4.5s',
-      image: '/images/vehicles/eco-sedan.jpg'
+      image: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=1024&auto=format&fit=crop'
     },
     {
       id: 'ev-suv',
@@ -22,7 +23,7 @@ export default function EcoVehicleHome() {
       price: 'From $45,900',
       range: '320 miles',
       acceleration: '0-60 in 5.2s',
-      image: '/images/vehicles/eco-suv.jpg'
+      image: 'https://images.unsplash.com/photo-1571127236794-81c2beda8697?q=80&w=1024&auto=format&fit=crop'
     },
     {
       id: 'ev-sport',
@@ -30,7 +31,7 @@ export default function EcoVehicleHome() {
       price: 'From $59,900',
       range: '300 miles',
       acceleration: '0-60 in 3.1s',
-      image: '/images/vehicles/eco-sport.jpg'
+      image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=1024&auto=format&fit=crop'
     }
   ];
 
@@ -112,11 +113,14 @@ export default function EcoVehicleHome() {
                   className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-xl transition"
                   onMouseEnter={() => setActiveVehicle(index)}
                 >
-                  <div className="h-48 bg-gray-200 relative">
-                    {/* Replace with actual image */}
-                    <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                      {vehicle.name} Preview
-                    </div>
+                  <div className="h-48 relative">
+                    <Image
+                      src={vehicle.image}
+                      alt={vehicle.name}
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold text-green-700 mb-2">{vehicle.name}</h3>

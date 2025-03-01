@@ -24,8 +24,13 @@ const AmazonProductCard = ({ product }) => {
           <Image
             src={imageUrl}
             alt={title}
-            layout="fill"
-            objectFit="contain"
+            width={300}
+            height={300}
+            style={{
+              objectFit: 'contain',
+              width: '100%',
+              height: '100%',
+            }}
             className="p-4"
           />
         </div>
