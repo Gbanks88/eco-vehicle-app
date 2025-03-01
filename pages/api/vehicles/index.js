@@ -1,28 +1,62 @@
-import { vehicles } from '../../../data/vehicles';
+import dbConnect from '../../../lib/mongodb';
+import Vehicle from '../../../models/Vehicle';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+  await dbConnect();
+
   if (req.method === 'GET') {
-    // Optional query parameters for filtering
-    const { category, inStock, maxPrice } = req.query;
+    try {
+      // Build query
+      const query = {};
+      const { category, inStock, maxPrice, search } = req.query;
 
-    let filteredVehicles = [...vehicles];
+      if (category && category !== 'All') {
+        query.category = category;
+      }
 
-    // Apply filters if provided
-    if (category && category !== 'All') {
-      filteredVehicles = filteredVehicles.filter(v => v.category === category);
+      if (inStock === 'true') {
+        query['availability.inStock'] = true;
+      }
+
+      if (maxPrice) {
+        query.price = { $lte: parseInt(maxPrice) };
+      }
+
+      if (search) {
+        query.$text = { $search: search };
+      }
+
+      const vehicles = await Vehicle.find(query)
+        .sort({ createdAt: -1 });
+
+      res.status(200).json(vehicles);
+  } else if (req.method === 'POST') {
+    try {
+      const vehicle = await Vehicle.create(req.body);
+      res.status(201).json(vehicle);
+    } catch (error) {
+      res.status(400).json({ success: false, error: error.message });
     }
-
-    if (inStock === 'true') {
-      filteredVehicles = filteredVehicles.filter(v => v.availability.inStock);
+  } else if (req.method === 'PUT') {
+    try {
+      const { id } = req.query;
+      const vehicle = await Vehicle.findOneAndUpdate(
+        { id },
+        req.body,
+        { new: true, runValidators: true }
+      );
+      if (!vehicle) {
+        return res.status(404).json({ success: false });
+      }
+      res.status(200).json(vehicle);
+    } catch (error) {
+      res.status(400).json({ success: false, error: error.message });
     }
-
-    if (maxPrice) {
-      filteredVehicles = filteredVehicles.filter(v => v.price <= parseInt(maxPrice));
-    }
-
-    res.status(200).json(filteredVehicles);
   } else {
-    res.setHeader('Allow', ['GET']);
+    res.setHeader('Allow', ['GET', 'POST', 'PUT']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
+} catch (error) {
+  res.status(500).json({ success: false, error: error.message });
+}
 }

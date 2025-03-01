@@ -1,6 +1,7 @@
-import { vehicles } from '../../../data/vehicles';
+import dbConnect from '../../../lib/mongodb';
+import Vehicle from '../../../models/Vehicle';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
@@ -22,7 +23,10 @@ export default function handler(req, res) {
     return res.status(400).json({ error: 'Maximum three vehicles can be compared at once' });
   }
 
-  const selectedVehicles = vehicles.filter(v => vehicleIds.includes(v.id));
+  await dbConnect();
+
+  try {
+    const selectedVehicles = await Vehicle.find({ id: { $in: vehicleIds } });
 
   if (selectedVehicles.length !== vehicleIds.length) {
     return res.status(404).json({ error: 'One or more vehicles not found' });
@@ -42,6 +46,9 @@ export default function handler(req, res) {
   };
 
   res.status(200).json(comparison);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 }
 
 function findBestValue(vehicles, path, criteria) {
