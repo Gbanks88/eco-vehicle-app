@@ -6,8 +6,12 @@ export default function Contact() {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
+    phone: '',
+    vehicleType: '',
     subject: '',
     message: '',
+    preferredContact: 'email',
+    newsletter: false,
   });
   const [submitStatus, setSubmitStatus] = useState('');
 
@@ -46,9 +50,12 @@ export default function Contact() {
         <meta name="description" content="Get in touch with us for any questions about eco-friendly vehicles and sustainable transportation solutions." />
       </Head>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Contact Us</h1>
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Get in Touch</h1>
+            <p className="text-xl text-gray-600">Have questions about eco-friendly vehicles? We're here to help!</p>
+          </div>
 
           <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
             <form 
@@ -107,6 +114,58 @@ export default function Contact() {
                   required
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                    Phone Number (optional)
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    value={formState.phone}
+                    onChange={handleChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="vehicleType" className="block text-sm font-medium text-gray-700">
+                    Vehicle Type
+                  </label>
+                  <select
+                    name="vehicleType"
+                    id="vehicleType"
+                    value={formState.vehicleType}
+                    onChange={handleChange}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                  >
+                    <option value="">Select a vehicle type</option>
+                    <option value="electric">Electric Vehicle</option>
+                    <option value="hybrid">Hybrid Vehicle</option>
+                    <option value="plugin_hybrid">Plug-in Hybrid</option>
+                    <option value="gasoline">Gasoline Vehicle</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="preferredContact" className="block text-sm font-medium text-gray-700">
+                  Preferred Contact Method
+                </label>
+                <select
+                  name="preferredContact"
+                  id="preferredContact"
+                  value={formState.preferredContact}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                >
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                </select>
               </div>
 
               <div>

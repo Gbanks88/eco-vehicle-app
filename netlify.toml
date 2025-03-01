@@ -2,12 +2,137 @@
   command = "npm run build"
   publish = ".next"
 
+# CG4L Eco-Vehicle Site Redirects
+[[redirects]]
+  from = "https://www.cg4l.online/*"
+  to = "https://cg4l.online/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://ev.cg4l.online/*"
+  to = "/ev/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://3d.cg4l.online/*"
+  to = "/3d/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://tech.cg4l.online/*"
+  to = "/tech/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://charging.cg4l.online/*"
+  to = "/charging/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://parts.cg4l.online/*"
+  to = "/parts/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://service.cg4l.online/*"
+  to = "/service/:splat"
+  status = 200
+
+# JohnAllens Fashion Site Redirects
+[[redirects]]
+  from = "https://www.johnallens.com/*"
+  to = "https://johnallens.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://mens.johnallens.com/*"
+  to = "/mens/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://womens.johnallens.com/*"
+  to = "/womens/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://boutique.johnallens.com/*"
+  to = "/boutique/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://sale.johnallens.com/*"
+  to = "/sale/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://shop.johnallens.com/*"
+  to = "/shop/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://cart.johnallens.com/*"
+  to = "/cart/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://checkout.johnallens.com/*"
+  to = "/checkout/:splat"
+  status = 200
+
+# API subdomain handling
+[[redirects]]
+  from = "https://api.cg4l.online/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://api.johnallens.com/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# CDN subdomain handling
+[[redirects]]
+  from = "https://cdn.cg4l.online/*"
+  to = "/cdn-content/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://cdn.johnallens.com/*"
+  to = "/cdn-content/:splat"
+  status = 200
+
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
+  NODE_VERSION = "18"
   NODE_ENV = "production"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Branch deploy settings
+[context.branch-deploy]
+  command = "npm run build"
+
+# Deploy preview settings
+[context.deploy-preview]
+  command = "npm run build"
+
+# Production context
+[context.production]
+  command = "npm run build"
+
+# Headers to secure the site
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:;"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
 [[plugins]]
   package = "netlify-plugin-submit-sitemap"
