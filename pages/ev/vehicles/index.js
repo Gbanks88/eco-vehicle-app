@@ -69,8 +69,17 @@ export default function VehicleList() {
           </motion.p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex justify-center gap-4 mb-12">
+        {/* Actions */}
+        <div className="flex justify-between items-center mb-12">
+          <Link
+            href="/ev/compare"
+            className="inline-flex items-center px-6 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
+          >
+            Compare Vehicles
+          </Link>
+          
+          {/* Category Filter */}
+          <div className="flex gap-4">
           {categories.map((category, index) => (
             <motion.button
               key={category}
