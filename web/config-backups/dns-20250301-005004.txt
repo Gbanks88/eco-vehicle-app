@@ -1,0 +1,37 @@
+DNS Backup - Sat Mar  1 00:50:04 MST 2025
+====================
+
+Domain: 3d.cg4f.online
+--------------------
+
+Domain: api.cg4f.online
+--------------------
+api.cg4f.online.	1799	IN	A	57.128.180.184
+
+Domain: cg4f.online
+--------------------
+cg4f.online.		1800	IN	A	57.128.180.184
+cg4f.online.		1800	IN	MX	10 eforward3.registrar-servers.com.
+cg4f.online.		1800	IN	MX	20 eforward5.registrar-servers.com.
+cg4f.online.		1800	IN	MX	15 eforward4.registrar-servers.com.
+cg4f.online.		1800	IN	MX	10 eforward1.registrar-servers.com.
+cg4f.online.		1800	IN	MX	10 eforward2.registrar-servers.com.
+cg4f.online.		1799	IN	TXT	"v=spf1 ip4:57.128.180.184 include:spf.efwd.registrar-servers.com -all"
+cg4f.online.		1800	IN	NS	dns1.registrar-servers.com.
+cg4f.online.		1800	IN	NS	dns2.registrar-servers.com.
+
+Domain: ev.cg4f.online
+--------------------
+
+Domain: johnallens.com
+--------------------
+johnallens.com.		1799	IN	A	216.239.32.21
+johnallens.com.		1743	IN	MX	10 mx2.privateemail.com.
+johnallens.com.		1743	IN	MX	10 mx1.privateemail.com.
+johnallens.com.		1799	IN	TXT	"v=spf1 include:_spf.google.com ~all"
+johnallens.com.		1799	IN	TXT	"google-site-verification=fMY0N71flsWb6ZLXBWdP205OSn-P3Ck2HaFV27zVyFc"
+johnallens.com.		1800	IN	NS	dns2.registrar-servers.com.
+johnallens.com.		1800	IN	NS	dns1.registrar-servers.com.
+
+Domain: shop.johnallens.com
+--------------------

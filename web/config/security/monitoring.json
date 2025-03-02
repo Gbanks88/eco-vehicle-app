@@ -1,0 +1,42 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "interval": 300,
+    "alerts": {
+      "email": ["admin@cg4l.online"],
+      "slack": "SLACK_WEBHOOK_URL"
+    },
+    "checks": {
+      "headers": true,
+      "ssl": true,
+      "dns": true,
+      "ports": true,
+      "vulnerabilities": true
+    },
+    "thresholds": {
+      "response_time": 2000,
+      "ssl_expiry_days": 30,
+      "security_score": 90
+    }
+  },
+  "protection": {
+    "ddos": {
+      "enabled": true,
+      "rate_limit": 100,
+      "burst": 200
+    },
+    "injection": {
+      "enabled": true,
+      "patterns": [
+        "SQL",
+        "XSS",
+        "Command"
+      ]
+    },
+    "authentication": {
+      "enabled": true,
+      "max_attempts": 5,
+      "lockout_duration": 900
+    }
+  }
+}

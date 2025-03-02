@@ -1,0 +1,36 @@
+; Zone file for cg4f.online
+$TTL 3600
+@       IN      SOA     ns1.cg4f.online. admin.cg4f.online. (
+                        2025022801 ; Serial
+                        3600       ; Refresh
+                        1800       ; Retry
+                        604800     ; Expire
+                        86400 )    ; Minimum TTL
+
+; Nameservers
+@       IN      NS      ns1.netlify.com.
+@       IN      NS      ns2.netlify.com.
+
+; Main domain
+@       IN      A       75.2.60.5
+www     IN      CNAME   eco-vehicle-app.netlify.app.
+
+; Eco-Vehicle Subdomains
+ev      IN      CNAME   eco-vehicle-app.netlify.app.
+3d      IN      CNAME   eco-vehicle-app.netlify.app.
+tech    IN      CNAME   eco-vehicle-app.netlify.app.
+charging IN     CNAME   eco-vehicle-app.netlify.app.
+parts   IN      CNAME   eco-vehicle-app.netlify.app.
+service IN      CNAME   eco-vehicle-app.netlify.app.
+
+; API and CDN
+api     IN      CNAME   eco-vehicle-app.netlify.app.
+cdn     IN      CNAME   eco-vehicle-app.netlify.app.
+
+; CAA Records
+@       IN      CAA     0 issue "letsencrypt.org"
+@       IN      CAA     0 issuewild "letsencrypt.org"
+
+; Security Records
+@       IN      TXT     "v=spf1 include:_spf.netlify.com -all"
+_dmarc  IN      TXT     "v=DMARC1; p=reject; rua=mailto:admin@cg4f.online"

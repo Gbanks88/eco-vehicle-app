@@ -1,0 +1,189 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# CG4L Eco-Vehicle Site Redirects
+[[redirects]]
+  from = "https://www.cg4l.online/*"
+  to = "https://cg4l.online/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://ev.cg4l.online/*"
+  to = "/ev/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://3d.cg4l.online/*"
+  to = "/3d/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://tech.cg4l.online/*"
+  to = "/tech/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://charging.cg4l.online/*"
+  to = "/charging/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://parts.cg4l.online/*"
+  to = "/parts/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://service.cg4l.online/*"
+  to = "/service/:splat"
+  status = 200
+
+# JohnAllens Fashion Site Redirects
+[[redirects]]
+  from = "https://www.johnallens.com/*"
+  to = "https://johnallens.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://mens.johnallens.com/*"
+  to = "/mens/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://womens.johnallens.com/*"
+  to = "/womens/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://boutique.johnallens.com/*"
+  to = "/boutique/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://sale.johnallens.com/*"
+  to = "/sale/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://shop.johnallens.com/*"
+  to = "/shop/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://cart.johnallens.com/*"
+  to = "/cart/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://checkout.johnallens.com/*"
+  to = "/checkout/:splat"
+  status = 200
+
+# API subdomain handling
+[[redirects]]
+  from = "https://api.cg4l.online/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://api.johnallens.com/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# CDN subdomain handling
+[[redirects]]
+  from = "https://cdn.cg4l.online/*"
+  to = "/cdn-content/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://cdn.johnallens.com/*"
+  to = "/cdn-content/:splat"
+  status = 200
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NODE_VERSION = "18"
+  NODE_ENV = "production"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Branch deploy settings
+[context.branch-deploy]
+  command = "npm run build"
+
+# Deploy preview settings
+[context.deploy-preview]
+  command = "npm run build"
+
+# Production context
+[context.production]
+  command = "npm run build"
+
+# Headers to secure the site
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.netlify.app; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https:;"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), vr=()"
+    Content-Security-Policy = "default-src 'self' https://*.cg4f.online https://*.johnallens.com https://www.amazon.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.cg4f.online https://*.johnallens.com https://www.amazon.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://*.cg4f.online https://*.johnallens.com https://www.amazon.com; connect-src 'self' https://*.cg4f.online https://*.johnallens.com https://www.amazon.com; frame-src https://*.cg4f.online https://*.johnallens.com https://www.amazon.com; worker-src 'self' blob:; manifest-src 'self'; base-uri 'self'; form-action 'self' https://*.cg4f.online https://*.johnallens.com;"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Feature-Policy = "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; camera 'none'; display-capture 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; fullscreen 'self'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; usb 'none'; vr 'none'; wake-lock 'none'; xr-spatial-tracking 'none';"
+    Access-Control-Allow-Origin = "https://*.cg4f.online https://*.johnallens.com"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Credentials = "true"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "http://eco-vehicle.com/*"
+  to = "https://eco-vehicle.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.eco-vehicle.com/*"
+  to = "https://eco-vehicle.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.eco-vehicle.com/*"
+  to = "https://eco-vehicle.com/:splat"
+  status = 301
+  force = true

@@ -1,0 +1,27 @@
+{
+  "backup": {
+    "enabled": true,
+    "schedule": {
+      "daily": "0 0 * * *",
+      "weekly": "0 0 * * 0",
+      "monthly": "0 0 1 * *"
+    },
+    "retention": {
+      "daily": 7,
+      "weekly": 30,
+      "monthly": 365
+    },
+    "storage": {
+      "local": "/Volumes/Learn_Space/eco_vehicle_project/web/backups",
+      "remote": {
+        "enabled": true,
+        "type": "s3",
+        "bucket": "backup-cg4l.online"
+      }
+    },
+    "encryption": {
+      "enabled": true,
+      "algorithm": "AES-256-GCM"
+    }
+  }
+}

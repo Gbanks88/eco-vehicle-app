@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-02-28T11:29:39.393787",
+  "netlify_toml": {
+    "status": "Invalid",
+    "build_configuration": {
+      "command_match": false,
+      "publish_match": false
+    },
+    "plugins_configuration": {
+      "nextjs_plugin": false
+    }
+  },
+  "dependencies": {
+    "status": "Missing Dependencies",
+    "dependencies": {
+      "@netlify/plugin-nextjs": false
+    }
+  },
+  "overall_status": "Configuration Issues"
+}

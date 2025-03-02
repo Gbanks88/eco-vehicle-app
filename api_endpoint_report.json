@@ -1,0 +1,67 @@
+{
+  "timestamp": "2025-02-28T11:36:24.684325",
+  "base_url": "https://api.cg4f.online",
+  "endpoints": {
+    "/products": {
+      "GET": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /products (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65ef00>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      "POST": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /products (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65fb00>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    },
+    "/products/{id}": {
+      "GET": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /products/%7Bid%7D (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e632360>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      "PUT": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /products/%7Bid%7D (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65ec00>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      "DELETE": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /products/%7Bid%7D (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e6a0560>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    },
+    "/cart": {
+      "GET": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /cart (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e6a1b80>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      "POST": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /cart (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65f530>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    },
+    "/orders": {
+      "GET": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /orders (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e6a0b90>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      "POST": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /orders (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e6a2300>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    },
+    "/auth/login": {
+      "POST": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /auth/login (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65ff50>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    },
+    "/auth/register": {
+      "POST": {
+        "status": "Error",
+        "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /auth/register (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65f710>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    }
+  },
+  "cors_configuration": {
+    "status": "Error",
+    "error": "HTTPSConnectionPool(host='api.cg4f.online', port=443): Max retries exceeded with url: /products (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10e65e180>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+  },
+  "overall_status": "Issues Found"
+}

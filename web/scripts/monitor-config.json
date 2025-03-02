@@ -1,0 +1,95 @@
+{
+  "global": {
+    "checkInterval": 300,
+    "alertThresholds": {
+      "responseTime": 2000,
+      "sslExpiryDays": 30,
+      "uptimePercent": 99.9
+    },
+    "retryAttempts": 3,
+    "retryDelay": 1000
+  },
+  "domains": {
+    "cg4f.online": {
+      "type": "primary",
+      "expectedIp": "75.2.60.5",
+      "monitors": ["dns", "ssl", "security", "performance", "uptime"],
+      "alertContacts": ["admin@cg4f.online"]
+    },
+    "ev.cg4f.online": {
+      "type": "service",
+      "monitors": ["performance", "3d", "api"],
+      "thresholds": {
+        "responseTime": 1500,
+        "3dLoadTime": 3000
+      }
+    },
+    "3d.cg4f.online": {
+      "type": "service",
+      "monitors": ["performance", "3d", "webgl"],
+      "thresholds": {
+        "responseTime": 1500,
+        "webglPerformance": 30
+      }
+    },
+    "api.cg4f.online": {
+      "type": "api",
+      "monitors": ["performance", "endpoints", "auth"],
+      "endpoints": [
+        "/api/vehicles",
+        "/api/parts",
+        "/api/services"
+      ],
+      "thresholds": {
+        "responseTime": 1000
+      }
+    },
+    "johnallens.com": {
+      "type": "primary",
+      "expectedIp": "75.2.60.5",
+      "monitors": ["dns", "ssl", "security", "performance", "uptime"],
+      "alertContacts": ["admin@johnallens.com"]
+    },
+    "shop.johnallens.com": {
+      "type": "ecommerce",
+      "monitors": ["performance", "cart", "checkout", "payment"],
+      "endpoints": [
+        "/api/products",
+        "/api/cart",
+        "/api/checkout"
+      ],
+      "thresholds": {
+        "responseTime": 1000,
+        "checkoutTime": 5000
+      }
+    }
+  },
+  "notifications": {
+    "email": {
+      "enabled": true,
+      "smtpServer": "smtp.cg4f.online",
+      "from": "monitor@cg4f.online"
+    },
+    "slack": {
+      "enabled": true,
+      "webhook": "SLACK_WEBHOOK_URL"
+    }
+  },
+  "security": {
+    "requiredHeaders": [
+      "Strict-Transport-Security",
+      "Content-Security-Policy",
+      "X-Frame-Options",
+      "X-Content-Type-Options",
+      "Referrer-Policy",
+      "Permissions-Policy"
+    ],
+    "sslMinDays": 30,
+    "tlsVersion": "1.3",
+    "cipherSuites": [
+      "TLS_AES_128_GCM_SHA256",
+      "TLS_AES_256_GCM_SHA384",
+      "TLS_CHACHA20_POLY1305_SHA256"
+    ]
+  }
+}

@@ -1,12 +1,46 @@
 [build]
-  publish = "web/static"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
 
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self' https://developer.api.autodesk.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://developer.api.autodesk.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://developer.api.autodesk.com"
+    Content-Security-Policy = "default-src 'self' https://johnallens.com https://developer.api.autodesk.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://johnallens.com https://developer.api.autodesk.com; style-src 'self' 'unsafe-inline' https://johnallens.com; img-src 'self' data: https: https://johnallens.com; connect-src 'self' https://johnallens.com https://developer.api.autodesk.com; frame-src https://johnallens.com"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+[[redirects]]
+  from = "/johnallens/*"
+  to = "https://johnallens.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/johnallens/*"
+  to = "https://johnallens.com/api/:splat"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true

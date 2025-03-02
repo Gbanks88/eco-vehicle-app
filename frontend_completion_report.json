@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-02-28T11:36:19.712154",
+  "deployment_status": {
+    "config_present": true,
+    "netlify_dir_present": true,
+    "has_build_settings": true,
+    "has_next_plugin": false,
+    "status": "Incomplete"
+  },
+  "component_status": {
+    "components": {
+      "nextjs_setup": {
+        "files_exist": {
+          "package.json": true,
+          "next.config.js": false
+        },
+        "status": true,
+        "dependencies_present": {
+          "next": false,
+          "react": false,
+          "react-dom": false
+        }
+      },
+      "tailwind_css": {
+        "files_exist": {
+          "tailwind.config.js": false,
+          "postcss.config.js": false
+        },
+        "status": true,
+        "dependencies_present": {
+          "tailwindcss": false,
+          "postcss": false,
+          "autoprefixer": false
+        }
+      },
+      "responsive_design": {
+        "files_exist": {
+          "styles/globals.css": false
+        },
+        "status": true,
+        "styles/globals.css_patterns": {
+          "@media": false,
+          "sm:": false,
+          "md:": false,
+          "lg:": false,
+          "xl:": false
+        }
+      },
+      "product_catalog": {
+        "files_exist": {
+          "pages/products/index.js": false,
+          "components/ProductGrid.js": false
+        },
+        "status": true
+      },
+      "shopping_cart": {
+        "files_exist": {
+          "components/Cart.js": false,
+          "hooks/useCart.js": false
+        },
+        "status": true
+      },
+      "product_details": {
+        "files_exist": {
+          "pages/products/[id].js": false,
+          "components/ProductDetails.js": false
+        },
+        "status": true
+      },
+      "newsletter": {
+        "files_exist": {
+          "components/Newsletter.js": false
+        },
+        "status": true
+      },
+      "featured_collections": {
+        "files_exist": {
+          "components/FeaturedCollections.js": false
+        },
+        "status": true
+      }
+    },
+    "total_completed": 8,
+    "total_components": 8,
+    "completion_percentage": 100.0
+  },
+  "overall_status": "In Progress"
+}

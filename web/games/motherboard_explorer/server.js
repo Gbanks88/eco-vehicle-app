@@ -4,8 +4,46 @@ const path = require('path');
 const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
+const fs = require('fs').promises;
+const xml2js = require('xml2js');
+const forgeRoutes = require('../../routes/forge');
+const session = require('express-session');
 
 const app = express();
+
+// Session middleware
+app.use(session({
+    secret: process.env.FLASK_SECRET_KEY || 'your_secret_key_here',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === 'production' }
+}));
+
+// Body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files for both games
+app.use('/games/motherboard_explorer', express.static(path.join(__dirname)));
+app.use('/games/recycling_challenge', express.static(path.join(__dirname, '../recycling_challenge')));
+app.use('/viewer', express.static(path.join(__dirname, '../../../viewer')));
+app.use('/models', express.static(path.join(__dirname, '../../../models')));
+app.use('/sysml', express.static(path.join(__dirname, '../sysml_viewer')));
+app.use('/api/forge', forgeRoutes);
+
+// SysML API endpoints
+app.get('/api/sysml/:diagram', async (req, res) => {
+    try {
+        const diagramPath = path.join(__dirname, '../../../models/sysml', `${req.params.diagram}.xml`);
+        const xmlData = await fs.readFile(diagramPath, 'utf-8');
+        const parser = new xml2js.Parser({ explicitArray: false });
+        const result = await parser.parseStringPromise(xmlData);
+        res.json(result);
+    } catch (error) {
+        console.error('Error reading SysML diagram:', error);
+        res.status(500).json({ error: 'Failed to load diagram' });
+    }
+});
 const server = http.createServer(app);
 const io = socketIo(server);
 

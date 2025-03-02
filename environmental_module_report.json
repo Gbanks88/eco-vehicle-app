@@ -1,0 +1,96 @@
+{
+  "timestamp": "2025-02-28T11:36:19.803593",
+  "components": {
+    "air_quality_monitoring": {
+      "files": {
+        "src/environmental/air_quality.py": {
+          "exists": true,
+          "size": 6625
+        },
+        "src/environmental/sensors/air_quality_sensor.py": {
+          "exists": false,
+          "size": 0
+        }
+      },
+      "functions": {
+        "src/environmental/air_quality.py": {
+          "monitor_air_quality": {
+            "implemented": false,
+            "has_docstring": false
+          },
+          "calculate_air_quality_index": {
+            "implemented": false,
+            "has_docstring": false
+          },
+          "get_sensor_data": {
+            "implemented": false,
+            "has_docstring": false
+          }
+        }
+      },
+      "status": "Incomplete"
+    },
+    "emissions_calculator": {
+      "files": {
+        "src/environmental/emissions.py": {
+          "exists": false,
+          "size": 0
+        },
+        "src/environmental/calculators/emissions_calculator.py": {
+          "exists": false,
+          "size": 0
+        }
+      },
+      "functions": {},
+      "status": "Incomplete"
+    },
+    "impact_analysis": {
+      "files": {
+        "src/environmental/impact.py": {
+          "exists": false,
+          "size": 0
+        },
+        "src/environmental/analysis/impact_analyzer.py": {
+          "exists": false,
+          "size": 0
+        }
+      },
+      "functions": {},
+      "status": "Incomplete"
+    },
+    "vehicle_sensors": {
+      "files": {
+        "src/environmental/vehicle_integration.py": {
+          "exists": false,
+          "size": 0
+        },
+        "src/environmental/sensors/vehicle_sensors.py": {
+          "exists": false,
+          "size": 0
+        }
+      },
+      "functions": {},
+      "status": "Incomplete"
+    }
+  },
+  "test_coverage": {
+    "tests/environmental": {
+      "exists": true,
+      "test_files": [
+        "test_air_quality.py"
+      ],
+      "test_count": 1
+    },
+    "tests/unit/environmental": {
+      "exists": false,
+      "test_files": [],
+      "test_count": 0
+    },
+    "tests/integration/environmental": {
+      "exists": false,
+      "test_files": [],
+      "test_count": 0
+    }
+  },
+  "overall_status": "Incomplete"
+}

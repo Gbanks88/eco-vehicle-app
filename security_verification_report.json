@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-02-28T11:36:20.706305",
+  "url": "https://cg4f.online",
+  "security_headers": {
+    "status": "Error",
+    "error": "HTTPSConnectionPool(host='cg4f.online', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10f771f70>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+  },
+  "content_security_policy": {
+    "status": "Error",
+    "error": "HTTPSConnectionPool(host='cg4f.online', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fa4a0c0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+  },
+  "permissions_policy": {
+    "status": "Error",
+    "error": "HTTPSConnectionPool(host='cg4f.online', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x10fa4a750>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+  },
+  "overall_status": "Issues Found"
+}

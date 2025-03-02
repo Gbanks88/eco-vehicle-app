@@ -1,0 +1,340 @@
+openapi: 3.0.0
+info:
+  title: Eco Vehicle Platform API
+  version: '1.0.0'
+  description: |
+    API documentation for the Eco Vehicle Platform, including monitoring, analytics, AI features, and application builder.
+  contact:
+    name: Development Team
+    url: https://github.com/Gbanks88/eco-vehicle-app
+
+servers:
+  - url: https://api.eco-vehicle.app/v1
+    description: Production server
+  - url: http://localhost:3000/api
+    description: Local development
+
+tags:
+  - name: Monitoring
+    description: System monitoring and metrics endpoints
+  - name: Analytics
+    description: Analytics and reporting endpoints
+  - name: AI
+    description: AI-powered features and recommendations
+  - name: Builder
+    description: Application builder endpoints for component management and workflow execution
+
+paths:
+  /monitoring:
+    get:
+      summary: Get system monitoring data
+      tags: [Monitoring]
+      parameters:
+        - name: timeframe
+          in: query
+          description: Time range for metrics
+          schema:
+            type: string
+            enum: [1h, 6h, 24h, 7d]
+            default: 24h
+        - name: system
+          in: query
+          description: System to filter metrics
+          schema:
+            type: string
+            enum: [all, database, api, ai, security]
+            default: all
+      responses:
+        '200':
+          description: Monitoring data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringData'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /monitoring/export:
+    get:
+      summary: Export monitoring data
+      tags: [Monitoring]
+      parameters:
+        - name: format
+          in: query
+          description: Export format
+          required: true
+          schema:
+            type: string
+            enum: [csv, excel, json]
+        - name: timeframe
+          in: query
+          description: Time range for export
+          schema:
+            type: string
+            enum: [1h, 6h, 24h, 7d, 30d]
+            default: 24h
+        - name: system
+          in: query
+          description: System to filter export
+          schema:
+            type: string
+            enum: [all, database, api, ai, security]
+            default: all
+      responses:
+        '200':
+          description: Export generated successfully
+          content:
+            text/csv:
+              schema:
+                type: string
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /analytics/metrics:
+    get:
+      summary: Get analytics metrics
+      tags: [Analytics]
+      parameters:
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: metrics
+          in: query
+          description: Specific metrics to retrieve
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [revenue, users, orders, conversion]
+      responses:
+        '200':
+          description: Analytics metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsMetrics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /ai/recommendations:
+    get:
+      summary: Get product recommendations
+      tags: [AI]
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 50
+      responses:
+        '200':
+          description: Recommendations retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recommendations'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  schemas:
+    MonitoringData:
+      type: object
+      properties:
+        metrics:
+          type: object
+          properties:
+            system:
+              $ref: '#/components/schemas/SystemMetrics'
+            database:
+              $ref: '#/components/schemas/DatabaseMetrics'
+            api:
+              $ref: '#/components/schemas/APIMetrics'
+            security:
+              $ref: '#/components/schemas/SecurityMetrics'
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+
+    SystemMetrics:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, warning, error]
+        metrics:
+          type: object
+          properties:
+            cpu:
+              type: string
+            memory:
+              type: string
+            uptime:
+              type: string
+
+    DatabaseMetrics:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, warning, error]
+        metrics:
+          type: object
+          properties:
+            connections:
+              type: integer
+            queryTime:
+              type: string
+            size:
+              type: string
+
+    APIMetrics:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, warning, error]
+        metrics:
+          type: object
+          properties:
+            requests:
+              type: integer
+            responseTime:
+              type: string
+            errors:
+              type: integer
+
+    SecurityMetrics:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, warning, error]
+        metrics:
+          type: object
+          properties:
+            threats:
+              type: integer
+            failedLogins:
+              type: integer
+            suspicious:
+              type: integer
+
+    Alert:
+      type: object
+      properties:
+        level:
+          type: string
+          enum: [critical, high, medium, low]
+        type:
+          type: string
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+
+    AnalyticsMetrics:
+      type: object
+      properties:
+        timeframe:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+            end:
+              type: string
+              format: date-time
+        metrics:
+          type: object
+          properties:
+            revenue:
+              type: number
+            users:
+              type: integer
+            orders:
+              type: integer
+            conversion:
+              type: number
+
+    Recommendations:
+      type: object
+      properties:
+        userId:
+          type: string
+        recommendations:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              score:
+                type: number
+              reason:
+                type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Unauthorized access
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Internal server error
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []

@@ -1,0 +1,5 @@
+# Force HTTPS
+/* https://:splat 301!
+
+# WWW to non-WWW
+https://www.cg4l.online/* https://cg4l.online/:splat 301!

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "express-session": "^1.18.1",
+    "forge-apis": "^0.9.10",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.9.4",
+    "netlify-cli": "^19.0.0"
+  }
+}
